@@ -1,3 +1,6 @@
+var userEmail;  //cookie name
+var userData;   // cookie value (JSON object)
+
 function cambiarLogIn(){
     document.getElementById("signup").style.display = "none";
     document.getElementById("login").style.display = "block";
@@ -180,7 +183,7 @@ function showStudent(){
 }
 
 function showStudentPhone(){
-    if(getCookie("rol") == "Estudiante"){
+    if(userData.rol === "Estudiante"){
         if (window.matchMedia("(max-width: 600px)").matches) {
             document.getElementById("columnLeftPhoneStudent").style.display = "block";
             document.getElementById("columnLeftComputerStudent").style.display = "none";
@@ -203,8 +206,8 @@ function showGrade(){
 function changeWeb(){
     document.getElementById("pagInicio").style.display = "none";
     document.getElementById("pagWeb").style.display = "block";
-    document.getElementById("userNameComputer").innerHTML = getCookie('usrname');
-    document.getElementById("userNameTablet").innerHTML = getCookie('usrname');
+    document.getElementById("userNameComputer").innerHTML = userData.usrname;
+    document.getElementById("userNameTablet").innerHTML = userData.usrname;
 }
 
 function cerrarSesion() {
@@ -229,7 +232,7 @@ function descargarExcel(id_tabla){
 }
 
 function commentBox(id_comment, result){
-	var name = getCookie("name") + " " + getCookie("surname");
+	var name = userData.name + " " + userDate.surname;
     var comment = document.getElementById(id_comment).value;
 
 	if(name == "" || comment == ""){
@@ -267,71 +270,81 @@ function commentBox(id_comment, result){
 	}
 }
 
-function checkCookie(){
+// checkCookie comprueba si existe una cookie registrada con el correo
+// introducido. Si no existe == no está registrado. Si existe pero
+// la contraseña no coindide == contraseña incorrecta. Si coincide == login. 
+function checkCookie() {
     var inputEmail = document.getElementById("emailLogin").value;
-    var cookieEmail = getCookie("email");
     var inputPass = document.getElementById("passLogin").value;
-    var cookiePass = getCookie("pass");
-    if(inputEmail == cookieEmail){
-        if(inputPass == cookiePass){
-            if(getCookie("rol") == "Estudiante"){
-                changeWeb();
-                showStudent();
-            } else{
-                changeWeb();
-            }
-        } else{
-            alert("La contraseña es incorrecta");
-        }
-    } else{
-        alert("Este correo electrónico no está dado de alta");
+    var obj = findCookie(inputEmail);
+
+    if (obj === null) {
+        alert("El correo electrónico introducido no está dado de alta. Por favor, regístrese.");
+        return false;
+    }
+    else if (obj.password === inputPass) {
+        userEmail = inputEmail;
+        userData = obj;
+        changeWeb();
+        if (userData.rol === "Estudiante") showStudent();
+    }
+    else {
+        alert("La contraseña es incorrecta");
+        return false;
     }
 }
 
-function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-    var expires = "expires="+d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+function setCookie(cname, cvalue) {
+    document.cookie = cname + "=" + cvalue + ";secure ;path=/";
 }
 
-function getCookie(cname) {
-    var name = cname + "=";
-    var ca = document.cookie.split(';');
-    for(var i = 0; i < ca.length; i++) {
+
+// findCookie busca la cookie según su nombre (el email). Si la encuentra devuelve un 
+// objeto (JSON) con el valor de la cookie, si no devuelve null.
+function findCookie(emailValue) {
+    var tag = emailValue + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    if (decodedCookie.length === 0) return null;
+    var ca = decodedCookie.split(';'); // ca es un array, en cada posición guardamos una cookie
+    for (var i = 0; i < ca.length; i++) {
         var c = ca[i];
-        while (c.charAt(0) == ' ') {
+        while (c.charAt(0) === ' ') { //obviar espacios
             c = c.substring(1);
         }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
+        if (c.indexOf(tag) === 0) { // encontrada una cookie asignada al email introducido, devuelvo su valor (obj JSON)
+            var JSONstring = c.substring(tag.length, c.length);
+            return JSON.parse(JSONstring);
         }
     }
-    return "";
+    return null;
 }
 
-function saveCookies(){
-    if(document.getElementById("name").value == "" || document.getElementById("surname").value == "" || document.getElementById("usrname").value == "" 
-    || document.getElementById("nia").value == "" || document.getElementById("bornDate").value == "" || document.getElementById("dni").value == "" 
-    || document.getElementById("rol").value == "" || document.getElementById("lenguage").value == "" 
-    || document.getElementById("email").value == "" || document.getElementById("pass").value == ""){
+// saveCookies comprueba que el correo especificado no está ya registrado
+// luego comprueba que se han rellenado todos los campos y, finalmente,
+// los guarda como objeto JSON en una cookie (cname = email; cvalue = JSON)
+function saveCookies() {
+    var vEmail = document.getElementById("email").value;
+    if (!(vEmail === "") && (findCookie(vEmail) !== null)) {
+        alert(vEmail + "El correo especificado ya está registrado por otra cuenta, por favor introduzca uno válido");
+        return false;
+    }
+
+    var vName = document.getElementById("name").value;
+    var vSurname = document.getElementById("surname").value;
+    var vUsername = document.getElementById("usrname").value;
+    var vNIA = document.getElementById("nia").value;
+    var vBirthdate = document.getElementById("bornDate").value;
+    var vId = document.getElementById("dni").value;
+    var vRol = document.getElementById("rol").value;
+    var vLang = document.getElementById("language").value;
+    var vPassword = document.getElementById("pass").value;
+    var vGrado = document.getElementById("grade").value;
+
+    if (vEmail === "" || vName === "" || vSurname === "" || vUsername === "" || vNIA === "" || vBirthdate === "" || vId === "" || vRol === "" || vLang === "" || vPassword === "" || vGrado === "") {
         alert("¡Debe rellenar todos los campos!");
-    } else{
-        setCookie("name", document.getElementById("name").value, 30);
-        setCookie("surname", document.getElementById("surname").value, 30);
-        setCookie("usrname", document.getElementById("usrname").value, 30);
-        setCookie("nia", document.getElementById("nia").value, 30);
-        setCookie("bornDate", document.getElementById("bornDate").value, 30);
-        setCookie("dni", document.getElementById("dni").value, 30);
-        setCookie("rol", document.getElementById("rol").value, 30);
-        setCookie("grade", document.getElementById("grade").value, 30);
-        setCookie("lenguage", document.getElementById("lenguage").value, 30);
-        if(document.getElementById("email").value == getCookie("email")){
-            alert("Ya existe una cuenta asociada al correo electrónico introducido, por favor introduzca uno válido");
-        } else{
-            setCookie("email", document.getElementById("email").value, 30);
-        }
-        setCookie("pass", document.getElementById("pass").value, 30);
+    } else {
+        var obj = { name: vName, surname: vSurname, username: vUsername, NIA: vNIA, birthdate: vBirthdate, id: vId, rol: vRol, lang: vLang, password: vPassword, grado: vGrado };
+        setCookie(vEmail, JSON.stringify(obj));
     }
 }
 
