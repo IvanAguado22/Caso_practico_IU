@@ -247,15 +247,15 @@ function showGrade(){
 function changeWeb1(){
     document.getElementById("pagInicio").style.display = "none";
     document.getElementById("pagAsignaturas").style.display = "block";
-    document.getElementById("userNameComputer").innerHTML = userData.username;
-    document.getElementById("userNameTablet").innerHTML = userData.username;
+    document.getElementById("userNameComputer1").innerHTML = userData.username;
+    document.getElementById("userNameTablet1").innerHTML = userData.username;
 }
 
 function changeWeb2(){
     document.getElementById("pagAsignaturas").style.display = "none";
     document.getElementById("pagWeb").style.display = "block";
-    document.getElementById("userNameComputer").innerHTML = userData.username;
-    document.getElementById("userNameTablet").innerHTML = userData.username;
+    document.getElementById("userNameComputer2").innerHTML = userData.username;
+    document.getElementById("userNameTablet2").innerHTML = userData.username;
 }
 
 function cerrarSesion() {
