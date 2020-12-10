@@ -178,7 +178,7 @@ function showGradesStudent(){
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "block";
-    document.getElementById("boton_volver").style.display = "none";
+    document.getElementById("boton_volver_st").style.display = "none";
     volverCalificaciones();
 }
 
@@ -335,14 +335,12 @@ function mostrarGraficas(){
 
 function volverCalificaciones(){
     if (!(userData.rol === "Estudiante")) {
-        document.getElementById("table1").style.display = "block";
-        // document.getElementsByClassName("table").style.width = "100%";
+        document.getElementById("table1").style.display = "";
         document.getElementById("boton_descargar").style.display = "block";
         document.getElementById("grafica1").style.display = "none";
         document.getElementById("boton_volver").style.display = "none";
     } else {
-        document.getElementById("table2").style.display = "block";
-        // document.getElementsByClassName("table").style.width = "100%";
+        document.getElementById("table2").style.display = "";
         document.getElementById("boton_descargar_st").style.display = "block";
         document.getElementById("grafica2").style.display = "none";
         document.getElementById("boton_volver_st").style.display = "none";
