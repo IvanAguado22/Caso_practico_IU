@@ -245,18 +245,21 @@ function descargarExcel(id_tabla){
 }
 
 function mostrarGraficas(){
+    var table = null;
+    var columns = 0;
+    var dataPoints_array = [];
+
     if(!(userData.rol==="Estudiante")) {
         document.getElementById("table1").style.display = "none";
         document.getElementById("boton_descargar").style.display = "none";
         document.getElementById("boton_volver").style.display = "block";
         document.getElementById("grafica1").style.display = "block";
 
-        var table = document.getElementById("table1");
-        // var rows = table.rows.length - 1;
-        var columns = table.rows[0].cells.length - 1;
-        var dataPoints_array = [];
-        var estudiante;
-        var notaMedia;
+        table = document.getElementById("table1");
+        columns = table.rows[0].cells.length - 1;
+        var estudiante = "";
+        var notaMedia = 0;
+
         for(var i = 1, row; row = table.rows[i]; i++){
             estudiante = "";
             notaMedia = 0;
@@ -265,7 +268,6 @@ function mostrarGraficas(){
                 else notaMedia += parseFloat(col.innerHTML);
             }
             notaMedia /= columns;
-            console.log(estudiante + " " + notaMedia);
             dataPoints_array.push({ y: notaMedia, label: estudiante });
         }
 
@@ -276,7 +278,7 @@ function mostrarGraficas(){
                 text: "Nota media por estudiante"
             },
             axisY: {
-                title: "Nota media"
+                title: "Calificación"
             },
             data: [{        
                 type: "column",  
@@ -294,7 +296,40 @@ function mostrarGraficas(){
         document.getElementById("boton_volver_st").style.display = "block";
         document.getElementById("grafica2").style.display = "block";
 
-        //grafica2
+        table = document.getElementById("table2");
+        columns = table.rows[0].cells.length - 1;
+        var actividades = new Array(columns);
+        var notas = new Array(columns);
+        
+        for(var i = 0, row; row = table.rows[i]; i++){
+            for(var j = 1, col; col = row.cells[j]; j++){
+                if(i == 0) actividades[j-1] = col.innerHTML;
+                else notas[j-1] = parseFloat(col.innerHTML);
+            }
+        }
+
+        for(var i = 0; i < columns; i++){
+            dataPoints_array.push({ y: notas[i], label: actividades[i] });
+        }
+
+        var chart = new CanvasJS.Chart("grafica2", {
+            animationEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title:{
+                text: "Mis calificaciones"
+            },
+            axisY: {
+                title: "Nota"
+            },
+            data: [{        
+                type: "column",  
+                showInLegend: true, 
+                legendMarkerColor: "grey",
+                legendText: "Actividades",
+                dataPoints: dataPoints_array
+            }]
+        });
+        chart.render();
     } 
 }
 
