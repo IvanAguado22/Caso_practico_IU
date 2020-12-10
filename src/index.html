@@ -103,7 +103,7 @@
                                     <label>
                                         Idioma
                                     </label>
-                                    <select name="idioma" id="language" required>
+                                    <select name="idioma" id="language">
                                         <option value="" selected>Elige una opción</option>
                                         <option value="Español">Español</option>
                                         <option value="Inglés">Inglés</option>
@@ -149,6 +149,148 @@
                 </div>
             </div>
         </div>
+        <!-------------------------------------------- PAGINA ASIGNATURAS ----------------------------------------------------->
+        <div id="pagAsignaturas" style="display: none;">
+            <div class="header">
+                <!-------------------------------------------- HEADER ----------------------------------------------------->
+                <header>
+                    <div class="headerComputer">
+                        <img src="images/logo.jpg" alt="logo" class="logo">
+                        <h1 class="title">Aula Global</h1>
+                        <div class="login">
+                            <img src="images/perfil.jpg" alt="logo" class="logo 2">
+                            <p id="userNameComputer"></p>
+                        </div>
+                    </div>
+
+                    <div class="headerTablet">
+                        <img src="images/logo.jpg" alt="logo" class="logo">
+                        <h1 class="title">Curso</h1>
+                        <div class="login">
+                            <img src="images/perfil.jpg" alt="logo" class="logo 2">
+                            <p id="userNameTablet"></p>
+                        </div>
+                    </div>
+                </header>
+
+                <div class="separator"></div>
+
+                <nav class="menu">
+                    <a href="#Inicio" onclick="showIni()">Cursos</a>
+                    <a href="#Noticias">Noticias</a>
+                    <a style="float:right" class="active" href="#" onclick="cerrarSesion()">Cerrar sesion</a>
+                </nav>
+            </div>
+
+            <div class="separator"></div>
+
+            <div class="main">
+                <section class="column mid" id="column_mid_subj">
+                    <h1 class="titulo1">Mis Cursos</h1>
+                    <div class="separator"></div>
+                    <div class="forumList">
+                        <ul>
+                            <li>
+                                <h2 class="forumSubtitle"><a href="#" onclick="changeWeb2()">Interfaces de Usuario</a></h2>                        
+                            </li>
+                            <li>
+                                <h2 class="forumSubtitle"><a href="#" onclick="">Redes de Ordenadores</a></h2>
+                            </li>
+                            <li>
+                                <h2 class="forumSubtitle"><a href="#" onclick="">Arquitectura de Computadores</a></h2>
+                            </li>
+                            <li>
+                                <h2 class="forumSubtitle"><a href="#" onclick="">Ingeniería del Software</a></h2>
+                            </li>
+                            <li>
+                                <h2 class="forumSubtitle"><a href="#" onclick="">Heurística y Optimización</a></h2>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <aside class="column side D" id="rightColumn">
+                    <h1 class="titulo1"><a href="#">Últimas Novedades</a></h1>
+                    <ul>
+                        <li><time datetime="2020-11-05"> 05/11 - Agregados nuevos videos</time></li>
+                        <li><time datetime="2020-11-02"> 02/11 - Añadido nuevo tema</time></li>
+                        <li><time datetime="2020-11-02"> 02/11 - Nuevos mensajes en el foro</time></li>
+                    </ul>
+
+                    <h1 class="titulo1"><a href="#" id="pop">Próximos Eventos</a></h1>
+                    <ul>
+                        <li><time datetime="2020-09-20"> 03/11 - Fecha límite práctica 2</time></li>
+                        <li><time datetime="2020-09-15"> 05/11 - Problema Evaluable Heurística</time></li>
+                    </ul>
+
+                    <div id="holder" style="display: none;">
+                        <div id="calendar"></div>
+                    </div>
+
+                    <script>
+                        $(document).ready(function() {
+                            $('#calendar').evoCalendar({
+                                calendarEvents: [
+                                    {
+                                        id: 'bHay68s', // Event's ID (required)
+                                        name: "Fecha Limite Practica 2", // Event name (required)
+                                        date: "November/03/2020", // Event date (required)
+                                        type: "holiday", // Event type (required)
+                                    },
+                                    {
+                                        type: "event",
+                                        color: "#63d867" // Event custom color (optional)
+                                    },
+                                    {
+                                        id: 'bHay78s', // Event's ID (required)
+                                        name: "Problema Evaluable Heurística", // Event name (required)
+                                        date: "November/05/2020", // Event date (required)
+                                        type: "holiday", // Event type (required)
+                                    },
+                                    {
+                                        type: "event",
+                                        color: "#63d867" // Event custom color (optional)
+                                    },
+                                    {
+                                        id: 'bHaa78s', // Event's ID (required)
+                                        name: "Practica Heurística", // Event name (required)
+                                        date: "November/08/2020", // Event date (required)
+                                        type: "holiday", // Event type (required)
+                                    },
+                                    {
+                                        type: "event",
+                                        color: "#63d867" // Event custom color (optional)
+                                    },
+                                    {
+                                        id: 'bHay79s', // Event's ID (required)
+                                        name: "Test Redes", // Event name (required)
+                                        date: "November/16/2020", // Event date (required)
+                                        type: "holiday", // Event type (required)
+                                    },
+                                    {
+                                        type: "event",
+                                        color: "#63d867" // Event custom color (optional)
+                                    },
+                                    {
+                                        id: 'aHay78s', // Event's ID (required)
+                                        name: "Examen Parcia IS", // Event name (required)
+                                        date: "November/18/2020", // Event date (required)
+                                        type: "holiday", // Event type (required)
+                                    },
+                                    {
+                                        type: "event",
+                                        color: "#63d867" // Event custom color (optional)
+                                    }
+                                ]
+                            })
+                            $("#pop").click(function(){
+                                $("#holder").toggle("slow");
+                            });
+                        })
+                    </script>
+                </aside>
+            </div>
+        </div>
         <!-------------------------------------------- PAGINA WEB ----------------------------------------------------->
         <div id="pagWeb">
             <div class="header">
@@ -176,31 +318,31 @@
                 <div class="separator"></div>
 
                 <nav class="menu">
-                    <a href="#Inicio" onclick="showIni()">Inicio</a>
+                    <a href="#Inicio" onclick="showIni()">Cursos</a>
                     <a href="#Noticias">Noticias</a>
                     <a style="float:right" class="active" href="#" onclick="cerrarSesion()">Cerrar sesion</a>
                 </nav>
             </div>
 
             <div class="separator"></div>
-
             <!-------------------------------------------- MAIN ----------------------------------------------------->
-            <div id="main">
+            <div class="main">
                 <!-------------------------------------------- COLUMNA IZQUIERDA ----------------------------------------------------->
                 <aside class="column side I" id="leftColumn">
                     <div id="columnLeftComputer">
-                        <h1 class="titulo1 n"> <a href="#" onclick="showIni()">Curso</a></h1>
+                        <h1 class="titulo1 n"> <a href="#" onclick="showCourse()">Curso</a></h1>
                         <nav class="leftList">
                             <a href="#" onclick="showStudentsList()">Listado de Estudiantes</a>
                             <a href="#" onclick="showForum()">Foro de la Asignatura</a>
                             <a href="#" onclick="showGrades()">Calificaciones</a>
+                            <a href="#" onclick="showActivities()">Actividades</a>
                             <a href="#Novedades">Últimas Novedades</a>
                             <a href="#Eventos">Próximos Eventos</a>
                         </nav>
                     </div>
 
                     <div id="columnLeftComputerStudent" style="display: none;">
-                        <h1 class="titulo1 n"> <a href="#" onclick="showIni()">Curso</a></h1>
+                        <h1 class="titulo1 n"> <a href="#" onclick="showCourse()">Curso</a></h1>
                         <nav class="leftList">
                             <a href="#" onclick="showSubjectsList()">Mis asignaturas</a>
                             <a href="#" onclick="showForum()">Foro de la Asignatura</a>
@@ -221,7 +363,7 @@
                                 <a href="#Eventos">Próximos Eventos</a>
                             </div>
                         </div>
-                        <h1 class="titulo1"><a href="#" onclick="showIni()">Curso</a></h1>
+                        <h1 class="titulo1"><a href="#" onclick="showCourse()">Curso</a></h1>
                     </div>
 
                     <div id="columnLeftPhoneStudent" style="display: none;">
@@ -235,7 +377,7 @@
                                 <a href="#Eventos">Próximos Eventos</a>
                             </div>
                         </div>
-                        <h1 class="titulo1"><a href="#" onclick="showIni()">Curso</a></h1>
+                        <h1 class="titulo1"><a href="#" onclick="showCourse()">Curso</a></h1>
                     </div>
                 </aside>
             
@@ -481,6 +623,37 @@
                     </div>
                 </section>
 
+                <!-------------------------------------------- ACTIVIDADES ----------------------------------------------------->               
+                    <section class="column mid" id="column_mid_activities" style="display: none;">
+                    <h1 class="listActivitiesTitle">Actividades</h1>
+                    <div  class="activitiesList">
+                        <ul>
+                            <li>
+                                <p class="data">Entrega Bloque 1</p>
+                            </li>
+                            <li>
+                                <p class="data">Entrega Bloque 2</p>
+                            </li>
+                            <li>
+                                <p class="data">Entrega Bloque 3</p>
+                            </li>
+                            <li>
+                                <p class="data">Entrega Caso Práctico</p>
+                            </li>
+                            <li id="result6"></li>                            
+                        </ul>                      
+                        <div>
+                            <h1 class="activitiesSubtitle">Crear actividad</h1>
+                            <form> 
+                                <p class="forumComment">Ecriba el nombre de la nueva actividad*</p>
+                                <textarea class="cuadroTxt" id="newActivitie"></textarea>
+                                <div>
+                                    <button type="reset" class="boton" onclick="addActivitie('newActivitie', 'result6');">Crear</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
                 <!-------------------------------------------- FORO ----------------------------------------------------->
                 <section class="column mid" id="column_mid_forum" style="display: none;">
                     <h1 class="forumTitle">Foro de la asignatura</h1>
@@ -825,7 +998,7 @@
                                 <p class="forumComment">Comentario*</p>
                                 <textarea class="cuadroTxt" id="comment5"></textarea>
                                 <div>
-                                    <button type="reset" class="boton" onclick="commentBox5('comment5', 'result5');">Enviar</button>
+                                    <button type="reset" class="boton" onclick="commentBox('comment5', 'result5');">Enviar</button>
                                 </div>
                             </form>
                         </div>
@@ -916,7 +1089,7 @@
                     <div class="botones_calificaciones">
                         <button id="boton_descargar" onclick="descargarExcel('table1')">Descargar</button>
                         <button id="boton_volver" onclick="volverCalificaciones()" display="none">Volver</button>
-                        <button id="boton_graficas" onclick="mostrarGraficas()">Gráfica</button>
+                        <button id="boton_grafica" onclick="mostrarGraficas()">Gráfica</button>
                     </div>
                 </section>
                 <!-------------------------------------------- CALIFICACIONES ESTUDIANTE ----------------------------------------------------->
@@ -943,7 +1116,7 @@
                         <div class="botones_calificaciones">
                             <button id="boton_descargar_st" onclick="descargarExcel('table2')">Descargar</button>
                             <button id="boton_volver_st" onclick="volverCalificaciones()" display="none">Volver</button>
-                            <button id="boton_graficas_st" onclick="mostrarGraficas()">Gráfica</button>
+                            <button id="boton_grafica_st" onclick="mostrarGraficas()">Gráfica</button>
                         </div>
                 </section>
                 <!-------------------------------------------- COLUMNA DERECHA ----------------------------------------------------->

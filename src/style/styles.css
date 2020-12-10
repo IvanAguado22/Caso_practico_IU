@@ -254,7 +254,7 @@ input:focus, select:focus {
  *
  * -------------------------------------------------------------------
  */
-#main{
+.main{
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -395,6 +395,33 @@ input:focus, select:focus {
 
 .subjectsList{
     margin-left: 15px;
+}
+
+/**
+ * ACTIVIDADES
+ *
+ * -------------------------------------------------------------------
+ */
+
+ .activitiesList{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.activitiesList li{
+    list-style: none;
+}
+
+.listActivitiesTitle{
+    font-size: 30px;
+    color: #1ab188;
+}
+
+.activitiesSubtitle{
+    font-size: 20px;
+    padding: 10px 0;
+    margin-top: 15px;
 }
 
 /**
@@ -605,6 +632,10 @@ tr:nth-child(1) {
         width: 100%;
         margin: 30px 0;
     }
+
+    .footer{
+        display: none;
+    }
 }
 
 /**
@@ -613,7 +644,7 @@ tr:nth-child(1) {
  * -------------------------------------------------------------------
  */
 @media screen and (max-width: 600px){
-    #main {
+    .main {
         flex-direction: column;
     }
 

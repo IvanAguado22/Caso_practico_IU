@@ -18,6 +18,11 @@ function cambiarSignIn(){
 }
 
 function showIni() {
+    document.getElementById("pagAsignaturas").style.display = "block";
+    document.getElementById("pagWeb").style.display = "none";
+}
+
+function showCourse() {
     document.getElementById("column_mid_ini").style.display = "block";
     document.getElementById("column_mid_studentsList").style.display = "none";
     document.getElementById("column_mid_forum").style.display = "none";
@@ -29,6 +34,7 @@ function showIni() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 }
 
 function showStudentsList() {
@@ -43,6 +49,7 @@ function showStudentsList() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 
 }
 
@@ -58,6 +65,7 @@ function showForum() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 
 }
 
@@ -73,6 +81,7 @@ function showForum1() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 
 }
 
@@ -88,6 +97,7 @@ function showForum2() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 
 }
 
@@ -103,6 +113,7 @@ function showForum3() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 
 }
 
@@ -118,6 +129,7 @@ function showForum4() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 
 }
 
@@ -133,6 +145,7 @@ function showForum5() {
     document.getElementById("column_mid_forum5").style.display = "block";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 
 }
 
@@ -148,6 +161,7 @@ function showSubjectsList() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "block";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 }
 
 function showGrades() {
@@ -164,6 +178,22 @@ function showGrades() {
     document.getElementById("column_mid_grades_student").style.display = "none"
     document.getElementById("boton_volver").style.display = "none";
     volverCalificaciones();
+    document.getElementById("column_mid_activities").style.display = "none";
+}
+
+function showActivities() {
+    document.getElementById("column_mid_ini").style.display = "none";
+    document.getElementById("column_mid_studentsList").style.display = "none";
+    document.getElementById("column_mid_forum").style.display = "none";
+    document.getElementById("column_mid_grades").style.display = "none";
+    document.getElementById("column_mid_forum1").style.display = "none";
+    document.getElementById("column_mid_forum2").style.display = "none";
+    document.getElementById("column_mid_forum3").style.display = "none";
+    document.getElementById("column_mid_forum4").style.display = "none";
+    document.getElementById("column_mid_forum5").style.display = "none";
+    document.getElementById("column_mid_subjectsList").style.display = "none";
+    document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "block";
 }
 
 function showGradesStudent(){
@@ -180,6 +210,7 @@ function showGradesStudent(){
     document.getElementById("column_mid_grades_student").style.display = "block";
     document.getElementById("boton_volver_st").style.display = "none";
     volverCalificaciones();
+    document.getElementById("column_mid_activities").style.display = "none";
 }
 
 function showStudent(){
@@ -213,8 +244,15 @@ function showGrade(){
     }
 }
 
-function changeWeb(){
+function changeWeb1(){
     document.getElementById("pagInicio").style.display = "none";
+    document.getElementById("pagAsignaturas").style.display = "block";
+    document.getElementById("userNameComputer").innerHTML = userData.username;
+    document.getElementById("userNameTablet").innerHTML = userData.username;
+}
+
+function changeWeb2(){
+    document.getElementById("pagAsignaturas").style.display = "none";
     document.getElementById("pagWeb").style.display = "block";
     document.getElementById("userNameComputer").innerHTML = userData.username;
     document.getElementById("userNameTablet").innerHTML = userData.username;
@@ -244,14 +282,15 @@ function descargarExcel(id_tabla){
     tmpElemento.click();
 }
 
-function mostrarGraficas(){
+function mostrarGraficas() {
     var table = null;
     var columns = 0;
     var dataPoints_array = [];
 
-    if(!(userData.rol==="Estudiante")) {
+    if (!(userData.rol === "Estudiante")) {
         document.getElementById("table1").style.display = "none";
         document.getElementById("boton_descargar").style.display = "none";
+        document.getElementById("boton_grafica").style.display = "none";
         document.getElementById("boton_volver").style.display = "block";
         document.getElementById("grafica1").style.display = "block";
 
@@ -260,11 +299,11 @@ function mostrarGraficas(){
         var estudiante = "";
         var notaMedia = 0;
 
-        for(var i = 1, row; row = table.rows[i]; i++){
+        for (var i = 1, row; row = table.rows[i]; i++) {
             estudiante = "";
             notaMedia = 0;
-            for(var j = 0, col; col = row.cells[j]; j++){
-                if(j===0) estudiante = col.innerHTML;
+            for (var j = 0, col; col = row.cells[j]; j++) {
+                if (j === 0) estudiante = col.innerHTML;
                 else notaMedia += parseFloat(col.innerHTML);
             }
             notaMedia /= columns;
@@ -274,15 +313,15 @@ function mostrarGraficas(){
         var chart = new CanvasJS.Chart("grafica1", {
             animationEnabled: true,
             theme: "light2", // "light1", "light2", "dark1", "dark2"
-            title:{
+            title: {
                 text: "Nota media por estudiante"
             },
             axisY: {
                 title: "Calificación"
             },
-            data: [{        
-                type: "column",  
-                showInLegend: true, 
+            data: [{
+                type: "column",
+                showInLegend: true,
                 legendMarkerColor: "grey",
                 legendText: "Estudiantes",
                 dataPoints: dataPoints_array
@@ -293,55 +332,59 @@ function mostrarGraficas(){
     } else {
         document.getElementById("table2").style.display = "none";
         document.getElementById("boton_descargar_st").style.display = "none";
+        document.getElementById("boton_grafica_st").style.display = "none";
         document.getElementById("boton_volver_st").style.display = "block";
         document.getElementById("grafica2").style.display = "block";
+        
 
         table = document.getElementById("table2");
         columns = table.rows[0].cells.length - 1;
         var actividades = new Array(columns);
         var notas = new Array(columns);
-        
-        for(var i = 0, row; row = table.rows[i]; i++){
-            for(var j = 1, col; col = row.cells[j]; j++){
-                if(i == 0) actividades[j-1] = col.innerHTML;
-                else notas[j-1] = parseFloat(col.innerHTML);
+
+        for (var i = 0, row; row = table.rows[i]; i++) {
+            for (var j = 1, col; col = row.cells[j]; j++) {
+                if (i == 0) actividades[j - 1] = col.innerHTML;
+                else notas[j - 1] = parseFloat(col.innerHTML);
             }
         }
 
-        for(var i = 0; i < columns; i++){
+        for (var i = 0; i < columns; i++) {
             dataPoints_array.push({ y: notas[i], label: actividades[i] });
         }
 
         var chart = new CanvasJS.Chart("grafica2", {
             animationEnabled: true,
             theme: "light2", // "light1", "light2", "dark1", "dark2"
-            title:{
+            title: {
                 text: "Mis calificaciones"
             },
             axisY: {
                 title: "Nota"
             },
-            data: [{        
-                type: "column",  
-                showInLegend: true, 
+            data: [{
+                type: "column",
+                showInLegend: true,
                 legendMarkerColor: "grey",
                 legendText: "Actividades",
                 dataPoints: dataPoints_array
             }]
         });
         chart.render();
-    } 
+    }
 }
 
 function volverCalificaciones(){
     if (!(userData.rol === "Estudiante")) {
         document.getElementById("table1").style.display = "";
         document.getElementById("boton_descargar").style.display = "block";
+        document.getElementById("boton_grafica").style.display = "block";
         document.getElementById("grafica1").style.display = "none";
         document.getElementById("boton_volver").style.display = "none";
     } else {
         document.getElementById("table2").style.display = "";
         document.getElementById("boton_descargar_st").style.display = "block";
+        document.getElementById("boton_grafica_st").style.display = "block";
         document.getElementById("grafica2").style.display = "none";
         document.getElementById("boton_volver_st").style.display = "none";
     }
@@ -349,7 +392,7 @@ function volverCalificaciones(){
 
 
 function commentBox(id_comment, result){
-	var name = userData.name + " " + userDate.surname;
+	var name = userData.name + " " + userData.surname;
     var comment = document.getElementById(id_comment).value;
 
 	if(name == "" || comment == ""){
@@ -387,6 +430,28 @@ function commentBox(id_comment, result){
 	}
 }
 
+function addActivitie(id_comment, result){
+	var name = userData.name + " " + userData.surname;
+    var comment = document.getElementById(id_comment).value;
+
+	if(comment == ""){
+		alert("Los campos marcados con * son obligatorios!");
+	}else{
+        var parent=document.createElement("li");
+        var message_element=document.createElement("p");
+        
+        var txt_message=document.createTextNode(comment);
+
+		message_element.appendChild(txt_message);
+
+        parent.appendChild(message_element);
+
+        message_element.setAttribute("class", "data");
+        
+		document.getElementById(result).appendChild(parent);
+	}
+}
+
 // checkCookie comprueba si existe una cookie registrada con el correo
 // introducido. Si no existe == no está registrado. Si existe pero
 // la contraseña no coindide == contraseña incorrecta. Si coincide == login. 
@@ -406,7 +471,7 @@ function checkCookie() {
     else if (obj.password === inputPass) {
         userEmail = inputEmail;
         userData = obj;
-        changeWeb();
+        changeWeb1();
         if (userData.rol === "Estudiante") showStudent();
     }
     else {
@@ -461,7 +526,7 @@ function saveCookies() {
     var vPassword = document.getElementById("pass").value;
     var vGrado = document.getElementById("grade").value;
 
-    if (vEmail === "" || vName === "" || vSurname === "" || vUsername === "" || vNIA === "" || vBirthdate === "" || vId === "" || vRol === "" || vLang === "" || vPassword === "") {
+    if (vEmail === "" || vName === "" || vSurname === "" || vUsername === "" || vNIA === "" || vBirthdate === "" || vId === "" || vRol === "" || vPassword === "") {
         alert("Por favor, rellene todos los campos");
         return false;
     } else {
