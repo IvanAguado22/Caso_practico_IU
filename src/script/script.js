@@ -18,6 +18,11 @@ function cambiarSignIn(){
 }
 
 function showIni() {
+    document.getElementById("pagAsignaturas").style.display = "block";
+    document.getElementById("pagWeb").style.display = "none";
+}
+
+function showCourse() {
     document.getElementById("column_mid_ini").style.display = "block";
     document.getElementById("column_mid_studentsList").style.display = "none";
     document.getElementById("column_mid_forum").style.display = "none";
@@ -210,11 +215,16 @@ function showGrade(){
     }
 }
 
-function changeWeb(){
+function changeWeb1(){
     document.getElementById("pagInicio").style.display = "none";
-    document.getElementById("pagWeb").style.display = "block";
+    document.getElementById("pagAsignaturas").style.display = "block";
     document.getElementById("userNameComputer").innerHTML = userData.username;
     document.getElementById("userNameTablet").innerHTML = userData.username;
+}
+
+function changeWeb2(){
+    document.getElementById("pagAsignaturas").style.display = "none";
+    document.getElementById("pagWeb").style.display = "block";
 }
 
 function cerrarSesion() {
@@ -242,7 +252,7 @@ function descargarExcel(id_tabla){
 }
 
 function commentBox(id_comment, result){
-	var name = userData.name + " " + userDate.surname;
+	var name = userData.name + " " + userData.surname;
     var comment = document.getElementById(id_comment).value;
 
 	if(name == "" || comment == ""){
@@ -299,7 +309,7 @@ function checkCookie() {
     else if (obj.password === inputPass) {
         userEmail = inputEmail;
         userData = obj;
-        changeWeb();
+        changeWeb1();
         if (userData.rol === "Estudiante") showStudent();
     }
     else {
