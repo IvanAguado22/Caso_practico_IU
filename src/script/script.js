@@ -251,6 +251,8 @@ function changeWeb1(){
 function changeWeb2(){
     document.getElementById("pagAsignaturas").style.display = "none";
     document.getElementById("pagWeb").style.display = "block";
+    document.getElementById("userNameComputer").innerHTML = userData.username;
+    document.getElementById("userNameTablet").innerHTML = userData.username;
 }
 
 function cerrarSesion() {
@@ -412,7 +414,7 @@ function saveCookies() {
     var vPassword = document.getElementById("pass").value;
     var vGrado = document.getElementById("grade").value;
 
-    if (vEmail === "" || vName === "" || vSurname === "" || vUsername === "" || vNIA === "" || vBirthdate === "" || vId === "" || vRol === "" || vLang === "" || vPassword === "") {
+    if (vEmail === "" || vName === "" || vSurname === "" || vUsername === "" || vNIA === "" || vBirthdate === "" || vId === "" || vRol === "" || vPassword === "") {
         alert("Por favor, rellene todos los campos");
         return false;
     } else {
