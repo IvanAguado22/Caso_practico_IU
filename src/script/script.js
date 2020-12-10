@@ -161,8 +161,9 @@ function showGrades() {
     document.getElementById("column_mid_forum4").style.display = "none";
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
-    document.getElementById("column_mid_grades_student").style.display = "none";
-
+    document.getElementById("column_mid_grades_student").style.display = "none"
+    document.getElementById("boton_volver").style.display = "none";
+    volverCalificaciones();
 }
 
 function showGradesStudent(){
@@ -177,6 +178,8 @@ function showGradesStudent(){
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "block";
+    document.getElementById("boton_volver").style.display = "none";
+    volverCalificaciones();
 }
 
 function showStudent(){
@@ -240,6 +243,77 @@ function descargarExcel(id_tabla){
     tmpElemento.download = 'calificaciones.xls';
     tmpElemento.click();
 }
+
+function mostrarGraficas(){
+    if(!(userData.rol==="Estudiante")) {
+        document.getElementById("table1").style.display = "none";
+        document.getElementById("boton_descargar").style.display = "none";
+        document.getElementById("boton_volver").style.display = "block";
+        document.getElementById("grafica1").style.display = "block";
+
+        var table = document.getElementById("table1");
+        // var rows = table.rows.length - 1;
+        var columns = table.rows[0].cells.length - 1;
+        var dataPoints_array = [];
+        var estudiante;
+        var notaMedia;
+        for(var i = 1, row; row = table.rows[i]; i++){
+            estudiante = "";
+            notaMedia = 0;
+            for(var j = 0, col; col = row.cells[j]; j++){
+                if(j===0) estudiante = col.innerHTML;
+                else notaMedia += parseFloat(col.innerHTML);
+            }
+            notaMedia /= columns;
+            console.log(estudiante + " " + notaMedia);
+            dataPoints_array.push({ y: notaMedia, label: estudiante });
+        }
+
+        var chart = new CanvasJS.Chart("grafica1", {
+            animationEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title:{
+                text: "Nota media por estudiante"
+            },
+            axisY: {
+                title: "Nota media"
+            },
+            data: [{        
+                type: "column",  
+                showInLegend: true, 
+                legendMarkerColor: "grey",
+                legendText: "Estudiantes",
+                dataPoints: dataPoints_array
+            }]
+        });
+        chart.render();
+
+    } else {
+        document.getElementById("table2").style.display = "none";
+        document.getElementById("boton_descargar_st").style.display = "none";
+        document.getElementById("boton_volver_st").style.display = "block";
+        document.getElementById("grafica2").style.display = "block";
+
+        //grafica2
+    } 
+}
+
+function volverCalificaciones(){
+    if (!(userData.rol === "Estudiante")) {
+        document.getElementById("table1").style.display = "block";
+        // document.getElementsByClassName("table").style.width = "100%";
+        document.getElementById("boton_descargar").style.display = "block";
+        document.getElementById("grafica1").style.display = "none";
+        document.getElementById("boton_volver").style.display = "none";
+    } else {
+        document.getElementById("table2").style.display = "block";
+        // document.getElementsByClassName("table").style.width = "100%";
+        document.getElementById("boton_descargar_st").style.display = "block";
+        document.getElementById("grafica2").style.display = "none";
+        document.getElementById("boton_volver_st").style.display = "none";
+    }
+}
+
 
 function commentBox(id_comment, result){
 	var name = userData.name + " " + userDate.surname;

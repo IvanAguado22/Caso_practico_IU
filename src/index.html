@@ -14,6 +14,7 @@
         <link rel="stylesheet" type="text/css" href="style/evo-calendar.midnight-blue.css"/>
         <script src="script/jquery-3.5.1.min.js"></script>
         <script src="script/evo-calendar.js"></script>
+        <script src="script/canvasjs.min.js"></script>
     </head>
 
     <body>
@@ -909,7 +910,13 @@
                                 <td>9,5</td>
                             </tr>
                         </table>
-                        <button class="download" onclick="descargarExcel('table1')">Descargar</button>
+                    </div>
+                    
+                    <div id="grafica1" display="none"></div>
+                    <div class="botones_calificaciones">
+                        <button id="boton_descargar" onclick="descargarExcel('table1')">Descargar</button>
+                        <button id="boton_volver" onclick="volverCalificaciones()" display="none">Volver</button>
+                        <button id="boton_graficas" onclick="mostrarGraficas()">Gráficas</button>
                     </div>
                 </section>
                 <!-------------------------------------------- CALIFICACIONES ESTUDIANTE ----------------------------------------------------->
@@ -931,7 +938,14 @@
                             </tr>
                         </table>
                         <button class="download" onclick="descargarExcel('table2')">Descargar</button>
-                    </div>
+                        </div>
+                        
+                        <div id="grafica1" display="none"></div>
+                        <div class="botones_calificaciones">
+                            <button id="boton_descargar_st" onclick="descargarExcel('table2')">Descargar</button>
+                            <button id="boton_volver_st" onclick="volverCalificaciones()" display="none">Volver</button>
+                            <button id="boton_graficas_st" onclick="mostrarGraficas()">Gráficas</button>
+                        </div>
                 </section>
                 <!-------------------------------------------- COLUMNA DERECHA ----------------------------------------------------->
                 <aside class="column side D" id="rightColumn">

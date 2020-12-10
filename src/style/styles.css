@@ -506,11 +506,14 @@ tr:nth-child(1) {
     background-color: rgba(255, 255, 255, .20);
 }
 
-.download{
-    display: block;
+.botones_calificaciones{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.botones_calificaciones button{
     margin: 20px;
-    margin-left: auto;
-    margin-right: auto;
     padding: 15px;
     font-size: 17px;
     text-transform: uppercase;
@@ -519,6 +522,12 @@ tr:nth-child(1) {
     letter-spacing: 0.1em;
     border: 0;
     cursor: pointer;
+}
+
+#grafica1{
+    display: none;
+    height: 370px; 
+    width: 100%;
 }
 
 /**
@@ -677,4 +686,5 @@ tr:nth-child(1) {
     .tabla{
         overflow: auto;
     }
+
 }
