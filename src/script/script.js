@@ -184,6 +184,11 @@ function showStudent(){
     document.getElementById("columnLeftComputer").style.display = "none";
 }
 
+function showTeacher(){
+    document.getElementById("columnLeftComputerStudent").style.display = "none";
+    document.getElementById("columnLeftComputer").style.display = "show";
+}
+
 function showStudentPhone(){
     if(userData.rol === "Estudiante"){
         if (window.matchMedia("(max-width: 600px)").matches) {
@@ -218,6 +223,7 @@ function cerrarSesion() {
         document.getElementById("pagInicio").style.display = "block";
         userEmail = "inputEmail";
         userData = null;
+        location.reload();
     }
 }
 
