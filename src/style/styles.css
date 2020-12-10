@@ -398,6 +398,33 @@ input:focus, select:focus {
 }
 
 /**
+ * ACTIVIDADES
+ *
+ * -------------------------------------------------------------------
+ */
+
+ .activitiesList{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.activitiesList li{
+    list-style: none;
+}
+
+.listActivitiesTitle{
+    font-size: 30px;
+    color: #1ab188;
+}
+
+.activitiesSubtitle{
+    font-size: 20px;
+    padding: 10px 0;
+    margin-top: 15px;
+}
+
+/**
  * FORO
  *
  * -------------------------------------------------------------------
