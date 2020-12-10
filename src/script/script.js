@@ -1,13 +1,15 @@
 var userEmail;  //cookie name
 var userData;   // cookie value (JSON object)
 
-function cambiarLogIn(){
+// Tras hacer click en "iniciar sesión" pequeño (muestra el formulario de login)
+function cambiarLogIn(){ 
     document.getElementById("signup").style.display = "none";
     document.getElementById("login").style.display = "block";
     document.getElementById("logIn").className = "active";
     document.getElementById("signUp").className = "";
 }
 
+// Tras hacer click en "Registrarse" (muestra el formulario de registro)
 function cambiarSignIn(){
     document.getElementById("signup").style.display = "block";
     document.getElementById("login").style.display = "none";
@@ -206,14 +208,16 @@ function showGrade(){
 function changeWeb(){
     document.getElementById("pagInicio").style.display = "none";
     document.getElementById("pagWeb").style.display = "block";
-    document.getElementById("userNameComputer").innerHTML = userData.usrname;
-    document.getElementById("userNameTablet").innerHTML = userData.usrname;
+    document.getElementById("userNameComputer").innerHTML = userData.username;
+    document.getElementById("userNameTablet").innerHTML = userData.username;
 }
 
 function cerrarSesion() {
     if (confirm("Seguro que quieres cerrar sesión?")) {
         document.getElementById("pagWeb").style.display = "none";
         document.getElementById("pagInicio").style.display = "block";
+        userEmail = "inputEmail";
+        userData = null;
     }
 }
 
@@ -273,11 +277,15 @@ function commentBox(id_comment, result){
 // checkCookie comprueba si existe una cookie registrada con el correo
 // introducido. Si no existe == no está registrado. Si existe pero
 // la contraseña no coindide == contraseña incorrecta. Si coincide == login. 
+// Se ejecuta tras pulsar "iniciar sesión" en el formulario de login
 function checkCookie() {
     var inputEmail = document.getElementById("emailLogin").value;
     var inputPass = document.getElementById("passLogin").value;
+    if(inputEmail === "" || inputPass === "") {
+        alert("Por favor, rellene todos los campos");
+        return false;
+    }
     var obj = findCookie(inputEmail);
-
     if (obj === null) {
         alert("El correo electrónico introducido no está dado de alta. Por favor, regístrese.");
         return false;
@@ -290,7 +298,6 @@ function checkCookie() {
     }
     else {
         alert("La contraseña es incorrecta");
-        return false;
     }
 }
 
@@ -322,10 +329,11 @@ function findCookie(emailValue) {
 // saveCookies comprueba que el correo especificado no está ya registrado
 // luego comprueba que se han rellenado todos los campos y, finalmente,
 // los guarda como objeto JSON en una cookie (cname = email; cvalue = JSON)
+// se ejecuta tras pulsar "guardar" en el formulario de registro
 function saveCookies() {
     var vEmail = document.getElementById("email").value;
     if (!(vEmail === "") && (findCookie(vEmail) !== null)) {
-        alert(vEmail + "El correo especificado ya está registrado por otra cuenta, por favor introduzca uno válido");
+        alert("El correo especificado ya está registrado por otra cuenta, por favor introduzca uno válido");
         return false;
     }
 
@@ -340,8 +348,9 @@ function saveCookies() {
     var vPassword = document.getElementById("pass").value;
     var vGrado = document.getElementById("grade").value;
 
-    if (vEmail === "" || vName === "" || vSurname === "" || vUsername === "" || vNIA === "" || vBirthdate === "" || vId === "" || vRol === "" || vLang === "" || vPassword === "" || vGrado === "") {
-        alert("¡Debe rellenar todos los campos!");
+    if (vEmail === "" || vName === "" || vSurname === "" || vUsername === "" || vNIA === "" || vBirthdate === "" || vId === "" || vRol === "" || vLang === "" || vPassword === "") {
+        alert("Por favor, rellene todos los campos");
+        return false;
     } else {
         var obj = { name: vName, surname: vSurname, username: vUsername, NIA: vNIA, birthdate: vBirthdate, id: vId, rol: vRol, lang: vLang, password: vPassword, grado: vGrado };
         setCookie(vEmail, JSON.stringify(obj));
