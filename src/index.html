@@ -333,6 +333,7 @@
                             <a href="#" onclick="showStudentsList()">Listado de Estudiantes</a>
                             <a href="#" onclick="showForum()">Foro de la Asignatura</a>
                             <a href="#" onclick="showGrades()">Calificaciones</a>
+                            <a href="#" onclick="showActivities()">Actividades</a>
                             <a href="#Novedades">Últimas Novedades</a>
                             <a href="#Eventos">Próximos Eventos</a>
                         </nav>
@@ -620,6 +621,37 @@
                     </div>
                 </section>
 
+                <!-------------------------------------------- ACTIVIDADES ----------------------------------------------------->               
+                    <section class="column mid" id="column_mid_activities" style="display: none;">
+                    <h1 class="listActivitiesTitle">Actividades</h1>
+                    <div  class="activitiesList">
+                        <ul>
+                            <li>
+                                <p class="data">Entrega Bloque 1</p>
+                            </li>
+                            <li>
+                                <p class="data">Entrega Bloque 2</p>
+                            </li>
+                            <li>
+                                <p class="data">Entrega Bloque 3</p>
+                            </li>
+                            <li>
+                                <p class="data">Entrega Caso Práctico</p>
+                            </li>
+                            <li id="result6"></li>                            
+                        </ul>                      
+                        <div>
+                            <h1 class="activitiesSubtitle">Crear actividad</h1>
+                            <form> 
+                                <p class="forumComment">Ecriba el nombre de la nueva actividad*</p>
+                                <textarea class="cuadroTxt" id="newActivitie"></textarea>
+                                <div>
+                                    <button type="reset" class="boton" onclick="addActivitie('newActivitie', 'result6');">Crear</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </section>
                 <!-------------------------------------------- FORO ----------------------------------------------------->
                 <section class="column mid" id="column_mid_forum" style="display: none;">
                     <h1 class="forumTitle">Foro de la asignatura</h1>

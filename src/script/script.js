@@ -34,6 +34,7 @@ function showCourse() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 }
 
 function showStudentsList() {
@@ -48,6 +49,7 @@ function showStudentsList() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 
 }
 
@@ -63,6 +65,7 @@ function showForum() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 
 }
 
@@ -78,6 +81,7 @@ function showForum1() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 
 }
 
@@ -93,6 +97,7 @@ function showForum2() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 
 }
 
@@ -108,6 +113,7 @@ function showForum3() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 
 }
 
@@ -123,6 +129,7 @@ function showForum4() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 
 }
 
@@ -138,6 +145,7 @@ function showForum5() {
     document.getElementById("column_mid_forum5").style.display = "block";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 
 }
 
@@ -153,6 +161,7 @@ function showSubjectsList() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "block";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 }
 
 function showGrades() {
@@ -167,7 +176,23 @@ function showGrades() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 
+}
+
+function showActivities() {
+    document.getElementById("column_mid_ini").style.display = "none";
+    document.getElementById("column_mid_studentsList").style.display = "none";
+    document.getElementById("column_mid_forum").style.display = "none";
+    document.getElementById("column_mid_grades").style.display = "none";
+    document.getElementById("column_mid_forum1").style.display = "none";
+    document.getElementById("column_mid_forum2").style.display = "none";
+    document.getElementById("column_mid_forum3").style.display = "none";
+    document.getElementById("column_mid_forum4").style.display = "none";
+    document.getElementById("column_mid_forum5").style.display = "none";
+    document.getElementById("column_mid_subjectsList").style.display = "none";
+    document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "block";
 }
 
 function showGradesStudent(){
@@ -182,6 +207,7 @@ function showGradesStudent(){
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "block";
+    document.getElementById("column_mid_activities").style.display = "none";
 }
 
 function showStudent(){
@@ -285,6 +311,28 @@ function commentBox(id_comment, result){
         image_element.setAttribute("class", "forumProfile"); 
         name_element.setAttribute("class", "data");
         message_element.setAttribute("class", "forumMessage");
+        
+		document.getElementById(result).appendChild(parent);
+	}
+}
+
+function addActivitie(id_comment, result){
+	var name = userData.name + " " + userData.surname;
+    var comment = document.getElementById(id_comment).value;
+
+	if(comment == ""){
+		alert("Los campos marcados con * son obligatorios!");
+	}else{
+        var parent=document.createElement("li");
+        var message_element=document.createElement("p");
+        
+        var txt_message=document.createTextNode(comment);
+
+		message_element.appendChild(txt_message);
+
+        parent.appendChild(message_element);
+
+        message_element.setAttribute("class", "data");
         
 		document.getElementById(result).appendChild(parent);
 	}
