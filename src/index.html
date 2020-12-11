@@ -628,6 +628,9 @@
                         <ul>
                             <li>
                                 <p class="data">Entrega Bloque 1</p>
+                                <div class="calificationField-wrap">
+                                    <input type="text" id="calification" required autocomplete="off" placeholder="Calificación" pattern="[0-9]"/>
+                                </div>
                             </li>
                             <li>
                                 <p class="data">Entrega Bloque 2</p>
@@ -644,9 +647,9 @@
                             <h1 class="activitiesSubtitle">Crear actividad</h1>
                             <form> 
                                 <p class="forumComment">Ecriba el nombre de la nueva actividad*</p>
-                                <textarea class="cuadroTxt" id="newActivitie"></textarea>
+                                <textarea class="cuadroTxt" id="newActivity"></textarea>
                                 <div>
-                                    <button type="reset" class="boton" onclick="addActivitie('newActivitie', 'result6');">Crear</button>
+                                    <button type="reset" class="boton" onclick="addActivity('newActivity', 'result6');">Crear</button>
                                 </div>
                             </form>
                         </div>

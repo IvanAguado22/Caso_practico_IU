@@ -316,7 +316,7 @@ function commentBox(id_comment, result){
 	}
 }
 
-function addActivitie(id_comment, result){
+function addActivity(id_comment, result){
 	var name = userData.name + " " + userData.surname;
     var comment = document.getElementById(id_comment).value;
 

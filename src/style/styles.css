@@ -424,6 +424,13 @@ input:focus, select:focus {
     margin-top: 15px;
 }
 
+.calificationField-wrap {
+	position: relative;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    margin-right: 710px;
+}
+
 /**
  * FORO
  *
