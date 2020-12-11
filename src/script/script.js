@@ -175,9 +175,10 @@ function showGrades() {
     document.getElementById("column_mid_forum4").style.display = "none";
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
-    document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("column_mid_grades_student").style.display = "none"
+    document.getElementById("boton_volver").style.display = "none";
+    volverCalificaciones();
     document.getElementById("column_mid_activities").style.display = "none";
-
 }
 
 function showActivities() {
@@ -207,6 +208,8 @@ function showGradesStudent(){
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "block";
+    document.getElementById("boton_volver_st").style.display = "none";
+    volverCalificaciones();
     document.getElementById("column_mid_activities").style.display = "none";
 }
 
@@ -244,13 +247,15 @@ function showGrade(){
 function changeWeb1(){
     document.getElementById("pagInicio").style.display = "none";
     document.getElementById("pagAsignaturas").style.display = "block";
-    document.getElementById("userNameComputer").innerHTML = userData.username;
-    document.getElementById("userNameTablet").innerHTML = userData.username;
+    document.getElementById("userNameComputer1").innerHTML = userData.username;
+    document.getElementById("userNameTablet1").innerHTML = userData.username;
 }
 
 function changeWeb2(){
     document.getElementById("pagAsignaturas").style.display = "none";
     document.getElementById("pagWeb").style.display = "block";
+    document.getElementById("userNameComputer2").innerHTML = userData.username;
+    document.getElementById("userNameTablet2").innerHTML = userData.username;
 }
 
 function cerrarSesion() {
@@ -276,6 +281,115 @@ function descargarExcel(id_tabla){
     tmpElemento.download = 'calificaciones.xls';
     tmpElemento.click();
 }
+
+function mostrarGraficas() {
+    var table = null;
+    var columns = 0;
+    var dataPoints_array = [];
+
+    if (!(userData.rol === "Estudiante")) {
+        document.getElementById("table1").style.display = "none";
+        document.getElementById("boton_descargar").style.display = "none";
+        document.getElementById("boton_grafica").style.display = "none";
+        document.getElementById("boton_volver").style.display = "block";
+        document.getElementById("grafica1").style.display = "block";
+
+        table = document.getElementById("table1");
+        columns = table.rows[0].cells.length - 1;
+        var estudiante = "";
+        var notaMedia = 0;
+
+        for (var i = 1, row; row = table.rows[i]; i++) {
+            estudiante = "";
+            notaMedia = 0;
+            for (var j = 0, col; col = row.cells[j]; j++) {
+                if (j === 0) estudiante = col.innerHTML;
+                else notaMedia += parseFloat(col.innerHTML);
+            }
+            notaMedia /= columns;
+            dataPoints_array.push({ y: notaMedia, label: estudiante });
+        }
+
+        var chart = new CanvasJS.Chart("grafica1", {
+            animationEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title: {
+                text: "Nota media por estudiante"
+            },
+            axisY: {
+                title: "Calificación"
+            },
+            data: [{
+                type: "column",
+                showInLegend: true,
+                legendMarkerColor: "grey",
+                legendText: "Estudiantes",
+                dataPoints: dataPoints_array
+            }]
+        });
+        chart.render();
+
+    } else {
+        document.getElementById("table2").style.display = "none";
+        document.getElementById("boton_descargar_st").style.display = "none";
+        document.getElementById("boton_grafica_st").style.display = "none";
+        document.getElementById("boton_volver_st").style.display = "block";
+        document.getElementById("grafica2").style.display = "block";
+        
+
+        table = document.getElementById("table2");
+        columns = table.rows[0].cells.length - 1;
+        var actividades = new Array(columns);
+        var notas = new Array(columns);
+
+        for (var i = 0, row; row = table.rows[i]; i++) {
+            for (var j = 1, col; col = row.cells[j]; j++) {
+                if (i == 0) actividades[j - 1] = col.innerHTML;
+                else notas[j - 1] = parseFloat(col.innerHTML);
+            }
+        }
+
+        for (var i = 0; i < columns; i++) {
+            dataPoints_array.push({ y: notas[i], label: actividades[i] });
+        }
+
+        var chart = new CanvasJS.Chart("grafica2", {
+            animationEnabled: true,
+            theme: "light2", // "light1", "light2", "dark1", "dark2"
+            title: {
+                text: "Mis calificaciones"
+            },
+            axisY: {
+                title: "Nota"
+            },
+            data: [{
+                type: "column",
+                showInLegend: true,
+                legendMarkerColor: "grey",
+                legendText: "Actividades",
+                dataPoints: dataPoints_array
+            }]
+        });
+        chart.render();
+    }
+}
+
+function volverCalificaciones(){
+    if (!(userData.rol === "Estudiante")) {
+        document.getElementById("table1").style.display = "";
+        document.getElementById("boton_descargar").style.display = "block";
+        document.getElementById("boton_grafica").style.display = "block";
+        document.getElementById("grafica1").style.display = "none";
+        document.getElementById("boton_volver").style.display = "none";
+    } else {
+        document.getElementById("table2").style.display = "";
+        document.getElementById("boton_descargar_st").style.display = "block";
+        document.getElementById("boton_grafica_st").style.display = "block";
+        document.getElementById("grafica2").style.display = "none";
+        document.getElementById("boton_volver_st").style.display = "none";
+    }
+}
+
 
 function commentBox(id_comment, result){
 	var name = userData.name + " " + userData.surname;
@@ -412,7 +526,7 @@ function saveCookies() {
     var vPassword = document.getElementById("pass").value;
     var vGrado = document.getElementById("grade").value;
 
-    if (vEmail === "" || vName === "" || vSurname === "" || vUsername === "" || vNIA === "" || vBirthdate === "" || vId === "" || vRol === "" || vLang === "" || vPassword === "") {
+    if (vEmail === "" || vName === "" || vSurname === "" || vUsername === "" || vNIA === "" || vBirthdate === "" || vId === "" || vRol === "" || vPassword === "") {
         alert("Por favor, rellene todos los campos");
         return false;
     } else {

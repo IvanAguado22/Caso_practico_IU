@@ -14,6 +14,7 @@
         <link rel="stylesheet" type="text/css" href="style/evo-calendar.midnight-blue.css"/>
         <script src="script/jquery-3.5.1.min.js"></script>
         <script src="script/evo-calendar.js"></script>
+        <script src="script/canvasjs.min.js"></script>
     </head>
 
     <body>
@@ -102,7 +103,7 @@
                                     <label>
                                         Idioma
                                     </label>
-                                    <select name="idioma" id="language" required>
+                                    <select name="idioma" id="language">
                                         <option value="" selected>Elige una opción</option>
                                         <option value="Español">Español</option>
                                         <option value="Inglés">Inglés</option>
@@ -158,7 +159,7 @@
                         <h1 class="title">Aula Global</h1>
                         <div class="login">
                             <img src="images/perfil.jpg" alt="logo" class="logo 2">
-                            <p id="userNameComputer"></p>
+                            <p id="userNameComputer1"></p>
                         </div>
                     </div>
 
@@ -167,7 +168,7 @@
                         <h1 class="title">Curso</h1>
                         <div class="login">
                             <img src="images/perfil.jpg" alt="logo" class="logo 2">
-                            <p id="userNameTablet"></p>
+                            <p id="userNameTablet1"></p>
                         </div>
                     </div>
                 </header>
@@ -186,6 +187,7 @@
             <div class="main">
                 <section class="column mid" id="column_mid_subj">
                     <h1 class="titulo1">Mis Cursos</h1>
+                    <div class="separator"></div>
                     <div class="forumList">
                         <ul>
                             <li>
@@ -299,7 +301,7 @@
                         <h1 class="title">Aula Global</h1>
                         <div class="login">
                             <img src="images/perfil.jpg" alt="logo" class="logo 2">
-                            <p id="userNameComputer"></p>
+                            <p id="userNameComputer2"></p>
                         </div>
                     </div>
 
@@ -308,7 +310,7 @@
                         <h1 class="title">Curso</h1>
                         <div class="login">
                             <img src="images/perfil.jpg" alt="logo" class="logo 2">
-                            <p id="userNameTablet"></p>
+                            <p id="userNameTablet2"></p>
                         </div>
                     </div>
                 </header>
@@ -1084,7 +1086,13 @@
                                 <td>9,5</td>
                             </tr>
                         </table>
-                        <button class="download" onclick="descargarExcel('table1')">Descargar</button>
+                    </div>
+                    
+                    <div id="grafica1" display="none"></div>
+                    <div class="botones_calificaciones">
+                        <button id="boton_descargar" onclick="descargarExcel('table1')">Descargar</button>
+                        <button id="boton_volver" onclick="volverCalificaciones()" display="none">Volver</button>
+                        <button id="boton_grafica" onclick="mostrarGraficas()">Gráfica</button>
                     </div>
                 </section>
                 <!-------------------------------------------- CALIFICACIONES ESTUDIANTE ----------------------------------------------------->
@@ -1105,8 +1113,14 @@
                                 <td>10</td>
                             </tr>
                         </table>
-                        <button class="download" onclick="descargarExcel('table2')">Descargar</button>
-                    </div>
+                        </div>
+                        
+                        <div id="grafica2" display="none"></div>
+                        <div class="botones_calificaciones">
+                            <button id="boton_descargar_st" onclick="descargarExcel('table2')">Descargar</button>
+                            <button id="boton_volver_st" onclick="volverCalificaciones()" display="none">Volver</button>
+                            <button id="boton_grafica_st" onclick="mostrarGraficas()">Gráfica</button>
+                        </div>
                 </section>
                 <!-------------------------------------------- COLUMNA DERECHA ----------------------------------------------------->
                 <aside class="column side D" id="rightColumn">
