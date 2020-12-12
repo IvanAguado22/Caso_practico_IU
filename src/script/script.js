@@ -221,6 +221,7 @@ function showGradesStudent(){
 function showStudent(){
     document.getElementById("columnLeftComputerStudent").style.display = "block";
     document.getElementById("columnLeftComputer").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
 }
 
 function showTeacher(){
@@ -659,22 +660,26 @@ function activityStudentSelection(){
     }
 }
 
-
+var createClickHandler = function(arg) {    
+    return function(){
+        console.log("Clicked on " + arg);
+        showActivityInfo(arg);
+    }
+  }
+  
 
 function listAllActivities(){
     var list = document.getElementById("listActivities");
     list.innerHTML = "";
     var objActivities = findCookie("actividades");
-    if(objActivities != null){
+    if(objActivities != null){          
         var arrayActivities= Object.keys(objActivities); 
         for(var i = 0; i < arrayActivities.length; i++){
         var node = document.createElement("LI");
         var textnode = document.createTextNode(arrayActivities[i]);
         node.appendChild(textnode); // Append the text to <li>
         // node.setAttribute("onclick", "\"showActivityInfo\(" + arrayActivities[i] + "\)\"");
-        node.onclick = function () { 
-            console.log("Clicked on " + node.innerHTML );
-            showActivityInfo( node.innerHTML ) }
+        node.onclick = createClickHandler(arrayActivities[i]);
         list.appendChild(node);     // Append <li> to <ul> with id="myList"
     }
     }
@@ -748,11 +753,6 @@ function generateTableHead(table, data) {
     document.getElementById("boton_crear_actividad").style.display = "none";
     document.getElementById("activitiesList").style.display = "none";
 }
-
-
-// cuando cliquee sobre una actividad (li text) cargar una tabla -> activityInfo(NOMBREACTIVIDAD);
-// únicamente tengo que encontrar la forma de obtener el nombre de un li sobre el que pinche
-
 
 
 // function setGrade(actName, studentName, studentGrade){    // buscar la actividad, cambiar la lista de estudiantes, set cookie
