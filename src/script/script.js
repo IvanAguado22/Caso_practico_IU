@@ -254,7 +254,8 @@ function changeWeb1(){
     document.getElementById("pagAsignaturas").style.display = "block";
     document.getElementById("userNameComputer1").innerHTML = userData.username;
     document.getElementById("userNameTablet1").innerHTML = userData.username;
-    activityListStudents();
+    activityStudentSelection();
+    listAllActivities();
 }
 
 function changeWeb2(){
@@ -263,6 +264,8 @@ function changeWeb2(){
     //showCourse();
     document.getElementById("userNameComputer2").innerHTML = userData.username;
     document.getElementById("userNameTablet2").innerHTML = userData.username;
+    activityStudentSelection();
+    listAllActivities();
 }
 
 function cerrarSesion() {
@@ -596,6 +599,7 @@ function volverActividades(){
     document.getElementById("boton_guardar_actividad").style.display = "none";
     document.getElementById("boton_crear_actividad").style.display = "block";
     document.getElementById("activitiesList").style.display = "block";
+    listAllActivities();
     // document.getElementById("formActividad ").reset();
 }
 
@@ -611,7 +615,7 @@ function guardarActividad() {
         studentsList[selectedOptions[i]] = "";
     }
     setActivity(actName, studentsList, endDate);
-
+    volverActividades();
 }
 // Return an array of the selected opion values
 // select is an HTML select element
@@ -630,7 +634,7 @@ function getSelectValues(select) {
     return result;
   }
 
-function activityListStudents(){
+function activityStudentSelection(){
     var objStudents = findCookie("estudiantes");     // Obtener la lista de estudiantes
     var arrayStudentEmails= Object.keys(objStudents); // get array of keys (emails)
 // Pasar la lista de estudiantes a un formulario de opciones multiples
@@ -652,7 +656,18 @@ function setActivity(actName, students, endDate) {
     }
 }
 
-
+function listAllActivities(){
+    var list = document.getElementById("listActivities");
+    list.innerHTML = "";
+    var objActivities = findCookie("actividades");
+    var arrayActivities= Object.keys(objActivities); 
+    for(var i = 0; i < arrayActivities.length; i++){
+        var node = document.createElement("LI");                 // Create a <li> node
+        var textnode = document.createTextNode(arrayActivities[i]);         // Create a text node
+        node.appendChild(textnode);                              // Append the text to <li>
+        list.appendChild(node);     // Append <li> to <ul> with id="myList"
+    }
+}
 
 // function setGrade(actName, studentName, studentGrade){    // buscar la actividad, cambiar la lista de estudiantes, set cookie
 //     var currentActivities = findCookie("actividades"); // busca la cookie "actividades", si la encuentra devuelve el valor de la cookie (lista de actividades) y si no dev null
