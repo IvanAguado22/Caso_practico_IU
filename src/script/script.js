@@ -264,7 +264,7 @@ function cerrarSesion() {
         document.getElementById("pagInicio").style.display = "block";
         userEmail = "inputEmail";
         userData = null;
-        location.reload();
+        //location.reload();
     }
 }
 
