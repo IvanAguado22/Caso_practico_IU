@@ -24,6 +24,8 @@ function showIni() {
 
 function showCourse() {
     document.getElementById("column_mid_ini").style.display = "block";
+    if (userData.rol === "Estudiante") showStudent();
+    else showTeacher();
     document.getElementById("column_mid_studentsList").style.display = "none";
     document.getElementById("column_mid_forum").style.display = "none";
     document.getElementById("column_mid_grades").style.display = "none";
@@ -254,7 +256,7 @@ function changeWeb1(){
 function changeWeb2(){
     document.getElementById("pagAsignaturas").style.display = "none";
     document.getElementById("pagWeb").style.display = "block";
-    showCourse();
+    //showCourse();
     document.getElementById("userNameComputer2").innerHTML = userData.username;
     document.getElementById("userNameTablet2").innerHTML = userData.username;
 }
@@ -432,6 +434,11 @@ function commentBox(id_comment, result){
 	}
 }
 
+function volverForo(id_tema_foro){
+    document.getElementById("column_mid_forum").style.display = "block";
+    document.getElementById(id_tema_foro).style.display = "none";
+}
+
 function addActivity(id_comment, result){
 	var name = userData.name + " " + userData.surname;
     var comment = document.getElementById(id_comment).value;
@@ -475,6 +482,7 @@ function checkCookie() {
         userData = obj;
         changeWeb1();
         if (userData.rol === "Estudiante") showStudent();
+        else showTeacher();
     }
     else {
         alert("La contraseña es incorrecta");
