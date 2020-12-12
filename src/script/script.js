@@ -685,10 +685,10 @@ function activityInfo(actName){
     var arrayTable = [];
     for(var i = 0; i < arrayEst.length ; i++){
         var objString = "{ \"" + arrayEst[i] + "\" : " + JSON.stringify(objEstudiantes[arrayEst[i]]) + "}";
-        console.log(objString);
         arrayTable.push(JSON.parse(objString));
     }
-        
+
+    document.getElementById("infoActividadTitulo").innerHTML = actName;
     document.getElementById("profesorActividad").innerHTML = "Profesor: " + teacher;
     document.getElementById("fechaActividad").innerHTML = "Fecha límite de entrega: " + endDate;
 

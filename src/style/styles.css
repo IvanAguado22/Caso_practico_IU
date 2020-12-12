@@ -409,8 +409,9 @@ input:focus, select:focus {
     justify-content: space-between;
 }
 
-#activitiesList li{
+#activitiesList li, #activityInfo li{
     list-style: none;
+    margin-bottom: 15px;
 }
 
 .listActivitiesTitle{
