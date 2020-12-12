@@ -255,7 +255,7 @@ function changeWeb1(){
     document.getElementById("userNameComputer1").innerHTML = userData.username;
     document.getElementById("userNameTablet1").innerHTML = userData.username;
     activityStudentSelection();
-    listAllActivities();
+    // listAllActivities();
 }
 
 function changeWeb2(){
@@ -265,7 +265,7 @@ function changeWeb2(){
     document.getElementById("userNameComputer2").innerHTML = userData.username;
     document.getElementById("userNameTablet2").innerHTML = userData.username;
     activityStudentSelection();
-    listAllActivities();
+    // listAllActivities();
 }
 
 function cerrarSesion() {
@@ -665,17 +665,25 @@ function listAllActivities(){
     var list = document.getElementById("listActivities");
     list.innerHTML = "";
     var objActivities = findCookie("actividades");
-    var arrayActivities= Object.keys(objActivities); 
-    for(var i = 0; i < arrayActivities.length; i++){
-        var node = document.createElement("LI");                 // Create a <li> node
-        var textnode = document.createTextNode(arrayActivities[i]);         // Create a text node
-        node.appendChild(textnode);                              // Append the text to <li>
+    if(objActivities != null){
+        var arrayActivities= Object.keys(objActivities); 
+        for(var i = 0; i < arrayActivities.length; i++){
+        var node = document.createElement("LI");
+        var textnode = document.createTextNode(arrayActivities[i]);
+        node.appendChild(textnode); // Append the text to <li>
+        // node.setAttribute("onclick", "\"showActivityInfo\(" + arrayActivities[i] + "\)\"");
+        node.onclick = function () { 
+            console.log("Clicked on " + node.innerHTML );
+            showActivityInfo( node.innerHTML ) }
         list.appendChild(node);     // Append <li> to <ul> with id="myList"
+    }
     }
 }
 
 function activityInfo(actName){
     var objActivities = findCookie("actividades");
+
+
     var objActivity = objActivities[actName];
     var teacher = objActivity.profesor;
     var endDate =  objActivity.fecha;
@@ -731,15 +739,20 @@ function generateTableHead(table, data) {
     }
   }
   
-  function doTable(){
+  function showActivityInfo(actName){
+    activityInfo(actName);
     document.getElementById("activityInfo").style.display = "block";
     document.getElementById("crearActividad").style.display = "none";
     document.getElementById("boton_volver_actividad").style.display = "block";
     document.getElementById("boton_guardar_actividad").style.display = "none";
     document.getElementById("boton_crear_actividad").style.display = "none";
     document.getElementById("activitiesList").style.display = "none";
-    activityInfo("Actividad 2");
 }
+
+
+// cuando cliquee sobre una actividad (li text) cargar una tabla -> activityInfo(NOMBREACTIVIDAD);
+// únicamente tengo que encontrar la forma de obtener el nombre de un li sobre el que pinche
+
 
 
 // function setGrade(actName, studentName, studentGrade){    // buscar la actividad, cambiar la lista de estudiantes, set cookie
