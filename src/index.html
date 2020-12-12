@@ -625,35 +625,49 @@
 
                 <!-------------------------------------------- ACTIVIDADES ----------------------------------------------------->               
                     <section class="column mid" id="column_mid_activities" style="display: none;">
-                    <h1 class="listActivitiesTitle">Actividades</h1>
-                    <div  class="activitiesList">
-                        <ul>
-                            <li>
-                                <p class="data">Entrega Bloque 1</p>
-                                <div class="calificationField-wrap">
-                                    <input type="text" id="calification" required autocomplete="off" placeholder="Calificación" pattern="[0-9]"/>
-                                </div>
-                            </li>
-                            <li>
-                                <p class="data">Entrega Bloque 2</p>
-                            </li>
-                            <li>
-                                <p class="data">Entrega Bloque 3</p>
-                            </li>
-                            <li>
-                                <p class="data">Entrega Caso Práctico</p>
-                            </li>
-                            <li id="result6"></li>                            
-                        </ul>                      
-                        <div>
-                            <h1 class="activitiesSubtitle">Crear actividad</h1>
-                            <form> 
-                                <p class="forumComment">Ecriba el nombre de la nueva actividad*</p>
-                                <textarea class="cuadroTxt" id="newActivity"></textarea>
+                    <div>
+                        <div id="activitiesList">
+                        <h1 class="listActivitiesTitle">Actividades</h1>
+                            <ul>
+                                <li>
+                                    <p class="data">Entrega Bloque 1</p>
+                                </li>
+                                <li>
+                                    <p class="data">Entrega Bloque 2</p>
+                                </li>
+                                <li>
+                                    <p class="data">Entrega Bloque 3</p>
+                                </li>
+                                <li>
+                                    <p class="data">Entrega Caso Práctico</p>
+                                </li>
+                                <li id="result6"></li>                            
+                            </ul>
+                        </div>
+                        <div id="crearActividad"  style="display: none;">
+                            <h1 class="listActivitiesTitle">Crear actividad</h1>   
+                            <form method="post" id="formActividad">
                                 <div>
-                                    <button type="reset" class="boton" onclick="addActivity('newActivity', 'result6');">Crear</button>
+                                    <label for="activityName">Nombre de la actividad:</label><br>
+                                    <input type="text" name="activityName" id="activityName" required><br>
+                                </div>
+                                <div>
+                                    <label for="studentSelection">¿Para quién es la actividad?</label><br>
+                                    <select id="studentSelection" name="studentSelection" multiple>
+                                        <!-- <option value="todos">Todos</option> -->
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="endDate">Fecha límite de entrega:</label><br>
+                                    <input type="date" name="endDate" id="endDate"><br>
                                 </div>
                             </form>
+                        </div>
+                        <div style="margin-top: 50px;" class="set_botones_form">
+                            <button id="boton_crear_actividad" class="boton" onclick="displayActivityForm();">Crear actividad</button>
+                            <button id="boton_guardar_actividad" class="boton" onclick="guardarActividad();" display="none">Guardar</button>
+                            <!-- <input id="boton_guardar_actividad" class="boton" type="submit" value="Guardar" onclick="volverActividades();"> -->
+                            <button id="boton_volver_actividad" onclick="volverActividades()" display="none">Volver</button>
                         </div>
                     </div>
                 </section>
@@ -1094,7 +1108,7 @@
                     </div>
                     
                     <div id="grafica1" display="none"></div>
-                    <div class="botones_calificaciones">
+                    <div class="set_botones_form">
                         <button id="boton_descargar" onclick="descargarExcel('table1')">Descargar</button>
                         <button id="boton_volver" onclick="volverCalificaciones()" display="none">Volver</button>
                         <button id="boton_grafica" onclick="mostrarGraficas()">Gráfica</button>
@@ -1121,7 +1135,7 @@
                         </div>
                         
                         <div id="grafica2" display="none"></div>
-                        <div class="botones_calificaciones">
+                        <div class="set_botones_form">
                             <button id="boton_descargar_st" onclick="descargarExcel('table2')">Descargar</button>
                             <button id="boton_volver_st" onclick="volverCalificaciones()" display="none">Volver</button>
                             <button id="boton_grafica_st" onclick="mostrarGraficas()">Gráfica</button>

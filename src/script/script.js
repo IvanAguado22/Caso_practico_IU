@@ -196,6 +196,9 @@ function showActivities() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "block";
+    document.getElementById("boton_guardar_actividad").style.display = "none";
+    document.getElementById("boton_volver_actividad").style.display = "none";
+    volverActividades();
 }
 
 function showGradesStudent(){
@@ -251,6 +254,7 @@ function changeWeb1(){
     document.getElementById("pagAsignaturas").style.display = "block";
     document.getElementById("userNameComputer1").innerHTML = userData.username;
     document.getElementById("userNameTablet1").innerHTML = userData.username;
+    activityListStudents();
 }
 
 function changeWeb2(){
@@ -439,28 +443,6 @@ function volverForo(id_tema_foro){
     document.getElementById(id_tema_foro).style.display = "none";
 }
 
-function addActivity(id_comment, result){
-	var name = userData.name + " " + userData.surname;
-    var comment = document.getElementById(id_comment).value;
-
-	if(comment == ""){
-		alert("Los campos marcados con * son obligatorios!");
-	}else{
-        var parent=document.createElement("li");
-        var message_element=document.createElement("p");
-        
-        var txt_message=document.createTextNode(comment);
-
-		message_element.appendChild(txt_message);
-
-        parent.appendChild(message_element);
-
-        message_element.setAttribute("class", "data");
-        
-		document.getElementById(result).appendChild(parent);
-	}
-}
-
 // checkCookie comprueba si existe una cookie registrada con el correo
 // introducido. Si no existe == no está registrado. Si existe pero
 // la contraseña no coindide == contraseña incorrecta. Si coincide == login. 
@@ -597,39 +579,80 @@ window.addEventListener('resize', showStudentPhone);
 
 
 
-// ACTIVIDADES - COOKIES
-
-// cuando se cargue (por primera vez) la página creamos una cookie llamada actividades (cvalue = lista de actividades)
-// cada vez que un profesor añada una actividad (addActivity) esta se guardará en esta cookie
-
-// var actividades = new Array(); //array vacío
-
-// function storeActivity(actName, students, endDate){
-//     var newActivity = { actName: { profesor: userEmail, estudiantes: students, fecha: endDate}};
-//     var currentActivities = findCookie("actividades"); // busca la cookie "actividades", si la encuentra devuelve el valor de la cookie (lista de actividades) y si no dev null
-//     if(currentActivities==null){
-//         var newSetActivities = [newActivity];
-//         setCookie("actividades", newSetActivities); 
-//     } else{
-//         currentActivities.push(newActivity);
-//         setCookie("actividades", currentActivities); 
-//     }
-// }
-
-
+// ACTIVIDADES 
 // -------------------------------------------------------------------------------------------------------------------
-// function storeActivity(actName, students, endDate){
-//     var newActivity = { profesor: userEmail, estudiantes: students, fecha: endDate};
-//     var currentActivities = findCookie("actividades"); // busca la cookie "actividades", si la encuentra devuelve el valor de la cookie (obj json de actividades) y si no dev null
-    
-//     if(currentActivities==null){
-//         var newSetActivities = {actName: newActivity};
-//         setCookie("actividades", newSetActivities); 
-//     } else{
-//         currentActivities.actName = newActivity; //si currentActivities no contiene la actividad nueva, la añade como un campo mas del JSON (y si ya estaba se actualiza) (como myarray.push(newAct))
-//         setCookie("actividades", currentActivities); 
-//     }
-// }
+
+function displayActivityForm(){
+    document.getElementById("crearActividad").style.display = "block";
+    document.getElementById("boton_volver_actividad").style.display = "block";
+    document.getElementById("boton_guardar_actividad").style.display = "block";
+    document.getElementById("boton_crear_actividad").style.display = "none";
+    document.getElementById("activitiesList").style.display = "none";
+}
+
+function volverActividades(){
+    document.getElementById("crearActividad").style.display = "none";
+    document.getElementById("boton_volver_actividad").style.display = "none";
+    document.getElementById("boton_guardar_actividad").style.display = "none";
+    document.getElementById("boton_crear_actividad").style.display = "block";
+    document.getElementById("activitiesList").style.display = "block";
+    // document.getElementById("formActividad ").reset();
+}
+
+// recuperar valores del form
+// creamos un objeto studentsList de la forma : {estudiante1 : "", estudiante2 : "" ---} 
+// cuando califiquemos la actividad lo iremos rellenando
+function guardarActividad() {
+    var actName = document.getElementById("activityName").value;
+    var endDate = document.getElementById("endDate").value;
+    var selectedOptions = getSelectValues(document.getElementById("studentSelection"));
+    var studentsList = {};
+    for (var i = 0; i < selectedOptions.length; i++) {
+        studentsList[selectedOptions[i]] = "";
+    }
+    setActivity(actName, studentsList, endDate);
+
+}
+// Return an array of the selected opion values
+// select is an HTML select element
+function getSelectValues(select) {
+    var result = [];
+    var options = select && select.options;
+    var opt;
+  
+    for (var i=0, iLen=options.length; i<iLen; i++) {
+      opt = options[i];
+  
+      if (opt.selected) {
+        result.push(opt.value || opt.text);
+      }
+    }
+    return result;
+  }
+
+function activityListStudents(){
+    var objStudents = findCookie("estudiantes");     // Obtener la lista de estudiantes
+    var arrayStudentEmails= Object.keys(objStudents); // get array of keys (emails)
+// Pasar la lista de estudiantes a un formulario de opciones multiples
+    var selection = document.getElementById("studentSelection");
+    for(var i = 0; i < arrayStudentEmails.length; i++){
+        var option = document.createElement("OPTION");
+        option.text = arrayStudentEmails[i];
+        selection.add(option);
+    }
+}
+
+function setActivity(actName, students, endDate) {
+    var actAtributtes = {profesor: userEmail, estudiantes: students, fecha: endDate};
+    var currentActivities = findCookie("actividades"); // busca la cookie "actividades", si la encuentra devuelve el valor de la cookie (obj json de actividades) y si no dev null
+    if (currentActivities == null) setCookie("actividades",  "{ \"" + actName + "\": " + JSON.stringify(actAtributtes) + "}")
+    else {
+        currentActivities[actName] = actAtributtes; //si currentActivities no contiene la actividad nueva, la añade como un campo mas del JSON (y si ya estaba se actualiza) (como myarray.push(newAct))
+        setCookie("actividades", JSON.stringify(currentActivities));
+    }
+}
+
+
 
 // function setGrade(actName, studentName, studentGrade){    // buscar la actividad, cambiar la lista de estudiantes, set cookie
 //     var currentActivities = findCookie("actividades"); // busca la cookie "actividades", si la encuentra devuelve el valor de la cookie (lista de actividades) y si no dev null

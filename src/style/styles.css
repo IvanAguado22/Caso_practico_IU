@@ -403,25 +403,20 @@ input:focus, select:focus {
  * -------------------------------------------------------------------
  */
 
- .activitiesList{
+ #activitiesList{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.activitiesList li{
+#activitiesList li{
     list-style: none;
 }
 
 .listActivitiesTitle{
     font-size: 30px;
     color: #1ab188;
-}
-
-.activitiesSubtitle{
-    font-size: 20px;
-    padding: 10px 0;
-    margin-top: 15px;
+    margin-bottom: 25px;
 }
 
 .calificationField-wrap {
@@ -429,6 +424,18 @@ input:focus, select:focus {
     margin-bottom: 5px;
     margin-top: 10px;
     margin-right: 710px;
+}
+
+#formActividad div {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+#formActividad div label, #formActividad div input{
+    margin-right: 10px; 
+    font-size: 15px;
 }
 
 /**
@@ -558,13 +565,13 @@ tr:nth-child(1) {
     background-color: rgba(255, 255, 255, .20);
 }
 
-.botones_calificaciones{
+.set_botones_form{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.botones_calificaciones button{
+.set_botones_form button{
     margin: 20px 0px;
     padding: 15px;
     font-size: 17px;
