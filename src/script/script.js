@@ -622,7 +622,8 @@ function guardarActividad() {
 }
 
 function setActivity(actName, students, endDate) {
-    var actAtributtes = {profesor: userEmail, estudiantes: students, fecha: endDate};
+    var teacherData = userData.name + " " + userData.surname + ", " + userData.NIA;
+    var actAtributtes = {profesor: teacherData, estudiantes: students, fecha: endDate};
     var currentActivities = findCookie("actividades"); // busca la cookie "actividades", si la encuentra devuelve el valor de la cookie (obj json de actividades) y si no dev null
     if (currentActivities == null) setCookie("actividades",  "{ \"" + actName + "\": " + JSON.stringify(actAtributtes) + "}")
     else {
@@ -648,14 +649,16 @@ function getSelectValues(select) {
     return result;
   }
 
+// Pasar la lista de estudiantes a un formulario de opciones multiples
 function activityStudentSelection(){
     var objStudents = findCookie("estudiantes");     // Obtener la lista de estudiantes
     var arrayStudentEmails= Object.keys(objStudents); // get array of keys (emails)
-// Pasar la lista de estudiantes a un formulario de opciones multiples
     var selection = document.getElementById("studentSelection");
+    selection.innerHTML = "";
     for(var i = 0; i < arrayStudentEmails.length; i++){
+        var studentFullName = objStudents[arrayStudentEmails[i]].name + " " + objStudents[arrayStudentEmails[i]].surname + ", " + objStudents[arrayStudentEmails[i]].NIA;
         var option = document.createElement("OPTION");
-        option.text = arrayStudentEmails[i];
+        option.text = studentFullName;
         selection.add(option);
     }
 }
@@ -687,8 +690,6 @@ function listAllActivities(){
 
 function activityInfo(actName){
     var objActivities = findCookie("actividades");
-
-
     var objActivity = objActivities[actName];
     var teacher = objActivity.profesor;
     var endDate =  objActivity.fecha;
