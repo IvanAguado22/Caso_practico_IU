@@ -24,6 +24,8 @@ function showIni() {
 
 function showCourse() {
     document.getElementById("column_mid_ini").style.display = "block";
+    if (userData.rol === "Estudiante") showStudent();
+    else showTeacher();
     document.getElementById("column_mid_studentsList").style.display = "none";
     document.getElementById("column_mid_forum").style.display = "none";
     document.getElementById("column_mid_grades").style.display = "none";
@@ -254,6 +256,7 @@ function changeWeb1(){
 function changeWeb2(){
     document.getElementById("pagAsignaturas").style.display = "none";
     document.getElementById("pagWeb").style.display = "block";
+    //showCourse();
     document.getElementById("userNameComputer2").innerHTML = userData.username;
     document.getElementById("userNameTablet2").innerHTML = userData.username;
 }
@@ -261,10 +264,11 @@ function changeWeb2(){
 function cerrarSesion() {
     if (confirm("Seguro que quieres cerrar sesión?")) {
         document.getElementById("pagWeb").style.display = "none";
+        document.getElementById("pagAsignaturas").style.display = "none";
         document.getElementById("pagInicio").style.display = "block";
         userEmail = "inputEmail";
         userData = null;
-        location.reload();
+        //location.reload();
     }
 }
 
@@ -430,6 +434,11 @@ function commentBox(id_comment, result){
 	}
 }
 
+function volverForo(id_tema_foro){
+    document.getElementById("column_mid_forum").style.display = "block";
+    document.getElementById(id_tema_foro).style.display = "none";
+}
+
 function addActivity(id_comment, result){
 	var name = userData.name + " " + userData.surname;
     var comment = document.getElementById(id_comment).value;
@@ -473,6 +482,7 @@ function checkCookie() {
         userData = obj;
         changeWeb1();
         if (userData.rol === "Estudiante") showStudent();
+        else showTeacher();
     }
     else {
         alert("La contraseña es incorrecta");
@@ -578,6 +588,8 @@ function saveCookies() {
     } else {
         var userObj = { name: vName, surname: vSurname, username: vUsername, NIA: vNIA, birthdate: vBirthdate, id: vId, rol: vRol, lang: vLang, password: vPassword, grado: vGrado };
         setUser(vEmail, vRol, userObj); // registrar como estudiante o como profesor
+        cambiarLogIn();
+        document.getElementById("form_registro").reset();
     }
 }
 

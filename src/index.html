@@ -29,7 +29,7 @@
                 <div class="tab-content">
                     <div id="signup"  style="display: none;">   
                         <h1 class="logInTitle">Registro</h1>
-                        <form method="post">
+                        <form method="post" onsubmit="return false" id="form_registro">
                             <div class="top-row">
                                 <div class="field-wrap">
                                     <input type="text" id="name" required autocomplete="off" placeholder="Nombre*"/>
@@ -176,7 +176,7 @@
                 <div class="separator"></div>
 
                 <nav class="menu">
-                    <a href="#Inicio" onclick="showIni()">Cursos</a>
+                    <a href="#Cursos" onclick="showIni()">Cursos</a>
                     <a href="#Noticias">Noticias</a>
                     <a style="float:right" class="active" href="#" onclick="cerrarSesion()">Cerrar sesion</a>
                 </nav>
@@ -217,19 +217,19 @@
                         <li><time datetime="2020-11-02"> 02/11 - Nuevos mensajes en el foro</time></li>
                     </ul>
 
-                    <h1 class="titulo1"><a href="#" id="pop">Próximos Eventos</a></h1>
+                    <h1 class="titulo1"><a href="#" id="pop1">Próximos Eventos</a></h1>
                     <ul>
                         <li><time datetime="2020-09-20"> 03/11 - Fecha límite práctica 2</time></li>
                         <li><time datetime="2020-09-15"> 05/11 - Problema Evaluable Heurística</time></li>
                     </ul>
 
-                    <div id="holder" style="display: none;">
-                        <div id="calendar"></div>
+                    <div id="holder1" style="display: none;">
+                        <div id="calendar1"></div>
                     </div>
 
                     <script>
                         $(document).ready(function() {
-                            $('#calendar').evoCalendar({
+                            $('#calendar1').evoCalendar({
                                 calendarEvents: [
                                     {
                                         id: 'bHay68s', // Event's ID (required)
@@ -283,8 +283,8 @@
                                     }
                                 ]
                             })
-                            $("#pop").click(function(){
-                                $("#holder").toggle("slow");
+                            $("#pop1").click(function(){
+                                $("#holder1").toggle("slow");
                             });
                         })
                     </script>
@@ -318,7 +318,7 @@
                 <div class="separator"></div>
 
                 <nav class="menu">
-                    <a href="#Inicio" onclick="showIni()">Cursos</a>
+                    <a href="#Cursos" onclick="showIni()">Cursos</a>
                     <a href="#Noticias">Noticias</a>
                     <a style="float:right" class="active" href="#" onclick="cerrarSesion()">Cerrar sesion</a>
                 </nav>
@@ -723,17 +723,18 @@
                                         <time datetime="2020-09-13T23:20:00Z">8/09/2020 - 9:12</time>
                                     </article>
                                 </li>
-                                <li id="result1"></li>
+                                <li id="result1"></li>            
                             </ul>
-                        </div>
+                        </div>                      
                         <!-------------------------------------------- CAJA DE COMENTARIOS ----------------------------------------------------->
                         <div>
                             <h1 class="forumSubtitle">Comentarios</h1>
                             <form> 
                                 <p class="forumComment">Comentario*</p>
                                 <textarea class="cuadroTxt" id="comment1"></textarea>
-                                <div>
+                                <div class="botones_foro">
                                     <button type="reset" class="boton" onclick="commentBox('comment1', 'result1');">Enviar</button>
+                                    <button onclick="volverForo('column_mid_forum1')" display="block">Volver</button>
                                 </div>
                             </form>
                         </div>
@@ -795,8 +796,9 @@
                             <form> 
                                 <p class="forumComment">Comentario*</p>
                                 <textarea class="cuadroTxt" id="comment2"></textarea>
-                                <div>
+                                <div class="botones_foro">
                                     <button type="reset" class="boton" onclick="commentBox('comment2', 'result2');">Enviar</button>
+                                    <button onclick="volverForo('column_mid_forum2')" display="block">Volver</button>
                                 </div>
                             </form>
                         </div>
@@ -850,8 +852,9 @@
                             <form> 
                                 <p class="forumComment">Comentario*</p>
                                 <textarea class="cuadroTxt" id="comment3"></textarea>
-                                <div>
+                                <div class="botones_foro">
                                     <button type="reset" class="boton" onclick="commentBox('comment3', 'result3');">Enviar</button>
+                                    <button onclick="volverForo('column_mid_forum3')" display="block">Volver</button>
                                 </div>
                             </form>
                         </div>
@@ -929,8 +932,9 @@
                             <form> 
                                 <p class="forumComment">Comentario*</p>
                                 <textarea class="cuadroTxt" id="comment4"></textarea>
-                                <div>
+                                <div class="botones_foro">
                                     <button type="reset" class="boton" onclick="commentBox('comment4', 'result4');">Enviar</button>
+                                    <button onclick="volverForo('column_mid_forum4')" display="block">Volver</button>
                                 </div>
                             </form>
                         </div>
@@ -1000,8 +1004,9 @@
                             <form> 
                                 <p class="forumComment">Comentario*</p>
                                 <textarea class="cuadroTxt" id="comment5"></textarea>
-                                <div>
+                                <div class="botones_foro">
                                     <button type="reset" class="boton" onclick="commentBox('comment5', 'result5');">Enviar</button>
+                                    <button onclick="volverForo('column_mid_forum5')" display="block">Volver</button>
                                 </div>
                             </form>
                         </div>
@@ -1131,19 +1136,19 @@
                         <li><time datetime="2020-11-02"> 02/11 - Nuevos mensajes en el foro</time></li>
                     </ul>
 
-                    <h1 class="titulo1"><a href="#" id="pop">Próximos Eventos</a></h1>
+                    <h1 class="titulo1"><a href="#" id="pop2">Próximos Eventos</a></h1>
                     <ul>
                         <li><time datetime="2020-09-20"> 03/11 - Fecha límite práctica 2</time></li>
                         <li><time datetime="2020-09-15"> 05/11 - Problema Evaluable Heurística</time></li>
                     </ul>
 
-                    <div id="holder" style="display: none;">
-                        <div id="calendar"></div>
+                    <div id="holder2" style="display: none;">
+                        <div id="calendar2"></div>
                     </div>
 
                     <script>
                         $(document).ready(function() {
-                            $('#calendar').evoCalendar({
+                            $('#calendar2').evoCalendar({
                                 calendarEvents: [
                                     {
                                         id: 'bHay68s', // Event's ID (required)
@@ -1197,8 +1202,8 @@
                                     }
                                 ]
                             })
-                            $("#pop").click(function(){
-                                $("#holder").toggle("slow");
+                            $("#pop2").click(function(){
+                                $("#holder2").toggle("slow");
                             });
                         })
                     </script>
