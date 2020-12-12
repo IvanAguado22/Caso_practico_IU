@@ -463,8 +463,8 @@ function checkCookie() {
         alert("Por favor, rellene todos los campos");
         return false;
     }
-    var obj = findCookie(inputEmail);
-    if (obj === null) {
+    var obj = findUser(inputEmail);
+    if (obj == null) {
         alert("El correo electrónico introducido no está dado de alta. Por favor, regístrese.");
         return false;
     }
@@ -480,14 +480,34 @@ function checkCookie() {
 }
 
 function setCookie(cname, cvalue) {
+    console.log("Setting cookie: " + cname + "=" + cvalue + ";secure ;path=/");
     document.cookie = cname + "=" + cvalue + ";secure ;path=/";
 }
 
+function setUser(vEmail, vrol, obj){
+    var newUser = "{ \"" + vEmail + "\" :" + JSON.stringify(obj) + "}";
+    var currentUsers;
+    if(vrol === "Estudiante"){
+        currentUsers = findCookie("estudiantes"); 
+        if(currentUsers==null) setCookie("estudiantes", newUser); 
+        else {
+            currentUsers[vEmail] = obj;
+            setCookie("estudiantes",  JSON.stringify(currentUsers)); 
+        }
+    } else{
+        currentUsers = findCookie("profesores");
+        if(currentUsers==null) setCookie("profesores", newUser); 
+        else {
+            currentUsers[vEmail] = obj;
+            setCookie("profesores",  JSON.stringify(currentUsers)); 
+        }
+    }
+}
 
-// findCookie busca la cookie según su nombre (el email). Si la encuentra devuelve un 
-// objeto (JSON) con el valor de la cookie, si no devuelve null.
-function findCookie(emailValue) {
-    var tag = emailValue + "=";
+// findCookie busca la cookie según su tipo (estudiantes, profesores, actividades). Si la encuentra devuelve un 
+// objeto (JSON) con el valor de la cookie (todos los estudiantes, todos los profesores,...), si no devuelve null.
+function findCookie(type) {
+    var tag = type + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     if (decodedCookie.length === 0) return null;
     var ca = decodedCookie.split(';'); // ca es un array, en cada posición guardamos una cookie
@@ -498,8 +518,34 @@ function findCookie(emailValue) {
         }
         if (c.indexOf(tag) === 0) { // encontrada una cookie asignada al email introducido, devuelvo su valor (obj JSON)
             var JSONstring = c.substring(tag.length, c.length);
+            console.log("Found cookie: " + JSONstring);
             return JSON.parse(JSONstring);
         }
+    }
+    return null;
+}
+
+// comprueba si el usuario emailValue está registrado (tiene que buscar en estudiantes y en profesores)
+// si no está registrado devuelve null, si lo está devuelve un objeto con sus datos
+function findUser(emailValue) {
+    var profesores = findCookie("profesores");
+    if (profesores != null) {
+        var user = findKeyValue(emailValue, profesores);
+        if(user != null) return user;
+    }
+    var estudiantes = findCookie("estudiantes");
+    if (estudiantes != null) {
+        var user = findKeyValue(emailValue, estudiantes);
+        if(user != null) return user;
+    }
+    return null;
+}
+
+function findKeyValue(key, myObject) { 
+    var keysArray= Object.keys(myObject); // get array of keys
+    if(keysArray.length === 0) return null;
+    for(var i = 0; i < keysArray.length; i++) {
+        if(keysArray[i]===key) return myObject[key];
     }
     return null;
 }
@@ -510,7 +556,7 @@ function findCookie(emailValue) {
 // se ejecuta tras pulsar "guardar" en el formulario de registro
 function saveCookies() {
     var vEmail = document.getElementById("email").value;
-    if (!(vEmail === "") && (findCookie(vEmail) !== null)) {
+    if (!(vEmail === "") && (findUser(vEmail) !== null)) {
         alert("El correo especificado ya está registrado por otra cuenta, por favor introduzca uno válido");
         return false;
     }
@@ -530,9 +576,60 @@ function saveCookies() {
         alert("Por favor, rellene todos los campos");
         return false;
     } else {
-        var obj = { name: vName, surname: vSurname, username: vUsername, NIA: vNIA, birthdate: vBirthdate, id: vId, rol: vRol, lang: vLang, password: vPassword, grado: vGrado };
-        setCookie(vEmail, JSON.stringify(obj));
+        var userObj = { name: vName, surname: vSurname, username: vUsername, NIA: vNIA, birthdate: vBirthdate, id: vId, rol: vRol, lang: vLang, password: vPassword, grado: vGrado };
+        setUser(vEmail, vRol, userObj); // registrar como estudiante o como profesor
     }
 }
 
 window.addEventListener('resize', showStudentPhone);
+
+
+
+// ACTIVIDADES - COOKIES
+
+// cuando se cargue (por primera vez) la página creamos una cookie llamada actividades (cvalue = lista de actividades)
+// cada vez que un profesor añada una actividad (addActivity) esta se guardará en esta cookie
+
+// var actividades = new Array(); //array vacío
+
+// function storeActivity(actName, students, endDate){
+//     var newActivity = { actName: { profesor: userEmail, estudiantes: students, fecha: endDate}};
+//     var currentActivities = findCookie("actividades"); // busca la cookie "actividades", si la encuentra devuelve el valor de la cookie (lista de actividades) y si no dev null
+//     if(currentActivities==null){
+//         var newSetActivities = [newActivity];
+//         setCookie("actividades", newSetActivities); 
+//     } else{
+//         currentActivities.push(newActivity);
+//         setCookie("actividades", currentActivities); 
+//     }
+// }
+
+
+// -------------------------------------------------------------------------------------------------------------------
+// function storeActivity(actName, students, endDate){
+//     var newActivity = { profesor: userEmail, estudiantes: students, fecha: endDate};
+//     var currentActivities = findCookie("actividades"); // busca la cookie "actividades", si la encuentra devuelve el valor de la cookie (obj json de actividades) y si no dev null
+    
+//     if(currentActivities==null){
+//         var newSetActivities = {actName: newActivity};
+//         setCookie("actividades", newSetActivities); 
+//     } else{
+//         currentActivities.actName = newActivity; //si currentActivities no contiene la actividad nueva, la añade como un campo mas del JSON (y si ya estaba se actualiza) (como myarray.push(newAct))
+//         setCookie("actividades", currentActivities); 
+//     }
+// }
+
+// function setGrade(actName, studentName, studentGrade){    // buscar la actividad, cambiar la lista de estudiantes, set cookie
+//     var currentActivities = findCookie("actividades"); // busca la cookie "actividades", si la encuentra devuelve el valor de la cookie (lista de actividades) y si no dev null
+//     if(currentActivities==null) alert("No hay ninguna actividad registrada");
+//     else if(currentActivities.actName == null) alert("La actividad " + actName + " no está registrada");
+//     else{
+//         currentActivities.actName.estudiantes.studentName = studentGrade;
+//         setCookie("actividades", currentActivities); 
+//     }
+// }
+
+// function listStudents(){ // crea una lista con todos los estudiantes (para que el profesor la visualice y pueda asignarles tareas a cada uno)
+
+
+// }
