@@ -532,6 +532,8 @@ function saveCookies() {
     } else {
         var obj = { name: vName, surname: vSurname, username: vUsername, NIA: vNIA, birthdate: vBirthdate, id: vId, rol: vRol, lang: vLang, password: vPassword, grado: vGrado };
         setCookie(vEmail, JSON.stringify(obj));
+        cambiarLogIn();
+        document.getElementById("form_registro").reset();
     }
 }
 

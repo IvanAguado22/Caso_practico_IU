@@ -29,7 +29,7 @@
                 <div class="tab-content">
                     <div id="signup"  style="display: none;">   
                         <h1 class="logInTitle">Registro</h1>
-                        <form method="post">
+                        <form method="post" onsubmit="return false" id="form_registro">
                             <div class="top-row">
                                 <div class="field-wrap">
                                     <input type="text" id="name" required autocomplete="off" placeholder="Nombre*"/>
@@ -217,19 +217,19 @@
                         <li><time datetime="2020-11-02"> 02/11 - Nuevos mensajes en el foro</time></li>
                     </ul>
 
-                    <h1 class="titulo1"><a href="#" id="pop">Próximos Eventos</a></h1>
+                    <h1 class="titulo1"><a href="#" id="pop1">Próximos Eventos</a></h1>
                     <ul>
                         <li><time datetime="2020-09-20"> 03/11 - Fecha límite práctica 2</time></li>
                         <li><time datetime="2020-09-15"> 05/11 - Problema Evaluable Heurística</time></li>
                     </ul>
 
-                    <div id="holder" style="display: none;">
-                        <div id="calendar"></div>
+                    <div id="holder1" style="display: none;">
+                        <div id="calendar1"></div>
                     </div>
 
                     <script>
                         $(document).ready(function() {
-                            $('#calendar').evoCalendar({
+                            $('#calendar1').evoCalendar({
                                 calendarEvents: [
                                     {
                                         id: 'bHay68s', // Event's ID (required)
@@ -283,8 +283,8 @@
                                     }
                                 ]
                             })
-                            $("#pop").click(function(){
-                                $("#holder").toggle("slow");
+                            $("#pop1").click(function(){
+                                $("#holder1").toggle("slow");
                             });
                         })
                     </script>
@@ -1131,19 +1131,19 @@
                         <li><time datetime="2020-11-02"> 02/11 - Nuevos mensajes en el foro</time></li>
                     </ul>
 
-                    <h1 class="titulo1"><a href="#" id="pop">Próximos Eventos</a></h1>
+                    <h1 class="titulo1"><a href="#" id="pop2">Próximos Eventos</a></h1>
                     <ul>
                         <li><time datetime="2020-09-20"> 03/11 - Fecha límite práctica 2</time></li>
                         <li><time datetime="2020-09-15"> 05/11 - Problema Evaluable Heurística</time></li>
                     </ul>
 
-                    <div id="holder" style="display: none;">
-                        <div id="calendar"></div>
+                    <div id="holder2" style="display: none;">
+                        <div id="calendar2"></div>
                     </div>
 
                     <script>
                         $(document).ready(function() {
-                            $('#calendar').evoCalendar({
+                            $('#calendar2').evoCalendar({
                                 calendarEvents: [
                                     {
                                         id: 'bHay68s', // Event's ID (required)
@@ -1197,8 +1197,8 @@
                                     }
                                 ]
                             })
-                            $("#pop").click(function(){
-                                $("#holder").toggle("slow");
+                            $("#pop2").click(function(){
+                                $("#holder2").toggle("slow");
                             });
                         })
                     </script>
