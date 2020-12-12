@@ -631,6 +631,15 @@
                             <ul id="listActivities">
                             </ul>
                         </div>
+                        <div id="activityInfo" display = "none">
+                            <h1 class="listActivitiesTitle">Info actividad</h1>
+                                <ul>
+                                    <li id = "profesorActividad"></li>
+                                    <li id = "fechaActividad"></li>
+                                    <table style="width:100%" id="tablaActividad">
+                                    </table>
+                                </ul>
+                            </div>
                         <div id="crearActividad"  style="display: none;">
                             <h1 class="listActivitiesTitle">Crear actividad</h1>   
                             <form method="post" id="formActividad">
@@ -652,6 +661,8 @@
                         </div>
                         <div style="margin-top: 50px;" class="set_botones_form">
                             <button id="boton_crear_actividad" class="boton" onclick="displayActivityForm();">Crear actividad</button>
+                            <button id="boton_crear_actividad" class="boton" onclick="doTable();">Crear tabla</button>
+
                             <button id="boton_guardar_actividad" class="boton" onclick="guardarActividad();" display="none">Guardar</button>
                             <button id="boton_volver_actividad" onclick="volverActividades()" display="none">Volver</button>
                         </div>

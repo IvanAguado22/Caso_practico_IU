@@ -585,12 +585,13 @@ window.addEventListener('resize', showStudentPhone);
 // ACTIVIDADES 
 // -------------------------------------------------------------------------------------------------------------------
 
-function displayActivityForm(){
+function displayActivityForm(){ 
     document.getElementById("crearActividad").style.display = "block";
     document.getElementById("boton_volver_actividad").style.display = "block";
     document.getElementById("boton_guardar_actividad").style.display = "block";
     document.getElementById("boton_crear_actividad").style.display = "none";
     document.getElementById("activitiesList").style.display = "none";
+    document.getElementById("activityInfo").style.display = "none";
 }
 
 function volverActividades(){
@@ -599,6 +600,7 @@ function volverActividades(){
     document.getElementById("boton_guardar_actividad").style.display = "none";
     document.getElementById("boton_crear_actividad").style.display = "block";
     document.getElementById("activitiesList").style.display = "block";
+    document.getElementById("activityInfo").style.display = "none";
     listAllActivities();
     // document.getElementById("formActividad ").reset();
 }
@@ -612,11 +614,22 @@ function guardarActividad() {
     var selectedOptions = getSelectValues(document.getElementById("studentSelection"));
     var studentsList = {};
     for (var i = 0; i < selectedOptions.length; i++) {
-        studentsList[selectedOptions[i]] = "";
+        studentsList[selectedOptions[i]] = "notGraded";
     }
     setActivity(actName, studentsList, endDate);
     volverActividades();
 }
+
+function setActivity(actName, students, endDate) {
+    var actAtributtes = {profesor: userEmail, estudiantes: students, fecha: endDate};
+    var currentActivities = findCookie("actividades"); // busca la cookie "actividades", si la encuentra devuelve el valor de la cookie (obj json de actividades) y si no dev null
+    if (currentActivities == null) setCookie("actividades",  "{ \"" + actName + "\": " + JSON.stringify(actAtributtes) + "}")
+    else {
+        currentActivities[actName] = actAtributtes; //si currentActivities no contiene la actividad nueva, la añade como un campo mas del JSON (y si ya estaba se actualiza) (como myarray.push(newAct))
+        setCookie("actividades", JSON.stringify(currentActivities));
+    }
+}
+
 // Return an array of the selected opion values
 // select is an HTML select element
 function getSelectValues(select) {
@@ -646,15 +659,7 @@ function activityStudentSelection(){
     }
 }
 
-function setActivity(actName, students, endDate) {
-    var actAtributtes = {profesor: userEmail, estudiantes: students, fecha: endDate};
-    var currentActivities = findCookie("actividades"); // busca la cookie "actividades", si la encuentra devuelve el valor de la cookie (obj json de actividades) y si no dev null
-    if (currentActivities == null) setCookie("actividades",  "{ \"" + actName + "\": " + JSON.stringify(actAtributtes) + "}")
-    else {
-        currentActivities[actName] = actAtributtes; //si currentActivities no contiene la actividad nueva, la añade como un campo mas del JSON (y si ya estaba se actualiza) (como myarray.push(newAct))
-        setCookie("actividades", JSON.stringify(currentActivities));
-    }
-}
+
 
 function listAllActivities(){
     var list = document.getElementById("listActivities");
@@ -668,6 +673,74 @@ function listAllActivities(){
         list.appendChild(node);     // Append <li> to <ul> with id="myList"
     }
 }
+
+function activityInfo(actName){
+    var objActivities = findCookie("actividades");
+    var objActivity = objActivities[actName];
+    var teacher = objActivity.profesor;
+    var endDate =  objActivity.fecha;
+    var objEstudiantes = objActivity.estudiantes; // {"c@c.c":"notGraded" , "a@a.a": "" , "b@b.a": ""} => [{"c@c.c":""} , {"a@a.a": ""} , {"b@b.a": ""}]
+    var arrayEst = Object.keys(objEstudiantes); 
+
+    var arrayTable = [];
+    for(var i = 0; i < arrayEst.length ; i++){
+        var objString = "{ \"" + arrayEst[i] + "\" : " + JSON.stringify(objEstudiantes[arrayEst[i]]) + "}";
+        console.log(objString);
+        arrayTable.push(JSON.parse(objString));
+    }
+        
+    document.getElementById("profesorActividad").innerHTML = "Profesor: " + teacher;
+    document.getElementById("fechaActividad").innerHTML = "Fecha límite de entrega: " + endDate;
+
+    let table =  document.getElementById("tablaActividad");
+    table.innerHTML= "";
+    let data = Object.keys(arrayTable[0]);
+    generateTable(table, arrayTable); // generate the table first
+    generateTableHead(table, data); // then the head
+
+}
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++
+
+function generateTableHead(table, data) {
+    let thead = table.createTHead();
+    let row = thead.insertRow();
+    let th = document.createElement("th");
+    let text = document.createTextNode("Estudiante");
+    th.appendChild(text);
+    row.appendChild(th);
+    let th2 = document.createElement("th");
+    let text2 = document.createTextNode("Calificación");
+    th2.appendChild(text2);
+    row.appendChild(th2);
+  }
+
+  function generateTable(table, data) { 
+    for (let element of data) {
+        let key = Object.keys(element)[0];
+        let row = table.insertRow();
+        let cell = row.insertCell();
+        let text = document.createTextNode(key);
+        cell.appendChild(text);
+
+        let cell2 = row.insertCell();
+        let text2 = document.createTextNode(element[key]);
+        cell2.appendChild(text2);
+      
+    }
+  }
+  
+  function doTable(){
+    document.getElementById("activityInfo").style.display = "block";
+    document.getElementById("crearActividad").style.display = "none";
+    document.getElementById("boton_volver_actividad").style.display = "block";
+    document.getElementById("boton_guardar_actividad").style.display = "none";
+    document.getElementById("boton_crear_actividad").style.display = "none";
+    document.getElementById("activitiesList").style.display = "none";
+    activityInfo("Actividad 2");
+}
+
 
 // function setGrade(actName, studentName, studentGrade){    // buscar la actividad, cambiar la lista de estudiantes, set cookie
 //     var currentActivities = findCookie("actividades"); // busca la cookie "actividades", si la encuentra devuelve el valor de la cookie (lista de actividades) y si no dev null
