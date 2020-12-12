@@ -254,6 +254,7 @@ function changeWeb1(){
 function changeWeb2(){
     document.getElementById("pagAsignaturas").style.display = "none";
     document.getElementById("pagWeb").style.display = "block";
+    showCourse();
     document.getElementById("userNameComputer2").innerHTML = userData.username;
     document.getElementById("userNameTablet2").innerHTML = userData.username;
 }
@@ -261,6 +262,7 @@ function changeWeb2(){
 function cerrarSesion() {
     if (confirm("Seguro que quieres cerrar sesión?")) {
         document.getElementById("pagWeb").style.display = "none";
+        document.getElementById("pagAsignaturas").style.display = "none";
         document.getElementById("pagInicio").style.display = "block";
         userEmail = "inputEmail";
         userData = null;
