@@ -23,9 +23,9 @@ function showIni() {
 }
 
 function showCourse() {
-    document.getElementById("column_mid_ini").style.display = "block";
     if (userData.rol === "Estudiante") showStudent();
     else showTeacher();
+    document.getElementById("column_mid_ini").style.display = "block";
     document.getElementById("column_mid_studentsList").style.display = "none";
     document.getElementById("column_mid_forum").style.display = "none";
     document.getElementById("column_mid_grades").style.display = "none";
@@ -221,7 +221,6 @@ function showGradesStudent(){
 function showStudent(){
     document.getElementById("columnLeftComputerStudent").style.display = "block";
     document.getElementById("columnLeftComputer").style.display = "none";
-    document.getElementById("column_mid_activities").style.display = "none";
 }
 
 function showTeacher(){
@@ -262,7 +261,7 @@ function changeWeb1(){
 function changeWeb2(){
     document.getElementById("pagAsignaturas").style.display = "none";
     document.getElementById("pagWeb").style.display = "block";
-    //showCourse();
+    showCourse();
     document.getElementById("userNameComputer2").innerHTML = userData.username;
     document.getElementById("userNameTablet2").innerHTML = userData.username;
     activityStudentSelection();
@@ -466,9 +465,8 @@ function checkCookie() {
     else if (obj.password === inputPass) {
         userEmail = inputEmail;
         userData = obj;
+        alert(userData.rol);
         changeWeb1();
-        if (userData.rol === "Estudiante") showStudent();
-        else showTeacher();
     }
     else {
         alert("La contraseña es incorrecta");
