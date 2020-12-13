@@ -179,7 +179,6 @@ function showGrades() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none"
     document.getElementById("boton_volver").style.display = "none";
-    volverCalificaciones();
     document.getElementById("column_mid_activities").style.display = "none";
 }
 
@@ -214,7 +213,6 @@ function showGradesStudent(){
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "block";
     document.getElementById("boton_volver_st").style.display = "none";
-    volverCalificaciones();
     document.getElementById("column_mid_activities").style.display = "none";
 }
 
@@ -225,7 +223,7 @@ function showStudent(){
 
 function showTeacher(){
     document.getElementById("columnLeftComputerStudent").style.display = "none";
-    document.getElementById("columnLeftComputer").style.display = "show";
+    document.getElementById("columnLeftComputer").style.display = "block";
 }
 
 function showStudentPhone(){
@@ -465,7 +463,6 @@ function checkCookie() {
     else if (obj.password === inputPass) {
         userEmail = inputEmail;
         userData = obj;
-        alert(userData.rol);
         changeWeb1();
     }
     else {
