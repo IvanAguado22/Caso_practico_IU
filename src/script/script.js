@@ -717,7 +717,7 @@ function listAllActivities(){
 }
 
 function listActivitiesStudent(){
-    var studentData = userData.name + " " + userData.surname + ", " + userData.NIA;
+    var studentData = userData.name + " " + userData.surname + ", " + userData.NIA + ", " + userEmail;
     var list = document.getElementById("activitiesListStudent");
     list.innerHTML = "";
     var objActivities = findCookie("actividades");
@@ -730,8 +730,7 @@ function listActivitiesStudent(){
             var keyArrayEstudiantes = Object.keys(objEstudiantes);
             for(var j = 0; j < keyArrayEstudiantes.length; j++){
                 if(keyArrayEstudiantes[j] === studentData){
-                    var objString = JSON.stringify(keyArrayActivities[i]);
-                    arrayActivities.push(JSON.parse(objString));
+                    arrayActivities.push(keyArrayActivities[i]);
                 }
             }
         }
@@ -739,11 +738,9 @@ function listActivitiesStudent(){
             var node = document.createElement("LI");
             var textnode = document.createTextNode(arrayActivities[k]);
             node.appendChild(textnode); // Append the text to <li>
-            // node.setAttribute("onclick", "\"showActivityInfo\(" + arrayActivities[i] + "\)\"");
-            node.onclick = createClickHandler(arrayActivities[i]);
+            node.onclick = createClickHandler(arrayActivities[k]);
             list.appendChild(node);     // Append <li> to <ul> with id="myList"
         }
-        console.log(arrayActivities);
     }
 }
 
