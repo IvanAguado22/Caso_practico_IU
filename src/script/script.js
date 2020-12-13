@@ -219,6 +219,7 @@ function showActivitiesStudent(){
     document.getElementById("boton_volver_st").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
     document.getElementById("column_mid_activities_student").style.display = "block";
+    listActivitiesStudent();
 }
 
 function showGradesStudent(){
@@ -623,6 +624,11 @@ function volverActividades(){
     // document.getElementById("formActividad ").reset();
 }
 
+function volverActividadesStudent(){
+    document.getElementById("activitiesStudent").style.display = "block";
+    document.getElementById("activityInfoStudent").style.display = "none";
+}
+
 var currentActivity;
 
 function showActivityInfo(actName){
@@ -634,6 +640,19 @@ function showActivityInfo(actName){
     document.getElementById("boton_guardar_actividad").style.display = "none";
     document.getElementById("boton_crear_actividad").style.display = "none";
     document.getElementById("activitiesList").style.display = "none";
+}
+
+function showActivityInfo2(actName){
+    currentActivity = actName;
+    var objActivities = findCookie("actividades");
+    var objActivity = objActivities[actName];
+    var teacher = objActivity.profesor;
+    var endDate =  objActivity.fecha;
+    document.getElementById("infoActividadTituloStudent").innerHTML = actName;
+    document.getElementById("profesorActividadStudent").innerHTML = "Profesor: " + teacher;
+    document.getElementById("fechaActividadStudent").innerHTML = "Fecha límite de entrega: " + endDate;
+    document.getElementById("activityInfoStudent").style.display = "block";
+    document.getElementById("activitiesStudent").style.display = "none";
 }
 
 // recuperar valores del form
@@ -697,7 +716,7 @@ var createClickHandler = function(arg) {
     return function(){
         showActivityInfo(arg);
     }
-  } 
+}
 
 function listAllActivities(){
     var list = document.getElementById("listActivities");
@@ -713,6 +732,12 @@ function listAllActivities(){
             node.onclick = createClickHandler(arrayActivities[i]);
             list.appendChild(node);     // Append <li> to <ul> with id="myList"
         }
+    }
+}
+
+var createClickHandler2 = function(arg) {    
+    return function(){
+        showActivityInfo2(arg);
     }
 }
 
@@ -738,7 +763,7 @@ function listActivitiesStudent(){
             var node = document.createElement("LI");
             var textnode = document.createTextNode(arrayActivities[k]);
             node.appendChild(textnode); // Append the text to <li>
-            node.onclick = createClickHandler(arrayActivities[k]);
+            node.onclick = createClickHandler2(arrayActivities[k]);
             list.appendChild(node);     // Append <li> to <ul> with id="myList"
         }
     }
