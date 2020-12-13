@@ -183,6 +183,8 @@ function showGrades() {
     document.getElementById("boton_volver").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
     document.getElementById("column_mid_activities_student").style.display = "none";
+
+    loadGrades();
 }
 
 function showActivities() {
@@ -834,18 +836,33 @@ function setGrade(){
     showActivityInfo(currentActivity);
 }
 
+//arrayActivities =  [{"actividad1":"10"} , {"actividad2": "7"} , {"actividad3": "9"}]
+function loadGrades(){
+    var objActivities = findCookie("actividades");
+    var studentData = userData.name + " " + userData.surname + ", " + userData.NIA + ", " + userEmail;
 
-// function setGrade(actName, studentName, studentGrade){    // buscar la actividad, cambiar la lista de estudiantes, set cookie
-//     var currentActivities = findCookie("actividades"); // busca la cookie "actividades", si la encuentra devuelve el valor de la cookie (lista de actividades) y si no dev null
-//     if(currentActivities==null) alert("No hay ninguna actividad registrada");
-//     else if(currentActivities.actName == null) alert("La actividad " + actName + " no está registrada");
-//     else{
-//         currentActivities.actName.estudiantes.studentName = studentGrade;
-//         setCookie("actividades", currentActivities); 
-//     }
-// }
+    if(objActivities != null){
+        var keyArrayActivities = Object.keys(objActivities);
+        var arrayActivities = [];
+    
+        for(var i = 0; i < keyArrayActivities.length; i++){
+            var objActividad = objActivities[keyArrayActivities[i]];
+            var objEstudiantes = objActividad.estudiantes;
+            var keyArrayEstudiantes = Object.keys(objEstudiantes);
+            for(var j = 0; j < keyArrayEstudiantes.length; j++){
+                if(keyArrayEstudiantes[j] === studentData){
+                    var objGrade = "{" + keyArrayActivities[i] + ":"+ objEstudiantes[studentData] + "}";
+                    console.log("pushing " + objGrade);
+                    arrayActivities.push(JSON.parse(objGrade));
+                    break;
+                }
+            }
+        }
+ 
+        let table =  document.getElementById("gradesTable");
+        table.innerHTML= "";
+        generateTable(table, arrayActivities); // generate the table first. Uso actName para ponerle un id a las celdas...
+        generateTableHead(table); // then the head    
 
-// function listStudents(){ // crea una lista con todos los estudiantes (para que el profesor la visualice y pueda asignarles tareas a cada uno)
-
-
-// }
+    }
+}
