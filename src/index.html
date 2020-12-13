@@ -631,15 +631,26 @@
                             <ul id="listActivities">
                             </ul>
                         </div>
-                        <div id="activityInfo" display = "none">
+                        <div id="activityInfo" style="display: none;">
                             <h1 class="listActivitiesTitle" id = "infoActividadTitulo">Info actividad</h1>
                                 <ul>
                                     <li id = "profesorActividad"></li>
                                     <li id = "fechaActividad"></li>
-                                    <table style="width:100%; margin-top: 30px;" id="tablaActividad">
-                                    </table>
                                 </ul>
-                            </div>
+                                <table style="width:100%; margin-top: 30px;" id="tablaActividad">
+                                </table>
+                                <div id = "setCalification" style="display: none;">
+                                    <h4>Calificar alumno (0-100)</h1>
+                                    <form onsubmit="return false" id = "calificationForm">
+                                        <label for="calification"></label>
+                                        <input type="number" id="calification" name="calification" min="0" max="100">
+                                        <div class="set_botones_form">
+                                            <button type="submit" class="button button-block" onclick="setGrade()">Guardar</button> 
+                                            <button class="button button-block" onclick="hideGradeForm()">Volver</button>  <!---- id="boton_volver_calificacion"  display="none" --------->     
+                                        </div>
+                                    </form>
+                                </div>
+                        </div>
                         <div id="crearActividad"  style="display: none;">
                             <h1 class="listActivitiesTitle">Crear actividad</h1>   
                             <form method="post" id="formActividad">
@@ -663,8 +674,8 @@
                             <button id="boton_crear_actividad" class="boton" onclick="displayActivityForm();">Crear actividad</button>
                             <!-- <button id="boton_crear_actividad" class="boton" onclick="showActivityInfo();">Crear tabla</button> -->
 
-                            <button id="boton_guardar_actividad" class="boton" onclick="guardarActividad();" display="none">Guardar</button>
-                            <button id="boton_volver_actividad" onclick="volverActividades()" display="none">Volver</button>
+                            <button id="boton_guardar_actividad" class="boton" onclick="guardarActividad();" style="display: none;">Guardar</button>
+                            <button id="boton_volver_actividad" onclick="volverActividades()" style="display: none;">Volver</button>
                         </div>
                     </div>
                 </section>

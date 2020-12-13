@@ -574,7 +574,7 @@ function saveCookies() {
     }
 }
 
-window.addEventListener('resize', showStudentPhone);
+if(userData != null) window.addEventListener('resize', showStudentPhone);
 
 
 
@@ -599,6 +599,19 @@ function volverActividades(){
     document.getElementById("activityInfo").style.display = "none";
     listAllActivities();
     // document.getElementById("formActividad ").reset();
+}
+
+var currentActivity;
+
+function showActivityInfo(actName){
+    currentActivity = actName;
+    activityInfo(actName);
+    document.getElementById("activityInfo").style.display = "block";
+    document.getElementById("crearActividad").style.display = "none";
+    document.getElementById("boton_volver_actividad").style.display = "block";
+    document.getElementById("boton_guardar_actividad").style.display = "none";
+    document.getElementById("boton_crear_actividad").style.display = "none";
+    document.getElementById("activitiesList").style.display = "none";
 }
 
 // recuperar valores del form
@@ -627,7 +640,7 @@ function setActivity(actName, students, endDate) {
     }
 }
 
-// Return an array of the selected opion values
+// Return an array of the selected option values
 // select is an HTML select element
 function getSelectValues(select) {
     var result = [];
@@ -651,7 +664,7 @@ function activityStudentSelection(){
     var selection = document.getElementById("studentSelection");
     selection.innerHTML = "";
     for(var i = 0; i < arrayStudentEmails.length; i++){
-        var studentFullName = objStudents[arrayStudentEmails[i]].name + " " + objStudents[arrayStudentEmails[i]].surname + ", " + objStudents[arrayStudentEmails[i]].NIA;
+        var studentFullName = objStudents[arrayStudentEmails[i]].name + " " + objStudents[arrayStudentEmails[i]].surname + ", " + objStudents[arrayStudentEmails[i]].NIA + ", " + arrayStudentEmails[i];
         var option = document.createElement("OPTION");
         option.text = studentFullName;
         selection.add(option);
@@ -660,11 +673,9 @@ function activityStudentSelection(){
 
 var createClickHandler = function(arg) {    
     return function(){
-        console.log("Clicked on " + arg);
         showActivityInfo(arg);
     }
-  }
-  
+  } 
 
 function listAllActivities(){
     var list = document.getElementById("listActivities");
@@ -689,7 +700,7 @@ function activityInfo(actName){
     var teacher = objActivity.profesor;
     var endDate =  objActivity.fecha;
     var objEstudiantes = objActivity.estudiantes; // {"c@c.c":"notGraded" , "a@a.a": "" , "b@b.a": ""} => [{"c@c.c":""} , {"a@a.a": ""} , {"b@b.a": ""}]
-    var arrayEst = Object.keys(objEstudiantes); 
+    var arrayEst = Object.keys(objEstudiantes); // ["c@c.c", "c@c.c", "c@c.c"]
 
     var arrayTable = [];
     for(var i = 0; i < arrayEst.length ; i++){
@@ -703,16 +714,14 @@ function activityInfo(actName){
 
     let table =  document.getElementById("tablaActividad");
     table.innerHTML= "";
-    let data = Object.keys(arrayTable[0]);
-    generateTable(table, arrayTable); // generate the table first
-    generateTableHead(table, data); // then the head
-
+    generateTable(table, arrayTable); // generate the table first. Uso actName para ponerle un id a las celdas...
+    generateTableHead(table); // then the head
 }
 
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++
 
-function generateTableHead(table, data) {
+function generateTableHead(table) {
     let thead = table.createTHead();
     let row = thead.insertRow();
     let th = document.createElement("th");
@@ -725,7 +734,18 @@ function generateTableHead(table, data) {
     row.appendChild(th2);
   }
 
-  function generateTable(table, data) { 
+
+var clickHandler_grading = function(id) {    
+    return function(){
+        studentGraded = id;
+        showGradeForm();
+    }
+  }
+
+   // el id de cada celda de calificación es el nombre de la actividad ("ej3" por ejemplo) + un número (i)
+   // solo puede haber una misma actividad con el mismo nombre     var i = 0;
+
+  function generateTable(table, data) {
     for (let element of data) {
         let key = Object.keys(element)[0];
         let row = table.insertRow();
@@ -736,18 +756,32 @@ function generateTableHead(table, data) {
         let cell2 = row.insertCell();
         let text2 = document.createTextNode(element[key]);
         cell2.appendChild(text2);
-      
+        cell2.onclick = clickHandler_grading(key);
     }
   }
   
-  function showActivityInfo(actName){
-    activityInfo(actName);
-    document.getElementById("activityInfo").style.display = "block";
-    document.getElementById("crearActividad").style.display = "none";
-    document.getElementById("boton_volver_actividad").style.display = "block";
-    document.getElementById("boton_guardar_actividad").style.display = "none";
-    document.getElementById("boton_crear_actividad").style.display = "none";
-    document.getElementById("activitiesList").style.display = "none";
+var studentGraded;
+
+function showGradeForm(){
+    document.getElementById("setCalification").style.display = "block"; 
+}
+
+function hideGradeForm(){
+    document.getElementById("setCalification").style.display = "none"; 
+}
+
+function setGrade(){
+    if(currentActivity == null || currentActivity == "" ) return false;
+    var nota = document.getElementById("calification").value; // al guardar
+    // actualizar cookie actividades con la nota guardada
+    var activitiesObj = findCookie("actividades");
+    var currentActivityObj = activitiesObj[currentActivity];
+    var endDate = currentActivityObj.fecha;
+    var studentsList = currentActivityObj.estudiantes; // modificarla metiendo la calificación obtenida
+    studentsList[studentGraded] = nota;
+    setActivity(currentActivity, studentsList, endDate);
+    hideGradeForm();
+    showActivityInfo(currentActivity);
 }
 
 
