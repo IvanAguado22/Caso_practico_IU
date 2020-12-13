@@ -347,6 +347,7 @@
                             <a href="#" onclick="showSubjectsList()">Mis asignaturas</a>
                             <a href="#" onclick="showForum()">Foro de la Asignatura</a>
                             <a href="#" onclick="showGradesStudent()">Calificaciones</a>
+                            <a href="#" onclick="showActivitiesStudent()">Mis actividades</a>
                             <a href="#Novedades">Últimas Novedades</a>
                             <a href="#Eventos">Próximos Eventos</a>
                         </nav>
@@ -373,6 +374,7 @@
                                 <a href="#" onclick="showSubjectsList()">Mis asignaturas</a>
                                 <a href="#" onclick="showForum()">Foro de la Asignatura</a>
                                 <a href="#" onclick="showGradesStudent()">Calificaciones</a>
+                                <a href="#" onclick="showActivitiesStudent()">Mis actividades</a>
                                 <a href="#Novedades">Últimas Novedades</a>
                                 <a href="#Eventos">Próximos Eventos</a>
                             </div>
@@ -584,7 +586,7 @@
                         </article>
                     </div>
                 </section>
-
+                <!-------------------------------------------- LISTADO DE ASIGNATURAS ----------------------------------------------------->
                 <section class="column mid" id="column_mid_subjectsList" style="display: none;">
                     <h1 class="listTitle">Listado de Asignaturas</h1>
                     <div  class="subjectsList">
@@ -623,12 +625,12 @@
                     </div>
                 </section>
 
-                <!-------------------------------------------- ACTIVIDADES ----------------------------------------------------->               
+                <!-------------------------------------------- ACTIVIDADES ----------------------------------------------------->
                 <section class="column mid" id="column_mid_activities" style="display: none;">
                     <div>
                         <div id="activitiesList">
                         <h1 class="listActivitiesTitle">Actividades</h1>
-                            <ul id="listActivities">
+                            <ul id="listActivities" style="cursor:pointer">
                             </ul>
                         </div>
                         <div id="activityInfo" display = "none">
@@ -666,6 +668,25 @@
                             <button id="boton_guardar_actividad" class="boton" onclick="guardarActividad();" display="none">Guardar</button>
                             <button id="boton_volver_actividad" onclick="volverActividades()" display="none">Volver</button>
                         </div>
+                    </div>
+                </section>
+                <!-------------------------------------------- ACTIVIDADES ESTUDIANTE----------------------------------------------------->
+                <section class="column mid" id="column_mid_activities_student" style="display: none;">
+                    <div id="ef">
+                        <h1 class="listActivitiesTitle">Actividades</h1>
+                            <ul id="activitiesListStudent" style="cursor:pointer">
+                            </ul>
+                    </div>
+                    <div>
+                        <h1 class="forumSubtitle">Comentarios</h1>
+                        <form> 
+                            <p class="forumComment">Comentario*</p>
+                            <textarea class="cuadroTxt" id="commentActivity"></textarea>
+                            <div class="botones_foro">
+                                <button type="reset" class="boton" onclick="commentBox('commentActivity', 'result1');">Enviar</button>
+                                <button onclick="listActivitiesStudent()">Volver</button>
+                            </div>
+                        </form>
                     </div>
                 </section>
                 <!-------------------------------------------- FORO ----------------------------------------------------->

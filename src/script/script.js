@@ -37,6 +37,7 @@ function showCourse() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showStudentsList() {
@@ -52,7 +53,7 @@ function showStudentsList() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
-
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showForum() {
@@ -68,7 +69,7 @@ function showForum() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
-
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showForum1() {
@@ -84,7 +85,7 @@ function showForum1() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
-
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showForum2() {
@@ -100,7 +101,7 @@ function showForum2() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
-
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showForum3() {
@@ -116,7 +117,7 @@ function showForum3() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
-
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showForum4() {
@@ -132,7 +133,7 @@ function showForum4() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
-
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showForum5() {
@@ -148,7 +149,7 @@ function showForum5() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
-
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showSubjectsList() {
@@ -164,6 +165,7 @@ function showSubjectsList() {
     document.getElementById("column_mid_subjectsList").style.display = "block";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showGrades() {
@@ -180,6 +182,7 @@ function showGrades() {
     document.getElementById("column_mid_grades_student").style.display = "none"
     document.getElementById("boton_volver").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showActivities() {
@@ -195,9 +198,27 @@ function showActivities() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "block";
+    document.getElementById("column_mid_activities_student").style.display = "none";
     document.getElementById("boton_guardar_actividad").style.display = "none";
     document.getElementById("boton_volver_actividad").style.display = "none";
     volverActividades();
+}
+
+function showActivitiesStudent(){
+    document.getElementById("column_mid_ini").style.display = "none";
+    document.getElementById("column_mid_studentsList").style.display = "none";
+    document.getElementById("column_mid_forum").style.display = "none";
+    document.getElementById("column_mid_grades").style.display = "none";
+    document.getElementById("column_mid_forum1").style.display = "none";
+    document.getElementById("column_mid_forum2").style.display = "none";
+    document.getElementById("column_mid_forum3").style.display = "none";
+    document.getElementById("column_mid_forum4").style.display = "none";
+    document.getElementById("column_mid_forum5").style.display = "none";
+    document.getElementById("column_mid_subjectsList").style.display = "none";
+    document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("boton_volver_st").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
+    document.getElementById("column_mid_activities_student").style.display = "block";
 }
 
 function showGradesStudent(){
@@ -214,6 +235,7 @@ function showGradesStudent(){
     document.getElementById("column_mid_grades_student").style.display = "block";
     document.getElementById("boton_volver_st").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showStudent(){
@@ -671,15 +693,46 @@ function listAllActivities(){
     list.innerHTML = "";
     var objActivities = findCookie("actividades");
     if(objActivities != null){          
-        var arrayActivities= Object.keys(objActivities); 
+        var arrayActivities = Object.keys(objActivities); 
         for(var i = 0; i < arrayActivities.length; i++){
-        var node = document.createElement("LI");
-        var textnode = document.createTextNode(arrayActivities[i]);
-        node.appendChild(textnode); // Append the text to <li>
-        // node.setAttribute("onclick", "\"showActivityInfo\(" + arrayActivities[i] + "\)\"");
-        node.onclick = createClickHandler(arrayActivities[i]);
-        list.appendChild(node);     // Append <li> to <ul> with id="myList"
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode(arrayActivities[i]);
+            node.appendChild(textnode); // Append the text to <li>
+            // node.setAttribute("onclick", "\"showActivityInfo\(" + arrayActivities[i] + "\)\"");
+            node.onclick = createClickHandler(arrayActivities[i]);
+            list.appendChild(node);     // Append <li> to <ul> with id="myList"
+        }
     }
+}
+
+function listActivitiesStudent(){
+    var studentData = userData.name + " " + userData.surname + ", " + userData.NIA;
+    var list = document.getElementById("activitiesListStudent");
+    list.innerHTML = "";
+    var objActivities = findCookie("actividades");
+    if(objActivities != null){
+        var keyArrayActivities = Object.keys(objActivities);
+        var arrayActivities = [];
+        for(var i = 0; i < keyArrayActivities.length; i++){
+            var objActividad = objActivities[keyArrayActivities[i]];
+            var objEstudiantes = objActividad.estudiantes;
+            var keyArrayEstudiantes = Object.keys(objEstudiantes);
+            for(var j = 0; j < keyArrayEstudiantes.length; j++){
+                if(keyArrayEstudiantes[j] === studentData){
+                    var objString = JSON.stringify(keyArrayActivities[i]);
+                    arrayActivities.push(JSON.parse(objString));
+                }
+            }
+        }
+        for(var k = 0; k < arrayActivities.length; k++){
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode(arrayActivities[k]);
+            node.appendChild(textnode); // Append the text to <li>
+            // node.setAttribute("onclick", "\"showActivityInfo\(" + arrayActivities[i] + "\)\"");
+            node.onclick = createClickHandler(arrayActivities[i]);
+            list.appendChild(node);     // Append <li> to <ul> with id="myList"
+        }
+        console.log(arrayActivities);
     }
 }
 
