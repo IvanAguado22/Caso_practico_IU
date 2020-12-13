@@ -409,7 +409,7 @@ input:focus, select:focus {
     justify-content: space-between;
 }
 
-#activitiesList li, #activityInfo li, #ef li{
+#activitiesList li, #activityInfo li, #activitiesStudent li, #activityInfoStudent li{
     list-style: none;
     margin-bottom: 15px;
 }
