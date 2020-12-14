@@ -403,25 +403,21 @@ input:focus, select:focus {
  * -------------------------------------------------------------------
  */
 
- .activitiesList{
+ #activitiesList{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.activitiesList li{
+#activitiesList li, #activityInfo li, #activitiesStudent li, #activityInfoStudent li{
     list-style: none;
+    margin-bottom: 15px;
 }
 
 .listActivitiesTitle{
     font-size: 30px;
     color: #1ab188;
-}
-
-.activitiesSubtitle{
-    font-size: 20px;
-    padding: 10px 0;
-    margin-top: 15px;
+    margin-bottom: 25px;
 }
 
 .calificationField-wrap {
@@ -429,6 +425,30 @@ input:focus, select:focus {
     margin-bottom: 5px;
     margin-top: 10px;
     margin-right: 710px;
+}
+
+#formActividad div {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+#formActividad div label, #formActividad div input{
+    margin-right: 10px; 
+    font-size: 15px;
+}
+
+#setCalification{
+    padding: 15px;
+    position: absolute;
+    background-color: rgba(19, 35, 47, .9);
+    box-shadow: 0 2px 5px #333333;
+    z-index: 1;
+    width: 450px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 /**
@@ -484,7 +504,6 @@ input:focus, select:focus {
 
 .cuadroTxt{
     color: white;
-    margin: 3px;
     padding: 15px;
     font-size: 15px;
     background: #1ab188;
@@ -506,6 +525,25 @@ input:focus, select:focus {
     cursor: pointer;
 }
 
+.botones_foro{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+}
+
+.botones_foro button{
+    margin: 20px 0px;
+    padding: 15px;
+    font-size: 17px;
+    text-transform: uppercase;
+    background: #1ab188;
+    color: white;
+    letter-spacing: 0.1em;
+    border: 0;
+    cursor: pointer;
+    min-width: 40%;
+}
 
 /**
  * CALIFICACIONES
@@ -541,14 +579,14 @@ tr:nth-child(1) {
     background-color: rgba(255, 255, 255, .20);
 }
 
-.botones_calificaciones{
+.set_botones_form{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
 }
 
-.botones_calificaciones button{
-    margin: 20px;
+.set_botones_form button{
+    margin: 20px 5px;
     padding: 15px;
     font-size: 17px;
     text-transform: uppercase;
@@ -557,6 +595,7 @@ tr:nth-child(1) {
     letter-spacing: 0.1em;
     border: 0;
     cursor: pointer;
+    min-width: 40%;
 }
 
 #grafica1{
@@ -573,7 +612,9 @@ tr:nth-child(1) {
 .footer{
     clear: both;
     text-align: center;
+    margin-top: 5px;
     padding: 20px;
+    border: 3px solid black;
     background: rgba(19, 35, 47, .9);
     border-radius: 4px;
 }

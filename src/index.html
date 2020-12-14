@@ -176,7 +176,7 @@
                 <div class="separator"></div>
 
                 <nav class="menu">
-                    <a href="#Inicio" onclick="showIni()">Cursos</a>
+                    <a href="#Cursos" onclick="showIni()">Cursos</a>
                     <a href="#Noticias">Noticias</a>
                     <a style="float:right" class="active" href="#" onclick="cerrarSesion()">Cerrar sesion</a>
                 </nav>
@@ -318,7 +318,7 @@
                 <div class="separator"></div>
 
                 <nav class="menu">
-                    <a href="#Inicio" onclick="showIni()">Cursos</a>
+                    <a href="#Cursos" onclick="showIni()">Cursos</a>
                     <a href="#Noticias">Noticias</a>
                     <a style="float:right" class="active" href="#" onclick="cerrarSesion()">Cerrar sesion</a>
                 </nav>
@@ -347,6 +347,7 @@
                             <a href="#" onclick="showSubjectsList()">Mis asignaturas</a>
                             <a href="#" onclick="showForum()">Foro de la Asignatura</a>
                             <a href="#" onclick="showGradesStudent()">Calificaciones</a>
+                            <a href="#" onclick="showActivitiesStudent()">Mis actividades</a>
                             <a href="#Novedades">Últimas Novedades</a>
                             <a href="#Eventos">Próximos Eventos</a>
                         </nav>
@@ -373,6 +374,7 @@
                                 <a href="#" onclick="showSubjectsList()">Mis asignaturas</a>
                                 <a href="#" onclick="showForum()">Foro de la Asignatura</a>
                                 <a href="#" onclick="showGradesStudent()">Calificaciones</a>
+                                <a href="#" onclick="showActivitiesStudent()">Mis actividades</a>
                                 <a href="#Novedades">Últimas Novedades</a>
                                 <a href="#Eventos">Próximos Eventos</a>
                             </div>
@@ -584,7 +586,7 @@
                         </article>
                     </div>
                 </section>
-
+                <!-------------------------------------------- LISTADO DE ASIGNATURAS ----------------------------------------------------->
                 <section class="column mid" id="column_mid_subjectsList" style="display: none;">
                     <h1 class="listTitle">Listado de Asignaturas</h1>
                     <div  class="subjectsList">
@@ -623,39 +625,87 @@
                     </div>
                 </section>
 
-                <!-------------------------------------------- ACTIVIDADES ----------------------------------------------------->               
-                    <section class="column mid" id="column_mid_activities" style="display: none;">
-                    <h1 class="listActivitiesTitle">Actividades</h1>
-                    <div  class="activitiesList">
-                        <ul>
-                            <li>
-                                <p class="data">Entrega Bloque 1</p>
-                                <div class="calificationField-wrap">
-                                    <input type="text" id="calification" required autocomplete="off" placeholder="Calificación" pattern="[0-9]"/>
+                <!-------------------------------------------- ACTIVIDADES ----------------------------------------------------->
+                <section class="column mid" id="column_mid_activities" style="display: none;">
+                    <div>
+                        <div id="activitiesList">
+                        <h1 class="listActivitiesTitle">Actividades</h1>
+                            <ul id="listActivities" style="cursor:pointer">
+                            </ul>
+                        </div>
+                        <div id="activityInfo" style="display: none;">
+                            <h1 class="listActivitiesTitle" id = "infoActividadTitulo">Info actividad</h1>
+                                <ul>
+                                    <li id = "profesorActividad"></li>
+                                    <li id = "fechaActividad"></li>
+                                </ul>
+                                <table style="width:100%; margin-top: 30px;" id="tablaActividad">
+                                </table>
+                                <div id = "setCalification" style="display: none;">
+                                    <h4>Calificar alumno (0-100)</h1>
+                                    <form onsubmit="return false" id = "calificationForm">
+                                        <label for="calification"></label>
+                                        <input type="number" id="calification" name="calification" min="0" max="100">
+                                        <div class="set_botones_form">
+                                            <button type="submit" class="button button-block" onclick="setGrade()">Guardar</button> 
+                                            <button class="button button-block" onclick="hideGradeForm()">Volver</button>  <!---- id="boton_volver_calificacion"  display="none" --------->     
+                                        </div>
+                                    </form>
                                 </div>
-                            </li>
-                            <li>
-                                <p class="data">Entrega Bloque 2</p>
-                            </li>
-                            <li>
-                                <p class="data">Entrega Bloque 3</p>
-                            </li>
-                            <li>
-                                <p class="data">Entrega Caso Práctico</p>
-                            </li>
-                            <li id="result6"></li>                            
-                        </ul>                      
-                        <div>
-                            <h1 class="activitiesSubtitle">Crear actividad</h1>
-                            <form> 
-                                <p class="forumComment">Ecriba el nombre de la nueva actividad*</p>
-                                <textarea class="cuadroTxt" id="newActivity"></textarea>
+                        </div>
+                        <div id="crearActividad"  style="display: none;">
+                            <h1 class="listActivitiesTitle">Crear actividad</h1>   
+                            <form method="post" id="formActividad">
                                 <div>
-                                    <button type="reset" class="boton" onclick="addActivity('newActivity', 'result6');">Crear</button>
+                                    <label for="activityName">Nombre de la actividad:</label><br>
+                                    <input type="text" name="activityName" id="activityName" required><br>
+                                </div>
+                                <div>
+                                    <label for="studentSelection">¿Para quién es la actividad?</label><br>
+                                    <select id="studentSelection" name="studentSelection" multiple>
+                                        <!-- <option value="todos">Todos</option> -->
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="endDate">Fecha límite de entrega:</label><br>
+                                    <input type="date" name="endDate" id="endDate"><br>
                                 </div>
                             </form>
                         </div>
+                        <div style="margin-top: 50px;" class="set_botones_form">
+                            <button id="boton_crear_actividad" class="boton" onclick="displayActivityForm();">Crear actividad</button>
+                            <!-- <button id="boton_crear_actividad" class="boton" onclick="showActivityInfo();">Crear tabla</button> -->
+
+                            <button id="boton_guardar_actividad" class="boton" onclick="guardarActividad();" style="display: none;">Guardar</button>
+                            <button id="boton_volver_actividad" onclick="volverActividades()" style="display: none;">Volver</button>
+                        </div>
                     </div>
+                </section>
+                <!-------------------------------------------- ACTIVIDADES ESTUDIANTE----------------------------------------------------->
+                <section class="column mid" id="column_mid_activities_student" style="display: none;">
+                    <div id="activitiesStudent">
+                        <h1 class="listActivitiesTitle">Actividades</h1>
+                            <ul id="activitiesListStudent" style="cursor:pointer">
+                            </ul>
+                    </div>
+                    <div id="activityInfoStudent" style="display: none;">
+                        <h1 class="listActivitiesTitle" id="infoActividadTituloStudent">Info actividad</h1>
+                        <ul>
+                            <li id = "profesorActividadStudent"></li>
+                            <li id = "fechaActividadStudent"></li>
+                            <li id = "resultListStudent"></li>
+                        </ul>
+                        <div id = "uploadComment">
+                            <form onsubmit="return false"> 
+                                <p class="forumComment">Comentario*</p>
+                                <textarea class="cuadroTxt" id="commentActivity"></textarea>
+                                <div class="botones_foro">
+                                    <button type="reset" class="boton" onclick="commentBox('commentActivity', 'resultListStudent');">Enviar</button>
+                                    <button onclick="volverActividadesStudent()">Volver</button>
+                                </div>
+                            </form>
+                        </div>
+                    <div>
                 </section>
                 <!-------------------------------------------- FORO ----------------------------------------------------->
                 <section class="column mid" id="column_mid_forum" style="display: none;">
@@ -732,8 +782,9 @@
                             <form> 
                                 <p class="forumComment">Comentario*</p>
                                 <textarea class="cuadroTxt" id="comment1"></textarea>
-                                <div>
+                                <div class="botones_foro">
                                     <button type="reset" class="boton" onclick="commentBox('comment1', 'result1');">Enviar</button>
+                                    <button onclick="volverForo('column_mid_forum1')" display="block">Volver</button>
                                 </div>
                             </form>
                         </div>
@@ -795,8 +846,9 @@
                             <form> 
                                 <p class="forumComment">Comentario*</p>
                                 <textarea class="cuadroTxt" id="comment2"></textarea>
-                                <div>
+                                <div class="botones_foro">
                                     <button type="reset" class="boton" onclick="commentBox('comment2', 'result2');">Enviar</button>
+                                    <button onclick="volverForo('column_mid_forum2')" display="block">Volver</button>
                                 </div>
                             </form>
                         </div>
@@ -850,8 +902,9 @@
                             <form> 
                                 <p class="forumComment">Comentario*</p>
                                 <textarea class="cuadroTxt" id="comment3"></textarea>
-                                <div>
+                                <div class="botones_foro">
                                     <button type="reset" class="boton" onclick="commentBox('comment3', 'result3');">Enviar</button>
+                                    <button onclick="volverForo('column_mid_forum3')" display="block">Volver</button>
                                 </div>
                             </form>
                         </div>
@@ -929,8 +982,9 @@
                             <form> 
                                 <p class="forumComment">Comentario*</p>
                                 <textarea class="cuadroTxt" id="comment4"></textarea>
-                                <div>
+                                <div class="botones_foro">
                                     <button type="reset" class="boton" onclick="commentBox('comment4', 'result4');">Enviar</button>
+                                    <button onclick="volverForo('column_mid_forum4')" display="block">Volver</button>
                                 </div>
                             </form>
                         </div>
@@ -1000,8 +1054,9 @@
                             <form> 
                                 <p class="forumComment">Comentario*</p>
                                 <textarea class="cuadroTxt" id="comment5"></textarea>
-                                <div>
+                                <div class="botones_foro">
                                     <button type="reset" class="boton" onclick="commentBox('comment5', 'result5');">Enviar</button>
+                                    <button onclick="volverForo('column_mid_forum5')" display="block">Volver</button>
                                 </div>
                             </form>
                         </div>
@@ -1089,7 +1144,7 @@
                     </div>
                     
                     <div id="grafica1" display="none"></div>
-                    <div class="botones_calificaciones">
+                    <div class="set_botones_form">
                         <button id="boton_descargar" onclick="descargarExcel('table1')">Descargar</button>
                         <button id="boton_volver" onclick="volverCalificaciones()" display="none">Volver</button>
                         <button id="boton_grafica" onclick="mostrarGraficas()">Gráfica</button>
@@ -1116,7 +1171,7 @@
                         </div>
                         
                         <div id="grafica2" display="none"></div>
-                        <div class="botones_calificaciones">
+                        <div class="set_botones_form">
                             <button id="boton_descargar_st" onclick="descargarExcel('table2')">Descargar</button>
                             <button id="boton_volver_st" onclick="volverCalificaciones()" display="none">Volver</button>
                             <button id="boton_grafica_st" onclick="mostrarGraficas()">Gráfica</button>

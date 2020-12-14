@@ -23,6 +23,8 @@ function showIni() {
 }
 
 function showCourse() {
+    if (userData.rol === "Estudiante") showStudent();
+    else showTeacher();
     document.getElementById("column_mid_ini").style.display = "block";
     document.getElementById("column_mid_studentsList").style.display = "none";
     document.getElementById("column_mid_forum").style.display = "none";
@@ -35,6 +37,7 @@ function showCourse() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showStudentsList() {
@@ -50,7 +53,7 @@ function showStudentsList() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
-
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showForum() {
@@ -66,7 +69,7 @@ function showForum() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
-
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showForum1() {
@@ -82,7 +85,7 @@ function showForum1() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
-
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showForum2() {
@@ -98,7 +101,7 @@ function showForum2() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
-
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showForum3() {
@@ -114,7 +117,7 @@ function showForum3() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
-
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showForum4() {
@@ -130,7 +133,7 @@ function showForum4() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
-
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showForum5() {
@@ -146,7 +149,7 @@ function showForum5() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
-
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showSubjectsList() {
@@ -162,6 +165,7 @@ function showSubjectsList() {
     document.getElementById("column_mid_subjectsList").style.display = "block";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showGrades() {
@@ -177,8 +181,8 @@ function showGrades() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none"
     document.getElementById("boton_volver").style.display = "none";
-    volverCalificaciones();
     document.getElementById("column_mid_activities").style.display = "none";
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showActivities() {
@@ -194,6 +198,28 @@ function showActivities() {
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "block";
+    document.getElementById("column_mid_activities_student").style.display = "none";
+    document.getElementById("boton_guardar_actividad").style.display = "none";
+    document.getElementById("boton_volver_actividad").style.display = "none";
+    volverActividades();
+}
+
+function showActivitiesStudent(){
+    document.getElementById("column_mid_ini").style.display = "none";
+    document.getElementById("column_mid_studentsList").style.display = "none";
+    document.getElementById("column_mid_forum").style.display = "none";
+    document.getElementById("column_mid_grades").style.display = "none";
+    document.getElementById("column_mid_forum1").style.display = "none";
+    document.getElementById("column_mid_forum2").style.display = "none";
+    document.getElementById("column_mid_forum3").style.display = "none";
+    document.getElementById("column_mid_forum4").style.display = "none";
+    document.getElementById("column_mid_forum5").style.display = "none";
+    document.getElementById("column_mid_subjectsList").style.display = "none";
+    document.getElementById("column_mid_grades_student").style.display = "none";
+    document.getElementById("boton_volver_st").style.display = "none";
+    document.getElementById("column_mid_activities").style.display = "none";
+    document.getElementById("column_mid_activities_student").style.display = "block";
+    listActivitiesStudent();
 }
 
 function showGradesStudent(){
@@ -209,8 +235,8 @@ function showGradesStudent(){
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "block";
     document.getElementById("boton_volver_st").style.display = "none";
-    volverCalificaciones();
     document.getElementById("column_mid_activities").style.display = "none";
+    document.getElementById("column_mid_activities_student").style.display = "none";
 }
 
 function showStudent(){
@@ -220,7 +246,7 @@ function showStudent(){
 
 function showTeacher(){
     document.getElementById("columnLeftComputerStudent").style.display = "none";
-    document.getElementById("columnLeftComputer").style.display = "show";
+    document.getElementById("columnLeftComputer").style.display = "block";
 }
 
 function showStudentPhone(){
@@ -249,18 +275,24 @@ function changeWeb1(){
     document.getElementById("pagAsignaturas").style.display = "block";
     document.getElementById("userNameComputer1").innerHTML = userData.username;
     document.getElementById("userNameTablet1").innerHTML = userData.username;
+    activityStudentSelection();
+    // listAllActivities();
 }
 
 function changeWeb2(){
     document.getElementById("pagAsignaturas").style.display = "none";
     document.getElementById("pagWeb").style.display = "block";
+    showCourse();
     document.getElementById("userNameComputer2").innerHTML = userData.username;
     document.getElementById("userNameTablet2").innerHTML = userData.username;
+    activityStudentSelection();
+    // listAllActivities();
 }
 
 function cerrarSesion() {
     if (confirm("Seguro que quieres cerrar sesión?")) {
         document.getElementById("pagWeb").style.display = "none";
+        document.getElementById("pagAsignaturas").style.display = "none";
         document.getElementById("pagInicio").style.display = "block";
         userEmail = "inputEmail";
         userData = null;
@@ -448,26 +480,9 @@ function commentBox(id_comment, result){
 	}
 }
 
-function addActivity(id_comment, result){
-	var name = userData.name + " " + userData.surname;
-    var comment = document.getElementById(id_comment).value;
-
-	if(comment == ""){
-		alert("Los campos marcados con * son obligatorios!");
-	}else{
-        var parent=document.createElement("li");
-        var message_element=document.createElement("p");
-        
-        var txt_message=document.createTextNode(comment);
-
-		message_element.appendChild(txt_message);
-
-        parent.appendChild(message_element);
-
-        message_element.setAttribute("class", "data");
-        
-		document.getElementById(result).appendChild(parent);
-	}
+function volverForo(id_tema_foro){
+    document.getElementById("column_mid_forum").style.display = "block";
+    document.getElementById(id_tema_foro).style.display = "none";
 }
 
 // checkCookie comprueba si existe una cookie registrada con el correo
@@ -481,8 +496,8 @@ function checkCookie() {
         alert("Por favor, rellene todos los campos");
         return false;
     }
-    var obj = findCookie(inputEmail);
-    if (obj === null) {
+    var obj = findUser(inputEmail);
+    if (obj == null) {
         alert("El correo electrónico introducido no está dado de alta. Por favor, regístrese.");
         return false;
     }
@@ -490,7 +505,6 @@ function checkCookie() {
         userEmail = inputEmail;
         userData = obj;
         changeWeb1();
-        if (userData.rol === "Estudiante") showStudent();
     }
     else {
         alert("La contraseña es incorrecta");
@@ -498,14 +512,34 @@ function checkCookie() {
 }
 
 function setCookie(cname, cvalue) {
+    console.log("Setting cookie: " + cname + "=" + cvalue + ";secure ;path=/");
     document.cookie = cname + "=" + cvalue + ";secure ;path=/";
 }
 
+function setUser(vEmail, vrol, obj){
+    var newUser = "{ \"" + vEmail + "\" :" + JSON.stringify(obj) + "}";
+    var currentUsers;
+    if(vrol === "Estudiante"){
+        currentUsers = findCookie("estudiantes"); 
+        if(currentUsers==null) setCookie("estudiantes", newUser); 
+        else {
+            currentUsers[vEmail] = obj;
+            setCookie("estudiantes",  JSON.stringify(currentUsers)); 
+        }
+    } else{
+        currentUsers = findCookie("profesores");
+        if(currentUsers==null) setCookie("profesores", newUser); 
+        else {
+            currentUsers[vEmail] = obj;
+            setCookie("profesores",  JSON.stringify(currentUsers)); 
+        }
+    }
+}
 
-// findCookie busca la cookie según su nombre (el email). Si la encuentra devuelve un 
-// objeto (JSON) con el valor de la cookie, si no devuelve null.
-function findCookie(emailValue) {
-    var tag = emailValue + "=";
+// findCookie busca la cookie según su tipo (estudiantes, profesores, actividades). Si la encuentra devuelve un 
+// objeto (JSON) con el valor de la cookie (todos los estudiantes, todos los profesores,...), si no devuelve null.
+function findCookie(type) {
+    var tag = type + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     if (decodedCookie.length === 0) return null;
     var ca = decodedCookie.split(';'); // ca es un array, en cada posición guardamos una cookie
@@ -516,8 +550,34 @@ function findCookie(emailValue) {
         }
         if (c.indexOf(tag) === 0) { // encontrada una cookie asignada al email introducido, devuelvo su valor (obj JSON)
             var JSONstring = c.substring(tag.length, c.length);
+            console.log("Found cookie: " + JSONstring);
             return JSON.parse(JSONstring);
         }
+    }
+    return null;
+}
+
+// comprueba si el usuario emailValue está registrado (tiene que buscar en estudiantes y en profesores)
+// si no está registrado devuelve null, si lo está devuelve un objeto con sus datos
+function findUser(emailValue) {
+    var profesores = findCookie("profesores");
+    if (profesores != null) {
+        var user = findKeyValue(emailValue, profesores);
+        if(user != null) return user;
+    }
+    var estudiantes = findCookie("estudiantes");
+    if (estudiantes != null) {
+        var user = findKeyValue(emailValue, estudiantes);
+        if(user != null) return user;
+    }
+    return null;
+}
+
+function findKeyValue(key, myObject) { 
+    var keysArray= Object.keys(myObject); // get array of keys
+    if(keysArray.length === 0) return null;
+    for(var i = 0; i < keysArray.length; i++) {
+        if(keysArray[i]===key) return myObject[key];
     }
     return null;
 }
@@ -528,7 +588,7 @@ function findCookie(emailValue) {
 // se ejecuta tras pulsar "guardar" en el formulario de registro
 function saveCookies() {
     var vEmail = document.getElementById("email").value;
-    if (!(vEmail === "") && (findCookie(vEmail) !== null)) {
+    if (!(vEmail === "") && (findUser(vEmail) !== null)) {
         alert("El correo especificado ya está registrado por otra cuenta, por favor introduzca uno válido");
         return false;
     }
@@ -548,11 +608,287 @@ function saveCookies() {
         alert("Por favor, rellene todos los campos");
         return false;
     } else {
-        var obj = { name: vName, surname: vSurname, username: vUsername, NIA: vNIA, birthdate: vBirthdate, id: vId, rol: vRol, lang: vLang, password: vPassword, grado: vGrado };
-        setCookie(vEmail, JSON.stringify(obj));
+        var userObj = { name: vName, surname: vSurname, username: vUsername, NIA: vNIA, birthdate: vBirthdate, id: vId, rol: vRol, lang: vLang, password: vPassword, grado: vGrado };
+        setUser(vEmail, vRol, userObj); // registrar como estudiante o como profesor
         cambiarLogIn();
         document.getElementById("form_registro").reset();
     }
 }
 
-window.addEventListener('resize', showStudentPhone);
+if(userData != null) window.addEventListener('resize', showStudentPhone);
+
+
+
+// ACTIVIDADES 
+// -------------------------------------------------------------------------------------------------------------------
+
+function displayActivityForm(){ 
+    document.getElementById("crearActividad").style.display = "block";
+    document.getElementById("boton_volver_actividad").style.display = "block";
+    document.getElementById("boton_guardar_actividad").style.display = "block";
+    document.getElementById("boton_crear_actividad").style.display = "none";
+    document.getElementById("activitiesList").style.display = "none";
+    document.getElementById("activityInfo").style.display = "none";
+}
+
+function volverActividades(){
+    document.getElementById("crearActividad").style.display = "none";
+    document.getElementById("boton_volver_actividad").style.display = "none";
+    document.getElementById("boton_guardar_actividad").style.display = "none";
+    document.getElementById("boton_crear_actividad").style.display = "block";
+    document.getElementById("activitiesList").style.display = "block";
+    document.getElementById("activityInfo").style.display = "none";
+    listAllActivities();
+    // document.getElementById("formActividad ").reset();
+}
+
+function volverActividadesStudent(){
+    document.getElementById("activitiesStudent").style.display = "block";
+    document.getElementById("activityInfoStudent").style.display = "none";
+}
+
+var currentActivity;
+
+function showActivityInfo(actName){
+    currentActivity = actName;
+    activityInfo(actName);
+    document.getElementById("activityInfo").style.display = "block";
+    document.getElementById("crearActividad").style.display = "none";
+    document.getElementById("boton_volver_actividad").style.display = "block";
+    document.getElementById("boton_guardar_actividad").style.display = "none";
+    document.getElementById("boton_crear_actividad").style.display = "none";
+    document.getElementById("activitiesList").style.display = "none";
+}
+
+function showActivityInfo2(actName){
+    currentActivity = actName;
+    var objActivities = findCookie("actividades");
+    var objActivity = objActivities[actName];
+    var teacher = objActivity.profesor;
+    var endDate =  objActivity.fecha;
+    document.getElementById("infoActividadTituloStudent").innerHTML = actName;
+    document.getElementById("profesorActividadStudent").innerHTML = "Profesor: " + teacher;
+    document.getElementById("fechaActividadStudent").innerHTML = "Fecha límite de entrega: " + endDate;
+    document.getElementById("activityInfoStudent").style.display = "block";
+    document.getElementById("activitiesStudent").style.display = "none";
+}
+
+// recuperar valores del form
+// creamos un objeto studentsList de la forma : {estudiante1 : "", estudiante2 : "" ---} 
+// cuando califiquemos la actividad lo iremos rellenando
+function guardarActividad() {
+    var actName = document.getElementById("activityName").value;
+    var endDate = document.getElementById("endDate").value;
+    var selectedOptions = getSelectValues(document.getElementById("studentSelection"));
+    var studentsList = {};
+    for (var i = 0; i < selectedOptions.length; i++) {
+        studentsList[selectedOptions[i]] = "notGraded";
+    }
+    setActivity(actName, studentsList, endDate);
+    volverActividades();
+}
+
+function setActivity(actName, students, endDate) {
+    var teacherData = userData.name + " " + userData.surname + ", " + userData.NIA;
+    var actAtributtes = {profesor: teacherData, estudiantes: students, fecha: endDate};
+    var currentActivities = findCookie("actividades"); // busca la cookie "actividades", si la encuentra devuelve el valor de la cookie (obj json de actividades) y si no dev null
+    if (currentActivities == null) setCookie("actividades",  "{ \"" + actName + "\": " + JSON.stringify(actAtributtes) + "}")
+    else {
+        currentActivities[actName] = actAtributtes; //si currentActivities no contiene la actividad nueva, la añade como un campo mas del JSON (y si ya estaba se actualiza) (como myarray.push(newAct))
+        setCookie("actividades", JSON.stringify(currentActivities));
+    }
+}
+
+// Return an array of the selected option values
+// select is an HTML select element
+function getSelectValues(select) {
+    var result = [];
+    var options = select && select.options;
+    var opt;
+  
+    for (var i=0, iLen=options.length; i<iLen; i++) {
+      opt = options[i];
+  
+      if (opt.selected) {
+        result.push(opt.value || opt.text);
+      }
+    }
+    return result;
+  }
+
+// Pasar la lista de estudiantes a un formulario de opciones multiples
+function activityStudentSelection(){
+    var objStudents = findCookie("estudiantes");     // Obtener la lista de estudiantes
+    var arrayStudentEmails= Object.keys(objStudents); // get array of keys (emails)
+    var selection = document.getElementById("studentSelection");
+    selection.innerHTML = "";
+    for(var i = 0; i < arrayStudentEmails.length; i++){
+        var studentFullName = objStudents[arrayStudentEmails[i]].name + " " + objStudents[arrayStudentEmails[i]].surname + ", " + objStudents[arrayStudentEmails[i]].NIA + ", " + arrayStudentEmails[i];
+        var option = document.createElement("OPTION");
+        option.text = studentFullName;
+        selection.add(option);
+    }
+}
+
+var createClickHandler = function(arg) {    
+    return function(){
+        showActivityInfo(arg);
+    }
+}
+
+function listAllActivities(){
+    var list = document.getElementById("listActivities");
+    list.innerHTML = "";
+    var objActivities = findCookie("actividades");
+    if(objActivities != null){          
+        var arrayActivities = Object.keys(objActivities); 
+        for(var i = 0; i < arrayActivities.length; i++){
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode(arrayActivities[i]);
+            node.appendChild(textnode); // Append the text to <li>
+            // node.setAttribute("onclick", "\"showActivityInfo\(" + arrayActivities[i] + "\)\"");
+            node.onclick = createClickHandler(arrayActivities[i]);
+            list.appendChild(node);     // Append <li> to <ul> with id="myList"
+        }
+    }
+}
+
+var createClickHandler2 = function(arg) {    
+    return function(){
+        showActivityInfo2(arg);
+    }
+}
+
+function listActivitiesStudent(){
+    var studentData = userData.name + " " + userData.surname + ", " + userData.NIA + ", " + userEmail;
+    var list = document.getElementById("activitiesListStudent");
+    list.innerHTML = "";
+    var objActivities = findCookie("actividades");
+    if(objActivities != null){
+        var keyArrayActivities = Object.keys(objActivities);
+        var arrayActivities = [];
+        for(var i = 0; i < keyArrayActivities.length; i++){
+            var objActividad = objActivities[keyArrayActivities[i]];
+            var objEstudiantes = objActividad.estudiantes;
+            var keyArrayEstudiantes = Object.keys(objEstudiantes);
+            for(var j = 0; j < keyArrayEstudiantes.length; j++){
+                if(keyArrayEstudiantes[j] === studentData){
+                    arrayActivities.push(keyArrayActivities[i]);
+                }
+            }
+        }
+        for(var k = 0; k < arrayActivities.length; k++){
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode(arrayActivities[k]);
+            node.appendChild(textnode); // Append the text to <li>
+            node.onclick = createClickHandler2(arrayActivities[k]);
+            list.appendChild(node);     // Append <li> to <ul> with id="myList"
+        }
+    }
+}
+
+function activityInfo(actName){
+    var objActivities = findCookie("actividades");
+    var objActivity = objActivities[actName];
+    var teacher = objActivity.profesor;
+    var endDate =  objActivity.fecha;
+    var objEstudiantes = objActivity.estudiantes; // {"c@c.c":"notGraded" , "a@a.a": "" , "b@b.a": ""} => [{"c@c.c":""} , {"a@a.a": ""} , {"b@b.a": ""}]
+    var arrayEst = Object.keys(objEstudiantes); // ["c@c.c", "c@c.c", "c@c.c"]
+
+    var arrayTable = [];
+    for(var i = 0; i < arrayEst.length ; i++){
+        var objString = "{ \"" + arrayEst[i] + "\" : " + JSON.stringify(objEstudiantes[arrayEst[i]]) + "}";
+        arrayTable.push(JSON.parse(objString));
+    }
+
+    document.getElementById("infoActividadTitulo").innerHTML = actName;
+    document.getElementById("profesorActividad").innerHTML = "Profesor: " + teacher;
+    document.getElementById("fechaActividad").innerHTML = "Fecha límite de entrega: " + endDate;
+
+    let table =  document.getElementById("tablaActividad");
+    table.innerHTML= "";
+    generateTable(table, arrayTable); // generate the table first. Uso actName para ponerle un id a las celdas...
+    generateTableHead(table); // then the head
+}
+
+
+// +++++++++++++++++++++++++++++++++++++++++++++++++
+
+function generateTableHead(table) {
+    let thead = table.createTHead();
+    let row = thead.insertRow();
+    let th = document.createElement("th");
+    let text = document.createTextNode("Estudiante");
+    th.appendChild(text);
+    row.appendChild(th);
+    let th2 = document.createElement("th");
+    let text2 = document.createTextNode("Calificación");
+    th2.appendChild(text2);
+    row.appendChild(th2);
+  }
+
+
+var clickHandler_grading = function(id) {    
+    return function(){
+        studentGraded = id;
+        showGradeForm();
+    }
+  }
+
+   // el id de cada celda de calificación es el nombre de la actividad ("ej3" por ejemplo) + un número (i)
+   // solo puede haber una misma actividad con el mismo nombre     var i = 0;
+
+  function generateTable(table, data) {
+    for (let element of data) {
+        let key = Object.keys(element)[0];
+        let row = table.insertRow();
+        let cell = row.insertCell();
+        let text = document.createTextNode(key);
+        cell.appendChild(text);
+
+        let cell2 = row.insertCell();
+        let text2 = document.createTextNode(element[key]);
+        cell2.appendChild(text2);
+        cell2.onclick = clickHandler_grading(key);
+    }
+  }
+  
+var studentGraded;
+
+function showGradeForm(){
+    document.getElementById("setCalification").style.display = "block"; 
+}
+
+function hideGradeForm(){
+    document.getElementById("setCalification").style.display = "none"; 
+}
+
+function setGrade(){
+    if(currentActivity == null || currentActivity == "" ) return false;
+    var nota = document.getElementById("calification").value; // al guardar
+    // actualizar cookie actividades con la nota guardada
+    var activitiesObj = findCookie("actividades");
+    var currentActivityObj = activitiesObj[currentActivity];
+    var endDate = currentActivityObj.fecha;
+    var studentsList = currentActivityObj.estudiantes; // modificarla metiendo la calificación obtenida
+    studentsList[studentGraded] = nota;
+    setActivity(currentActivity, studentsList, endDate);
+    hideGradeForm();
+    showActivityInfo(currentActivity);
+}
+
+
+// function setGrade(actName, studentName, studentGrade){    // buscar la actividad, cambiar la lista de estudiantes, set cookie
+//     var currentActivities = findCookie("actividades"); // busca la cookie "actividades", si la encuentra devuelve el valor de la cookie (lista de actividades) y si no dev null
+//     if(currentActivities==null) alert("No hay ninguna actividad registrada");
+//     else if(currentActivities.actName == null) alert("La actividad " + actName + " no está registrada");
+//     else{
+//         currentActivities.actName.estudiantes.studentName = studentGrade;
+//         setCookie("actividades", currentActivities); 
+//     }
+// }
+
+// function listStudents(){ // crea una lista con todos los estudiantes (para que el profesor la visualice y pueda asignarles tareas a cada uno)
+
+
+// }
