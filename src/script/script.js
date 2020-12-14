@@ -430,21 +430,39 @@ function commentBox(id_comment, result){
 	if(name == "" || comment == ""){
 		alert("Los campos marcados con * son obligatorios!");
 	}else{
-        var parent=document.createElement("li");
+        let day = new Date().getDate();
+        if (day < 10){
+            day = "0" + day;
+        }
+        let month = new Date().getMonth() + 1;
+        if (month < 10){
+            month = "0" + month;
+        }
+        let year = new Date().getFullYear();
+        let hour = new Date().getHours();
+        if (hour < 10){
+            hour = "0" + hour;
+        }
+        let minute = (new Date().getMinutes());
+        if (minute < 10){
+            minute = "0" + minute;
+        }
+        let today = (day + "/" + month + "/" + year);
+        let time = (hour + ":" + minute);
+        let date = (today + " - " + time);
+
+        var parent = document.createElement("li");
         var image_element = document.createElement("img");
-		var name_element=document.createElement("p");
-        var message_element=document.createElement("p");
-        var date_element=document.createElement("p");
+		var name_element = document.createElement("p");
+        var message_element = document.createElement("p");
+        var date_element = document.createElement("p");
         
-		var txt_name=document.createTextNode(name);
-        var txt_message=document.createTextNode(comment);
-        var today = new Date();
-        var date = today.getDate()+"/"+(today.getMonth()+1)+"/"+today.getFullYear();
-        var time = today.getHours() + ":" + today.getMinutes();
-        var dateTime = date + " - " + time;
-        var txt_date = document.createTextNode(dateTime);
+		var txt_name = document.createTextNode(name);
+        var txt_message = document.createTextNode(comment);
+        var txt_date = document.createTextNode(date);
 
         name_element.appendChild(txt_name);
+        //message_element.style.whiteSpace = "pre-wrap";
 		message_element.appendChild(txt_message);
         date_element.appendChild(txt_date);
 
