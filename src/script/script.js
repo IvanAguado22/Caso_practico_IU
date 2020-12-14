@@ -180,10 +180,10 @@ function showGrades() {
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "none"
-    document.getElementById("boton_volver").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
     document.getElementById("column_mid_activities_student").style.display = "none";
 
+    volverCalificaciones();
     loadGradesTeacher();
 }
 
@@ -221,6 +221,7 @@ function showActivitiesStudent(){
     document.getElementById("boton_volver_st").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
     document.getElementById("column_mid_activities_student").style.display = "block";
+    volverActividades();
     listActivitiesStudent();
 }
 
@@ -236,9 +237,10 @@ function showGradesStudent(){
     document.getElementById("column_mid_forum5").style.display = "none";
     document.getElementById("column_mid_subjectsList").style.display = "none";
     document.getElementById("column_mid_grades_student").style.display = "block";
-    document.getElementById("boton_volver_st").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
     document.getElementById("column_mid_activities_student").style.display = "none";
+
+    volverCalificaciones();
     loadGradesStudent();
 }
 
