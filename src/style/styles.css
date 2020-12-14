@@ -624,7 +624,7 @@ tr:nth-child(1) {
     min-width: 40%;
 }
 
-#grafica1{
+#grafica1, #grafica2{
     display: none;
     height: 370px; 
     width: 100%;

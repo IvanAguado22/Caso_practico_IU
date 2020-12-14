@@ -279,7 +279,6 @@ function changeWeb1(){
     document.getElementById("userNameComputer1").innerHTML = userData.username;
     document.getElementById("userNameTablet1").innerHTML = userData.username;
     activityStudentSelection();
-    // listAllActivities();
 }
 
 function changeWeb2(){
@@ -289,7 +288,6 @@ function changeWeb2(){
     document.getElementById("userNameComputer2").innerHTML = userData.username;
     document.getElementById("userNameTablet2").innerHTML = userData.username;
     activityStudentSelection();
-    // listAllActivities();
 }
 
 function cerrarSesion() {
@@ -700,7 +698,6 @@ function volverActividades(){
     document.getElementById("activitiesList").style.display = "block";
     document.getElementById("activityInfo").style.display = "none";
     listAllActivities();
-    // document.getElementById("formActividad ").reset();
 }
 
 function volverActividadesStudent(idMostradoAntes){
@@ -940,6 +937,7 @@ var studentGraded;
 
 function showGradeForm(){
     document.getElementById("setCalification").style.display = "block"; 
+    document.getElementById("calificationForm").reset()
 }
 
 function hideGradeForm(){
@@ -975,7 +973,7 @@ function loadGradesStudent(){
             var keyArrayEstudiantes = Object.keys(objEstudiantes);
             for(var j = 0; j < keyArrayEstudiantes.length; j++){
                 if(keyArrayEstudiantes[j] === studentData){
-                    var objGrade = "{ \"" + keyArrayActivities[i] + "\":"+ objEstudiantes[studentData] + "}";
+                    var objGrade = "{ \"" + keyArrayActivities[i] + "\": \""+ objEstudiantes[studentData] + "\"}";
                     console.log("pushing " + objGrade);
                     arrayActivities.push(JSON.parse(objGrade));
                     break;
@@ -1012,21 +1010,5 @@ function loadGradesTeacher(){
 
             activityGradesTable(keyArrayActivities[i], tableId, "Estudiante");
         }
-    }
-      
-} // activityGradesTable(actName, idTable, firstTitle)
-
-// function generateTableHead_TeacherGrades(table) {
-//     let thead = table.createTHead();
-//     let row = thead.insertRow();
-//     let th = document.createElement("th");
-//     let text = document.createTextNode(Estudiante);
-//     th.appendChild(text);
-//     row.appendChild(th);
-
-//     // En un bucle las actividades
-//     let th2 = document.createElement("th");
-//     let text2 = document.createTextNode("Calificación");
-//     th2.appendChild(text2);
-//     row.appendChild(th2);
-//   }
+    }      
+} 
