@@ -672,7 +672,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div style="margin-top: 50px;" class="set_botones_form">
+                        <div class="set_botones_form">
                             <button id="boton_crear_actividad" class="boton" onclick="displayActivityForm();">Crear actividad</button>
                             <!-- <button id="boton_crear_actividad" class="boton" onclick="showActivityInfo();">Crear tabla</button> -->
 
@@ -685,23 +685,26 @@
                 <section class="column mid" id="column_mid_activities_student" style="display: none;">
                     <div id="activitiesStudent">
                         <h1 class="listActivitiesTitle">Actividades</h1>
-                            <ul id="activitiesListStudent" style="cursor:pointer">
-                            </ul>
+                        <ul id="activitiesListStudent" style="cursor:pointer">
+                        </ul>
                     </div>
                     <div id="activityInfoStudent" style="display: none;">
                         <h1 class="listActivitiesTitle" id="infoActividadTituloStudent">Info actividad</h1>
-                        <ul>
+                        <ul id="listActivitiesStudent">
                             <li id = "profesorActividadStudent"></li>
                             <li id = "fechaActividadStudent"></li>
-                            <li id = "resultListStudent"></li>
                         </ul>
-                        <div id = "uploadComment">
+                        <div id="results">
+                            <h2 class="listActivitiesTitle">Entrega</h2>
+                        </div>
+                        <div>
                             <form onsubmit="return false"> 
-                                <p class="forumComment">Comentario*</p>
+                                <p class="activitieComment">Entrega*</p>
                                 <textarea class="cuadroTxt" id="commentActivity"></textarea>
-                                <div class="botones_foro">
-                                    <button type="reset" class="boton" onclick="commentBox('commentActivity', 'resultListStudent');">Enviar</button>
-                                    <button onclick="volverActividadesStudent()">Volver</button>
+                                <div class="botones_foro" id="botonesActividades">
+                                    <button type="reset" id="enviarActividad">Enviar</button>
+                                    <button onclick="enviarEmail(profesorActividadStudent)">Revisión</button>
+                                    <button id="volverActividad">Volver</button>
                                 </div>
                             </form>
                         </div>

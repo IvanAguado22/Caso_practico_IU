@@ -409,15 +409,45 @@ input:focus, select:focus {
     justify-content: space-between;
 }
 
-#activitiesList li, #activityInfo li, #activitiesStudent li, #activityInfoStudent li{
+#activitiesList li,  #activitiesStudent li{
+    color: #a0b3b0;
     list-style: none;
+    padding: 15px 0;
+    font-size: 17px;
+}
+
+#activityInfo li, #listActivitiesStudent li{
+    color: white;
+    list-style: none;
+    padding: 15px 0;
+    font-size: 17px;
+}
+
+#results{
     margin-bottom: 15px;
+}
+
+#results li{
+    color: white;
+    list-style: none;
+    font-size: 17px;
+}
+
+.activitieComment{
+    margin: 15px 0;
+}
+
+.dataActivity{
+    margin-top: 15px;
+}
+
+#activitiesListStudent li:hover{
+    color: white;
 }
 
 .listActivitiesTitle{
     font-size: 30px;
     color: #1ab188;
-    margin-bottom: 25px;
 }
 
 .calificationField-wrap {
@@ -498,10 +528,6 @@ input:focus, select:focus {
     padding: 10px;
 }
 
-.forumComment{
-    margin: 10px;
-}
-
 .cuadroTxt{
     color: white;
     padding: 15px;
@@ -510,6 +536,7 @@ input:focus, select:focus {
     letter-spacing: 0.1em;
     border: 0;
     min-width: 100%;
+    resize: none;
 }
 
 .boton{
@@ -541,7 +568,7 @@ input:focus, select:focus {
     letter-spacing: 0.1em;
     border: 0;
     cursor: pointer;
-    min-width: 40%;
+    min-width: 30%;
 }
 
 /**

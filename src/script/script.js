@@ -302,8 +302,10 @@ function cerrarSesion() {
     }
 }
 
-function enviarEmail(){
-    window.open('mailto:test@example.com');
+function enviarEmail(profesorActividadStudent){
+    var email = document.getElementById(profesorActividadStudent);
+    var mailto_link = 'mailto:' + email
+    window.open(mailto_link);
 }
 
 function descargarExcel(id_tabla){
@@ -432,21 +434,39 @@ function commentBox(id_comment, result){
 	if(name == "" || comment == ""){
 		alert("Los campos marcados con * son obligatorios!");
 	}else{
-        var parent=document.createElement("li");
+        let day = new Date().getDate();
+        if (day < 10){
+            day = "0" + day;
+        }
+        let month = new Date().getMonth() + 1;
+        if (month < 10){
+            month = "0" + month;
+        }
+        let year = new Date().getFullYear();
+        let hour = new Date().getHours();
+        if (hour < 10){
+            hour = "0" + hour;
+        }
+        let minute = (new Date().getMinutes());
+        if (minute < 10){
+            minute = "0" + minute;
+        }
+        let today = (day + "/" + month + "/" + year);
+        let time = (hour + ":" + minute);
+        let date = (today + " - " + time);
+
+        var parent = document.createElement("li");
         var image_element = document.createElement("img");
-		var name_element=document.createElement("p");
-        var message_element=document.createElement("p");
-        var date_element=document.createElement("p");
+		var name_element = document.createElement("p");
+        var message_element = document.createElement("p");
+        var date_element = document.createElement("p");
         
-		var txt_name=document.createTextNode(name);
-        var txt_message=document.createTextNode(comment);
-        var today = new Date();
-        var date = today.getDate()+"/"+(today.getMonth()+1)+"/"+today.getFullYear();
-        var time = today.getHours() + ":" + today.getMinutes();
-        var dateTime = date + " - " + time;
-        var txt_date = document.createTextNode(dateTime);
+		var txt_name = document.createTextNode(name);
+        var txt_message = document.createTextNode(comment);
+        var txt_date = document.createTextNode(date);
 
         name_element.appendChild(txt_name);
+        //message_element.style.whiteSpace = "pre-wrap";
 		message_element.appendChild(txt_message);
         date_element.appendChild(txt_date);
 
@@ -460,7 +480,62 @@ function commentBox(id_comment, result){
         name_element.setAttribute("class", "data");
         message_element.setAttribute("class", "forumMessage");
         
-		document.getElementById(result).appendChild(parent);
+        document.getElementById(result).appendChild(parent);
+        alert("El comentario ha sido publicado correctamente");
+	}
+}
+
+function commentBox2(id_comment, result){
+	var name = userData.name + " " + userData.surname;
+    var comment = document.getElementById(id_comment).value;
+
+	if(name == "" || comment == ""){
+		alert("Los campos marcados con * son obligatorios!");
+	}else{
+        let day = new Date().getDate();
+        if (day < 10){
+            day = "0" + day;
+        }
+        let month = new Date().getMonth() + 1;
+        if (month < 10){
+            month = "0" + month;
+        }
+        let year = new Date().getFullYear();
+        let hour = new Date().getHours();
+        if (hour < 10){
+            hour = "0" + hour;
+        }
+        let minute = (new Date().getMinutes());
+        if (minute < 10){
+            minute = "0" + minute;
+        }
+        let today = (day + "/" + month + "/" + year);
+        let time = (hour + ":" + minute);
+        let date = (today + " - " + time);
+
+        var parent=document.createElement("li");
+		var name_element=document.createElement("p");
+        var message_element=document.createElement("p");
+        var date_element = document.createElement("p");
+
+		var txt_name=document.createTextNode(name);
+        var txt_message=document.createTextNode(comment);
+        var txt_date = document.createTextNode(date);
+
+        name_element.appendChild(txt_name);
+        message_element.appendChild(txt_message);
+        date_element.appendChild(txt_date);
+
+        parent.appendChild(name_element);
+        parent.appendChild(message_element);
+        parent.appendChild(date_element);
+
+        name_element.setAttribute("class", "dataActivity");
+        message_element.setAttribute("class", "forumMessage");
+        date_element.setAttribute("class", "forumMessage");
+        
+        document.getElementById(result).appendChild(parent);
+        alert("La actividad se ha subido correctamente");
 	}
 }
 
@@ -626,8 +701,9 @@ function volverActividades(){
     // document.getElementById("formActividad ").reset();
 }
 
-function volverActividadesStudent(){
+function volverActividadesStudent(idMostradoAntes){
     document.getElementById("activitiesStudent").style.display = "block";
+    document.getElementById(idMostradoAntes).style.display = "none";
     document.getElementById("activityInfoStudent").style.display = "none";
 }
 
@@ -644,7 +720,7 @@ function showActivityInfo(actName){
     document.getElementById("activitiesList").style.display = "none";
 }
 
-function showActivityInfo2(actName){
+function showActivityInfo2(actName, showingResult, resultId){
     currentActivity = actName;
     var objActivities = findCookie("actividades");
     var objActivity = objActivities[actName];
@@ -654,7 +730,12 @@ function showActivityInfo2(actName){
     document.getElementById("profesorActividadStudent").innerHTML = "Profesor: " + teacher;
     document.getElementById("fechaActividadStudent").innerHTML = "Fecha límite de entrega: " + endDate;
     document.getElementById("activityInfoStudent").style.display = "block";
+    document.getElementById(showingResult).style.display = "block";
+    var botonActividades = document.getElementById("enviarActividad");
+    botonActividades.onclick = function() {commentBox2("commentActivity", resultId)};
     document.getElementById("activitiesStudent").style.display = "none";
+    var botonVolverActividades = document.getElementById("volverActividad");
+    botonVolverActividades.onclick = function() {volverActividadesStudent(showingResult)};
 }
 
 // recuperar valores del form
@@ -737,9 +818,9 @@ function listAllActivities(){
     }
 }
 
-var createClickHandler2 = function(arg) {    
+var createClickHandler2 = function(arg1,arg2, arg3) {    
     return function(){
-        showActivityInfo2(arg);
+        showActivityInfo2(arg1, arg2, arg3);
     }
 }
 
@@ -751,6 +832,7 @@ function listActivitiesStudent(){
     if(objActivities != null){
         var keyArrayActivities = Object.keys(objActivities);
         var arrayActivities = [];
+        var listResults = document.getElementById("results");
         for(var i = 0; i < keyArrayActivities.length; i++){
             var objActividad = objActivities[keyArrayActivities[i]];
             var objEstudiantes = objActividad.estudiantes;
@@ -762,10 +844,18 @@ function listActivitiesStudent(){
             }
         }
         for(var k = 0; k < arrayActivities.length; k++){
+            var resultList = document.createElement("UL");
+            resultList.id = "resultList" + k;
+            var result = document.createElement("LI");
+            result.id = "resultListStudent" + k;
+            resultList.appendChild(result);
+            resultList.style.display = "none";
+            listResults.appendChild(resultList);
+
             var node = document.createElement("LI");
             var textnode = document.createTextNode(arrayActivities[k]);
             node.appendChild(textnode); // Append the text to <li>
-            node.onclick = createClickHandler2(arrayActivities[k]);
+            node.onclick = createClickHandler2(arrayActivities[k], resultList.id, result.id);
             list.appendChild(node);     // Append <li> to <ul> with id="myList"
         }
     }
