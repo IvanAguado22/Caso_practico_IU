@@ -780,6 +780,10 @@ function getSelectValues(select) {
     return result;
   }
 
+function showHelpMessaje(){
+    getElementById("mensajeAyuda").style.display = "block";
+}
+
 // Pasar la lista de estudiantes a un formulario de opciones multiples
 function activityStudentSelection(){
     var objStudents = findCookie("estudiantes");     // Obtener la lista de estudiantes
