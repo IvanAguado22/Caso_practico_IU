@@ -462,7 +462,7 @@ function commentBox(id_comment, result){
         var txt_date = document.createTextNode(date);
 
         name_element.appendChild(txt_name);
-        message_element.style.whiteSpace = "pre-wrap";
+        //message_element.style.whiteSpace = "pre-wrap";
 		message_element.appendChild(txt_message);
         date_element.appendChild(txt_date);
 
