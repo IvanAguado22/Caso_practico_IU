@@ -672,7 +672,7 @@
                                 </div>
                             </form>
                         </div>
-                        <div style="margin-top: 50px;" class="set_botones_form">
+                        <div class="set_botones_form">
                             <button id="boton_crear_actividad" class="boton" onclick="displayActivityForm();">Crear actividad</button>
                             <!-- <button id="boton_crear_actividad" class="boton" onclick="showActivityInfo();">Crear tabla</button> -->
 
@@ -690,14 +690,16 @@
                     </div>
                     <div id="activityInfoStudent" style="display: none;">
                         <h1 class="listActivitiesTitle" id="infoActividadTituloStudent">Info actividad</h1>
-                        <ul>
+                        <ul id="listActivitiesStudent">
                             <li id = "profesorActividadStudent"></li>
                             <li id = "fechaActividadStudent"></li>
                         </ul>
-                        <div id="results"></div>
+                        <div id="results">
+                            <h2 class="listActivitiesTitle">Entrega</h2>
+                        </div>
                         <div>
                             <form onsubmit="return false"> 
-                                <p class="forumComment">Comentario*</p>
+                                <p class="activitieComment">Entrega*</p>
                                 <textarea class="cuadroTxt" id="commentActivity"></textarea>
                                 <div class="botones_foro" id="botonesActividades">
                                     <button type="reset" class="boton" id="enviarActividad">Enviar</button>

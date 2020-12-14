@@ -416,12 +416,31 @@ input:focus, select:focus {
     font-size: 17px;
 }
 
-#activityInfo li, #activityInfoStudent li{
+#activityInfo li, #listActivitiesStudent li{
     color: white;
     list-style: none;
     padding: 15px 0;
     font-size: 17px;
 }
+
+#results{
+    margin-bottom: 15px;
+}
+
+#results li{
+    color: white;
+    list-style: none;
+    font-size: 17px;
+}
+
+.activitieComment{
+    margin-bottom: 15px;
+}
+
+.dataActivity{
+    margin-top: 15px;
+}
+
 #activitiesListStudent li:hover{
     color: white;
 }
@@ -429,7 +448,6 @@ input:focus, select:focus {
 .listActivitiesTitle{
     font-size: 30px;
     color: #1ab188;
-    margin-bottom: 25px;
 }
 
 .calificationField-wrap {
@@ -508,10 +526,6 @@ input:focus, select:focus {
 .forumMessage{
     font-size: 15px;
     padding: 10px;
-}
-
-.forumComment{
-    margin: 10px;
 }
 
 .cuadroTxt{

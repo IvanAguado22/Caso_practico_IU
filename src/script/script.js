@@ -476,7 +476,8 @@ function commentBox(id_comment, result){
         name_element.setAttribute("class", "data");
         message_element.setAttribute("class", "forumMessage");
         
-		document.getElementById(result).appendChild(parent);
+        document.getElementById(result).appendChild(parent);
+        alert("El comentario ha sido publicado correctamente");
 	}
 }
 
@@ -487,23 +488,50 @@ function commentBox2(id_comment, result){
 	if(name == "" || comment == ""){
 		alert("Los campos marcados con * son obligatorios!");
 	}else{
+        let day = new Date().getDate();
+        if (day < 10){
+            day = "0" + day;
+        }
+        let month = new Date().getMonth() + 1;
+        if (month < 10){
+            month = "0" + month;
+        }
+        let year = new Date().getFullYear();
+        let hour = new Date().getHours();
+        if (hour < 10){
+            hour = "0" + hour;
+        }
+        let minute = (new Date().getMinutes());
+        if (minute < 10){
+            minute = "0" + minute;
+        }
+        let today = (day + "/" + month + "/" + year);
+        let time = (hour + ":" + minute);
+        let date = (today + " - " + time);
+
         var parent=document.createElement("li");
 		var name_element=document.createElement("p");
         var message_element=document.createElement("p");
-        
+        var date_element = document.createElement("p");
+
 		var txt_name=document.createTextNode(name);
         var txt_message=document.createTextNode(comment);
+        var txt_date = document.createTextNode(date);
 
         name_element.appendChild(txt_name);
-		message_element.appendChild(txt_message);
+        message_element.appendChild(txt_message);
+        date_element.appendChild(txt_date);
 
         parent.appendChild(name_element);
         parent.appendChild(message_element);
+        parent.appendChild(date_element);
 
-        name_element.setAttribute("class", "data");
+        name_element.setAttribute("class", "dataActivity");
         message_element.setAttribute("class", "forumMessage");
-
+        date_element.setAttribute("class", "forumMessage");
+        
         document.getElementById(result).appendChild(parent);
+        alert("La actividad se ha subido correctamente");
 	}
 }
 
