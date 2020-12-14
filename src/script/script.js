@@ -184,7 +184,7 @@ function showGrades() {
     document.getElementById("column_mid_activities").style.display = "none";
     document.getElementById("column_mid_activities_student").style.display = "none";
 
-    loadGrades();
+    loadGradesTeacher();
 }
 
 function showActivities() {
@@ -239,6 +239,7 @@ function showGradesStudent(){
     document.getElementById("boton_volver_st").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
     document.getElementById("column_mid_activities_student").style.display = "none";
+    loadGradesStudent();
 }
 
 function showStudent(){
@@ -323,7 +324,7 @@ function mostrarGraficas() {
     var columns = 0;
     var dataPoints_array = [];
 
-    if (!(userData.rol === "Estudiante")) {
+    if (userData.rol == "Profesor") {
         document.getElementById("table1").style.display = "none";
         document.getElementById("boton_descargar").style.display = "none";
         document.getElementById("boton_grafica").style.display = "none";
@@ -366,23 +367,24 @@ function mostrarGraficas() {
         chart.render();
 
     } else {
-        document.getElementById("table2").style.display = "none";
+        document.getElementById("gradesTable").style.display = "none";
         document.getElementById("boton_descargar_st").style.display = "none";
         document.getElementById("boton_grafica_st").style.display = "none";
         document.getElementById("boton_volver_st").style.display = "block";
         document.getElementById("grafica2").style.display = "block";
         
 
-        table = document.getElementById("table2");
-        columns = table.rows[0].cells.length - 1;
+        table = document.getElementById("gradesTable");
+        columns = table.rows.length - 1;
         var actividades = new Array(columns);
         var notas = new Array(columns);
-
-        for (var i = 0, row; row = table.rows[i]; i++) {
-            for (var j = 1, col; col = row.cells[j]; j++) {
-                if (i == 0) actividades[j - 1] = col.innerHTML;
-                else notas[j - 1] = parseFloat(col.innerHTML);
+        var k = 0;
+        for (var i = 1, row; row = table.rows[i]; i++) {
+            for (var j = 0, col; col = row.cells[j]; j++) {
+                if (j == 0) actividades[k] = col.innerHTML;
+                else notas[k] = parseFloat(col.innerHTML);
             }
+            k++;
         }
 
         for (var i = 0; i < columns; i++) {
@@ -418,7 +420,7 @@ function volverCalificaciones(){
         document.getElementById("grafica1").style.display = "none";
         document.getElementById("boton_volver").style.display = "none";
     } else {
-        document.getElementById("table2").style.display = "";
+        document.getElementById("gradesTable").style.display = "";
         document.getElementById("boton_descargar_st").style.display = "block";
         document.getElementById("boton_grafica_st").style.display = "block";
         document.getElementById("grafica2").style.display = "none";
@@ -811,7 +813,6 @@ function listAllActivities(){
             var node = document.createElement("LI");
             var textnode = document.createTextNode(arrayActivities[i]);
             node.appendChild(textnode); // Append the text to <li>
-            // node.setAttribute("onclick", "\"showActivityInfo\(" + arrayActivities[i] + "\)\"");
             node.onclick = createClickHandler(arrayActivities[i]);
             list.appendChild(node);     // Append <li> to <ul> with id="myList"
         }
@@ -859,6 +860,7 @@ function listActivitiesStudent(){
             list.appendChild(node);     // Append <li> to <ul> with id="myList"
         }
     }
+
 }
 
 function activityInfo(actName){
@@ -866,6 +868,18 @@ function activityInfo(actName){
     var objActivity = objActivities[actName];
     var teacher = objActivity.profesor;
     var endDate =  objActivity.fecha;
+
+    document.getElementById("infoActividadTitulo").innerHTML = actName;
+    document.getElementById("profesorActividad").innerHTML = "Profesor: " + teacher;
+    document.getElementById("fechaActividad").innerHTML = "Fecha límite de entrega: " + endDate;
+
+    activityGradesTable(actName, "tablaActividad", "Estudiante");
+
+}
+
+function activityGradesTable(actName, idTable, firstTitle){
+    var objActivities = findCookie("actividades");
+    var objActivity = objActivities[actName];
     var objEstudiantes = objActivity.estudiantes; // {"c@c.c":"notGraded" , "a@a.a": "" , "b@b.a": ""} => [{"c@c.c":""} , {"a@a.a": ""} , {"b@b.a": ""}]
     var arrayEst = Object.keys(objEstudiantes); // ["c@c.c", "c@c.c", "c@c.c"]
 
@@ -875,24 +889,19 @@ function activityInfo(actName){
         arrayTable.push(JSON.parse(objString));
     }
 
-    document.getElementById("infoActividadTitulo").innerHTML = actName;
-    document.getElementById("profesorActividad").innerHTML = "Profesor: " + teacher;
-    document.getElementById("fechaActividad").innerHTML = "Fecha límite de entrega: " + endDate;
-
-    let table =  document.getElementById("tablaActividad");
+    let table =  document.getElementById(idTable);
     table.innerHTML= "";
     generateTable(table, arrayTable); // generate the table first. Uso actName para ponerle un id a las celdas...
-    generateTableHead(table); // then the head
+    generateTableHead(table, firstTitle); // then the head
 }
-
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++
 
-function generateTableHead(table) {
+function generateTableHead(table, firstTitle) {
     let thead = table.createTHead();
     let row = thead.insertRow();
     let th = document.createElement("th");
-    let text = document.createTextNode("Estudiante");
+    let text = document.createTextNode(firstTitle);
     th.appendChild(text);
     row.appendChild(th);
     let th2 = document.createElement("th");
@@ -952,7 +961,7 @@ function setGrade(){
 }
 
 //arrayActivities =  [{"actividad1":"10"} , {"actividad2": "7"} , {"actividad3": "9"}]
-function loadGrades(){
+function loadGradesStudent(){
     var objActivities = findCookie("actividades");
     var studentData = userData.name + " " + userData.surname + ", " + userData.NIA + ", " + userEmail;
 
@@ -966,18 +975,58 @@ function loadGrades(){
             var keyArrayEstudiantes = Object.keys(objEstudiantes);
             for(var j = 0; j < keyArrayEstudiantes.length; j++){
                 if(keyArrayEstudiantes[j] === studentData){
-                    var objGrade = "{" + keyArrayActivities[i] + ":"+ objEstudiantes[studentData] + "}";
+                    var objGrade = "{ \"" + keyArrayActivities[i] + "\":"+ objEstudiantes[studentData] + "}";
                     console.log("pushing " + objGrade);
                     arrayActivities.push(JSON.parse(objGrade));
                     break;
                 }
             }
         }
- 
+
         let table =  document.getElementById("gradesTable");
         table.innerHTML= "";
         generateTable(table, arrayActivities); // generate the table first. Uso actName para ponerle un id a las celdas...
-        generateTableHead(table); // then the head    
-
+        generateTableHead(table, "Actividad"); // then the head    
     }
 }
+
+//arrayActivities =  [{"actividad1":"10"} , {"actividad2": "7"} , {"actividad3": "9"}]
+// y si genero una tabla por cada actividad ????
+
+function loadGradesTeacher(){
+    var objActivities = findCookie("actividades");
+    var list = document.getElementById("totalActivityTables");
+    list.innerHTML = "";
+    if(objActivities != null){
+        var keyArrayActivities = Object.keys(objActivities);
+        for(var i = 0; i < keyArrayActivities.length; i++){
+            var tableId = keyArrayActivities[i] + "_id"
+            var nodeTable = document.createElement("table");
+            nodeTable.id = tableId;
+
+            var node = document.createElement("LI");
+            var textnode = document.createTextNode(keyArrayActivities[i]);
+            node.appendChild(textnode); // Append the text to <li>
+            node.appendChild(nodeTable); 
+            list.appendChild(node);    
+
+            activityGradesTable(keyArrayActivities[i], tableId, "Estudiante");
+        }
+    }
+      
+} // activityGradesTable(actName, idTable, firstTitle)
+
+// function generateTableHead_TeacherGrades(table) {
+//     let thead = table.createTHead();
+//     let row = thead.insertRow();
+//     let th = document.createElement("th");
+//     let text = document.createTextNode(Estudiante);
+//     th.appendChild(text);
+//     row.appendChild(th);
+
+//     // En un bucle las actividades
+//     let th2 = document.createElement("th");
+//     let text2 = document.createTextNode("Calificación");
+//     th2.appendChild(text2);
+//     row.appendChild(th2);
+//   }

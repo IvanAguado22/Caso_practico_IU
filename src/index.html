@@ -645,7 +645,7 @@
                                     <h4>Calificar alumno (0-100)</h1>
                                     <form onsubmit="return false" id = "calificationForm">
                                         <label for="calification"></label>
-                                        <input type="number" id="calification" name="calification" min="0" max="100">
+                                        <input type="number" id="calification" name="calification" min="0" max="10">
                                         <div class="set_botones_form">
                                             <button type="submit" class="button button-block" onclick="setGrade()">Guardar</button> 
                                             <button class="button button-block" onclick="hideGradeForm()">Volver</button>  <!---- id="boton_volver_calificacion"  display="none" --------->     
@@ -1068,7 +1068,7 @@
 
                 <!-------------------------------------------- CALIFICACIONES ----------------------------------------------------->
                 <section class="column mid" id="column_mid_grades" style="display: none;">
-                    <h1 class="gradeTitle">Calificaciones</h1>
+                    <h1 class="gradeTitle">Calificaciones globales</h1>
                     <div class="tabla">
                         <table style="width:100%" id="table1">
                             <tr>
@@ -1145,19 +1145,20 @@
                             </tr>
                         </table>
                     </div>
-                    
                     <div id="grafica1" display="none"></div>
                     <div class="set_botones_form">
                         <button id="boton_descargar" onclick="descargarExcel('table1')">Descargar</button>
                         <button id="boton_volver" onclick="volverCalificaciones()" display="none">Volver</button>
                         <button id="boton_grafica" onclick="mostrarGraficas()">Gráfica</button>
                     </div>
+                    <h1 class="gradeTitle" style="margin-top: 20px;"> Calificaciones por actividad</h1>
+                    <ul id = "totalActivityTables"> </ul>
                 </section>
                 <!-------------------------------------------- CALIFICACIONES ESTUDIANTE ----------------------------------------------------->
                 <section class="column mid" id="column_mid_grades_student" style="display: none;">
                     <h1 class="gradeTitle">Calificaciones</h1>
                     <div class="tabla">
-                        <table style="width:100%" id="table2">
+                        <!-- <table style="width:100%" id="table2">
                             <tr>
                                 <th>Estudiante</th>
                                 <th>Actividad 1</th>
@@ -1170,13 +1171,13 @@
                                 <td>10</td>
                                 <td>10</td>
                             </tr>
-                        </table>
+                        </table> -->
                         <table id = "gradesTable" ></table>
                         </div>
                         
                         <div id="grafica2" display="none"></div>
                         <div class="set_botones_form">
-                            <button id="boton_descargar_st" onclick="descargarExcel('table2')">Descargar</button>
+                            <button id="boton_descargar_st" onclick="descargarExcel('gradesTable')">Descargar</button>
                             <button id="boton_volver_st" onclick="volverCalificaciones()" display="none">Volver</button>
                             <button id="boton_grafica_st" onclick="mostrarGraficas()">Gráfica</button>
                         </div>

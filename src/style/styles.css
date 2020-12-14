@@ -409,7 +409,7 @@ input:focus, select:focus {
     justify-content: space-between;
 }
 
-#activitiesList li,  #activitiesStudent li{
+#activitiesList li,  #activitiesStudent li, #totalActivityTables li{
     color: #a0b3b0;
     list-style: none;
     padding: 15px 0;
