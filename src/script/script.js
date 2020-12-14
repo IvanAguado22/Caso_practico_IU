@@ -300,8 +300,10 @@ function cerrarSesion() {
     }
 }
 
-function enviarEmail(){
-    window.open('mailto:test@example.com');
+function enviarEmail(profesorActividadStudent){
+    var email = document.getElementById(profesorActividadStudent);
+    var mailto_link = 'mailto:' + email
+    window.open(mailto_link);
 }
 
 function descargarExcel(id_tabla){

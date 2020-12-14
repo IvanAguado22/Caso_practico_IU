@@ -434,7 +434,7 @@ input:focus, select:focus {
 }
 
 .activitieComment{
-    margin-bottom: 15px;
+    margin: 15px 0;
 }
 
 .dataActivity{
@@ -568,7 +568,7 @@ input:focus, select:focus {
     letter-spacing: 0.1em;
     border: 0;
     cursor: pointer;
-    min-width: 40%;
+    min-width: 30%;
 }
 
 /**
