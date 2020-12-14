@@ -409,9 +409,21 @@ input:focus, select:focus {
     justify-content: space-between;
 }
 
-#activitiesList li, #activityInfo li, #activitiesStudent li, #activityInfoStudent li{
+#activitiesList li,  #activitiesStudent li{
+    color: #a0b3b0;
     list-style: none;
-    margin-bottom: 15px;
+    padding: 15px 0;
+    font-size: 17px;
+}
+
+#activityInfo li, #activityInfoStudent li{
+    color: white;
+    list-style: none;
+    padding: 15px 0;
+    font-size: 17px;
+}
+#activitiesListStudent li:hover{
+    color: white;
 }
 
 .listActivitiesTitle{

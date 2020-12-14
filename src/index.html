@@ -685,23 +685,23 @@
                 <section class="column mid" id="column_mid_activities_student" style="display: none;">
                     <div id="activitiesStudent">
                         <h1 class="listActivitiesTitle">Actividades</h1>
-                            <ul id="activitiesListStudent" style="cursor:pointer">
-                            </ul>
+                        <ul id="activitiesListStudent" style="cursor:pointer">
+                        </ul>
                     </div>
                     <div id="activityInfoStudent" style="display: none;">
                         <h1 class="listActivitiesTitle" id="infoActividadTituloStudent">Info actividad</h1>
                         <ul>
                             <li id = "profesorActividadStudent"></li>
                             <li id = "fechaActividadStudent"></li>
-                            <li id = "resultListStudent"></li>
                         </ul>
-                        <div id = "uploadComment">
+                        <div id="results"></div>
+                        <div>
                             <form onsubmit="return false"> 
                                 <p class="forumComment">Comentario*</p>
                                 <textarea class="cuadroTxt" id="commentActivity"></textarea>
-                                <div class="botones_foro">
-                                    <button type="reset" class="boton" onclick="commentBox('commentActivity', 'resultListStudent');">Enviar</button>
-                                    <button onclick="volverActividadesStudent()">Volver</button>
+                                <div class="botones_foro" id="botonesActividades">
+                                    <button type="reset" class="boton" id="enviarActividad">Enviar</button>
+                                    <button id="volverActividad">Volver</button>
                                 </div>
                             </form>
                         </div>

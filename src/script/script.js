@@ -462,6 +462,33 @@ function commentBox(id_comment, result){
 	}
 }
 
+function commentBox2(id_comment, result){
+	var name = userData.name + " " + userData.surname;
+    var comment = document.getElementById(id_comment).value;
+
+	if(name == "" || comment == ""){
+		alert("Los campos marcados con * son obligatorios!");
+	}else{
+        var parent=document.createElement("li");
+		var name_element=document.createElement("p");
+        var message_element=document.createElement("p");
+        
+		var txt_name=document.createTextNode(name);
+        var txt_message=document.createTextNode(comment);
+
+        name_element.appendChild(txt_name);
+		message_element.appendChild(txt_message);
+
+        parent.appendChild(name_element);
+        parent.appendChild(message_element);
+
+        name_element.setAttribute("class", "data");
+        message_element.setAttribute("class", "forumMessage");
+
+        document.getElementById(result).appendChild(parent);
+	}
+}
+
 function volverForo(id_tema_foro){
     document.getElementById("column_mid_forum").style.display = "block";
     document.getElementById(id_tema_foro).style.display = "none";
@@ -624,8 +651,9 @@ function volverActividades(){
     // document.getElementById("formActividad ").reset();
 }
 
-function volverActividadesStudent(){
+function volverActividadesStudent(idMostradoAntes){
     document.getElementById("activitiesStudent").style.display = "block";
+    document.getElementById(idMostradoAntes).style.display = "none";
     document.getElementById("activityInfoStudent").style.display = "none";
 }
 
@@ -642,7 +670,7 @@ function showActivityInfo(actName){
     document.getElementById("activitiesList").style.display = "none";
 }
 
-function showActivityInfo2(actName){
+function showActivityInfo2(actName, showingResult, resultId){
     currentActivity = actName;
     var objActivities = findCookie("actividades");
     var objActivity = objActivities[actName];
@@ -652,7 +680,12 @@ function showActivityInfo2(actName){
     document.getElementById("profesorActividadStudent").innerHTML = "Profesor: " + teacher;
     document.getElementById("fechaActividadStudent").innerHTML = "Fecha límite de entrega: " + endDate;
     document.getElementById("activityInfoStudent").style.display = "block";
+    document.getElementById(showingResult).style.display = "block";
+    var botonActividades = document.getElementById("enviarActividad");
+    botonActividades.onclick = function() {commentBox2("commentActivity", resultId)};
     document.getElementById("activitiesStudent").style.display = "none";
+    var botonVolverActividades = document.getElementById("volverActividad");
+    botonVolverActividades.onclick = function() {volverActividadesStudent(showingResult)};
 }
 
 // recuperar valores del form
@@ -735,9 +768,9 @@ function listAllActivities(){
     }
 }
 
-var createClickHandler2 = function(arg) {    
+var createClickHandler2 = function(arg1,arg2, arg3) {    
     return function(){
-        showActivityInfo2(arg);
+        showActivityInfo2(arg1, arg2, arg3);
     }
 }
 
@@ -749,6 +782,7 @@ function listActivitiesStudent(){
     if(objActivities != null){
         var keyArrayActivities = Object.keys(objActivities);
         var arrayActivities = [];
+        var listResults = document.getElementById("results");
         for(var i = 0; i < keyArrayActivities.length; i++){
             var objActividad = objActivities[keyArrayActivities[i]];
             var objEstudiantes = objActividad.estudiantes;
@@ -760,10 +794,18 @@ function listActivitiesStudent(){
             }
         }
         for(var k = 0; k < arrayActivities.length; k++){
+            var resultList = document.createElement("UL");
+            resultList.id = "resultList" + k;
+            var result = document.createElement("LI");
+            result.id = "resultListStudent" + k;
+            resultList.appendChild(result);
+            resultList.style.display = "none";
+            listResults.appendChild(resultList);
+
             var node = document.createElement("LI");
             var textnode = document.createTextNode(arrayActivities[k]);
             node.appendChild(textnode); // Append the text to <li>
-            node.onclick = createClickHandler2(arrayActivities[k]);
+            node.onclick = createClickHandler2(arrayActivities[k], resultList.id, result.id);
             list.appendChild(node);     // Append <li> to <ul> with id="myList"
         }
     }
