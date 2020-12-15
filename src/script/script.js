@@ -544,8 +544,6 @@ function commentBox2(id_comment, result){
 function volverForo(id_tema_foro){
     document.getElementById("column_mid_forum").style.display = "block";
     document.getElementById(id_tema_foro).style.display = "none";
-    document.getElementById("pagInicio").style.display = "none";
-    showForum();
 }
 
 // checkCookie comprueba si existe una cookie registrada con el correo

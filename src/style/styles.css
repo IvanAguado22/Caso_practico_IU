@@ -482,7 +482,7 @@ input:focus, select:focus {
 }
 
 #studentSelection option:hover { 
-    background-color: red; 
+    background-color: #1ab188; 
 }
 
 /**
