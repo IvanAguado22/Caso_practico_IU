@@ -303,8 +303,8 @@ function cerrarSesion() {
     }
 }
 
-function enviarEmail(profesorActividadStudent){
-    var email = document.getElementById(profesorActividadStudent);
+function enviarEmail(){
+    var email = "jmesa@inf.uc3m.es";
     var mailto_link = 'mailto:' + email
     window.open(mailto_link);
 }
@@ -686,6 +686,7 @@ function saveCookies() {
         setUser(vEmail, vRol, userObj); // registrar como estudiante o como profesor
         cambiarLogIn();
         document.getElementById("form_registro").reset();
+        alert("Se ha registrado con éxito");
     }
 }
 
