@@ -300,7 +300,6 @@ function cerrarSesion() {
         document.getElementById("pagInicio").style.display = "block";
         userEmail = "inputEmail";
         userData = null;
-        //location.reload();
     }
 }
 
@@ -545,6 +544,8 @@ function commentBox2(id_comment, result){
 function volverForo(id_tema_foro){
     document.getElementById("column_mid_forum").style.display = "block";
     document.getElementById(id_tema_foro).style.display = "none";
+    document.getElementById("pagInicio").style.display = "none";
+    showForum();
 }
 
 // checkCookie comprueba si existe una cookie registrada con el correo
@@ -803,14 +804,16 @@ function showHelpMessaje(){
 // Pasar la lista de estudiantes a un formulario de opciones multiples
 function activityStudentSelection(){
     var objStudents = findCookie("estudiantes");     // Obtener la lista de estudiantes
-    var arrayStudentEmails= Object.keys(objStudents); // get array of keys (emails)
-    var selection = document.getElementById("studentSelection");
-    selection.innerHTML = "";
-    for(var i = 0; i < arrayStudentEmails.length; i++){
-        var studentFullName = objStudents[arrayStudentEmails[i]].name + " " + objStudents[arrayStudentEmails[i]].surname + ", " + objStudents[arrayStudentEmails[i]].NIA + ", " + arrayStudentEmails[i];
-        var option = document.createElement("OPTION");
-        option.text = studentFullName;
-        selection.add(option);
+    if (objStudents != null) {
+        var arrayStudentEmails = Object.keys(objStudents); // get array of keys (emails)
+        var selection = document.getElementById("studentSelection");
+        selection.innerHTML = "";
+        for (var i = 0; i < arrayStudentEmails.length; i++) {
+            var studentFullName = objStudents[arrayStudentEmails[i]].name + " " + objStudents[arrayStudentEmails[i]].surname + ", " + objStudents[arrayStudentEmails[i]].NIA + ", " + arrayStudentEmails[i];
+            var option = document.createElement("OPTION");
+            option.text = studentFullName;
+            selection.add(option);
+        }
     }
 }
 
