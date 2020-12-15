@@ -209,7 +209,7 @@
                     </div>
                 </section>
 
-                <aside class="column side D" id="rightColumn">
+                <aside class="column side D" id="rightColumnSubjects">
                     <h1 class="titulo1"><a href="#">Últimas Novedades</a></h1>
                     <ul>
                         <li><time datetime="2020-11-05"> 05/11 - Agregados nuevos videos</time></li>
@@ -642,7 +642,7 @@
                                 <table style="width:100%; margin-top: 30px;" id="tablaActividad">
                                 </table>
                                 <div id = "setCalification" style="display: none;">
-                                    <h4>Calificar alumno (0-10)</h1>
+                                    <h1>Calificar alumno (0-10)</h1>
                                     <form onsubmit="return false" id = "calificationForm">
                                         <label for="calification"></label>
                                         <input type="number" id="calification" name="calification" min="0" max="10">
@@ -667,7 +667,7 @@
                                     </select>
                                 </div>
                                 <div>
-                                    <img src="images/ayuda3.svg" width="32px" style="margin-right: 10px; cursor: pointer;">
+                                    <img src="images/ayuda3.svg" alt="logo" width="32" style="margin-right: 10px; cursor: pointer;">
                                     <label>Pincha en un alumno para asignarle la tarea. Para seleccionar a más de un estudiante, mantén pulsada la tecla CTRL mientras pinchas en ellos</label><br>
                                 </div>
                                 <div>
@@ -710,7 +710,7 @@
                                 </div>
                             </form>
                         </div>
-                    <div>
+                    </div>
                 </section>
                 <!-------------------------------------------- FORO ----------------------------------------------------->
                 <section class="column mid" id="column_mid_forum" style="display: none;">
@@ -1147,10 +1147,10 @@
                             </tr>
                         </table>
                     </div>
-                    <div id="grafica1" display="none"></div>
+                    <div id="grafica1" style="display: none;"></div>
                     <div class="set_botones_form">
                         <button id="boton_descargar" onclick="descargarExcel('table1')">Descargar</button>
-                        <button id="boton_volver" onclick="volverCalificaciones()" display="none">Volver</button>
+                        <button id="boton_volver" onclick="volverCalificaciones()" style="display: none;">Volver</button>
                         <button id="boton_grafica" onclick="mostrarGraficas()">Gráfica</button>
                     </div>
                     <h1 class="gradeTitle" style="margin-top: 20px;"> Calificaciones por actividad</h1>
@@ -1177,15 +1177,15 @@
                         <table id = "gradesTable" ></table>
                         </div>
                         
-                        <div id="grafica2" display="none"></div>
+                        <div id="grafica2" style="display: none;"></div>
                         <div class="set_botones_form">
                             <button id="boton_descargar_st" onclick="descargarExcel('gradesTable')">Descargar</button>
-                            <button id="boton_volver_st" onclick="volverCalificaciones()" display="none">Volver</button>
+                            <button id="boton_volver_st" onclick="volverCalificaciones()" style="display: none;">Volver</button>
                             <button id="boton_grafica_st" onclick="mostrarGraficas()">Gráfica</button>
                         </div>
                 </section>
                 <!-------------------------------------------- COLUMNA DERECHA ----------------------------------------------------->
-                <aside class="column side D" id="rightColumn">
+                <aside class="column side D" id="rightColumnMain">
                     <h1 class="titulo1"><a href="#">Últimas Novedades</a></h1>
                     <ul>
                         <li><time datetime="2020-11-05"> 05/11 - Agregados nuevos videos</time></li>
