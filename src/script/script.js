@@ -221,7 +221,8 @@ function showActivitiesStudent(){
     document.getElementById("boton_volver_st").style.display = "none";
     document.getElementById("column_mid_activities").style.display = "none";
     document.getElementById("column_mid_activities_student").style.display = "block";
-    volverActividades();
+    document.getElementById("activitiesStudent").style.display = "block";
+    document.getElementById("activityInfoStudent").style.display = "none";
     listActivitiesStudent();
 }
 
@@ -665,8 +666,21 @@ function saveCookies() {
     var vPassword = document.getElementById("pass").value;
     var vGrado = document.getElementById("grade").value;
 
+    var regexNia = /100+[0-9]{6,6}/i;
+    var regexEmail = /[a-z0-9]+@+[a-z0-9]+.+[a-z0-9]/i;
+    var regexPass = /[a-z0-9]{1,8}/i;
+
     if (vEmail === "" || vName === "" || vSurname === "" || vUsername === "" || vNIA === "" || vBirthdate === "" || vId === "" || vRol === "" || vPassword === "") {
         alert("Por favor, rellene todos los campos");
+        return false;
+    } else if(!regexNia.test(vNIA)){
+        alert("El NIA debe seguir el formato 100xxxxxx");
+        return false;
+    } else if(!regexEmail.test(vEmail)){
+        alert("El Email debe seguir el formato: letras minúsculas o números + @ + letras minúsculas o números + . + letras minúsculas o números");
+        return false;
+    } else if(!regexPass.test(vPassword)){
+        alert("La contraseña debe contener maximo 8 caracteres, ya sean letras minúsculas o números");
         return false;
     } else {
         var userObj = { name: vName, surname: vSurname, username: vUsername, NIA: vNIA, birthdate: vBirthdate, id: vId, rol: vRol, lang: vLang, password: vPassword, grado: vGrado };
